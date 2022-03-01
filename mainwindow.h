@@ -18,9 +18,12 @@ public:
 private slots:
     void on_valider_clicked();
 
-    void on_pushButton_clicked();
-
     void on_pb_supprimer_clicked();
+
+    void on_cherchermodif_clicked();
+
+    void on_valider_2_clicked();
+
 
 private:
     Ui::MainWindow *ui;

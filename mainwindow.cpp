@@ -61,13 +61,13 @@ void MainWindow::on_pb_supprimer_clicked()
 
       {
       QMessageBox::information(nullptr, QObject::tr("supprimer un fournisseur"),
-                        QObject::tr("Employee supprimé.\n"
+                        QObject::tr("fournisseur supprimé.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 ui->view->setModel(F.afficher());
       }
         else
         {
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un fournisseur"),
                         QObject::tr("Erreur !.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
@@ -76,3 +76,69 @@ ui->view->setModel(F.afficher());
 
 
 }
+
+void MainWindow::on_cherchermodif_clicked()
+{
+    Fournisseur E1;
+        E1=E1.chercher(ui->idmodif->text().toInt());
+
+        if(E1.getnom()!="vide")
+      {
+
+          ui->idfournisseur_2->setText( QString::number(E1.getid()) ) ;
+          ui->nom_2->setText( E1.getnom() ) ;
+          ui->dateajout_2->setDate( E1.getdateajout() ) ;
+          ui->dateexpr_2->setDate(E1.getdateexpr());
+         ui->description_2->setText(E1.getdescription());
+
+ui->view->setModel(F.afficher());
+      }
+        else //introuvable
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+                        QObject::tr("employee introuvable !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+
+}
+
+void MainWindow::on_valider_2_clicked()
+{
+    int idfournisseur=ui->idfournisseur_2->text().toInt();
+    QString nom=ui->nom_2->text();
+    QDate dateajout=ui->dateajout_2->date();
+    QDate dateexpr=ui->dateexpr_2->date();
+    QString description=ui->description_2->text();
+     Fournisseur F(idfournisseur,nom,dateajout,dateexpr,description);
+
+    Fournisseur E1;
+    int test=E1.userExists(idfournisseur);
+
+    if(test==true)
+    {
+        if(int test1=E1.modifier(idfournisseur,nom,dateajout,dateexpr,description)==true){
+            QMessageBox::information(nullptr, QObject::tr("modifier un fournisseur"),
+                              QObject::tr("fournisseur modifié.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+       ui->view->setModel(F.afficher());
+        }
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un modifé"),
+                        QObject::tr("Erreur de modification!.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+
+    }
+
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+                        QObject::tr("Erreur !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+}
+

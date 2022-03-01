@@ -3,6 +3,8 @@
 #include <QDate>
 #include <QString>
 #include <QSqlQueryModel>
+#include <QDebug>
+#include <QSqlError>
 class Fournisseur
 {
 public:
@@ -21,6 +23,9 @@ public:
   bool ajouter();
     bool supprimer(int);
   QSqlQueryModel* afficher();
+      bool userExists(const int& idfournisseur) const;
+      bool modifier(int,QString,QDate,QDate,QString);
+      Fournisseur chercher(int idfournisseur);
 private:
     int idfournisseur;
     QString nom, description;

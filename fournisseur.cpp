@@ -3,6 +3,7 @@
 #include <QSqlQueryModel>
 #include <QSqlDatabase>
 #include <QObject>
+
 Fournisseur::Fournisseur()
 {
 idfournisseur=0;
@@ -42,11 +43,30 @@ bool Fournisseur::ajouter()
             return query.exec();
 }
 bool Fournisseur::supprimer(int idfournisseur){
-    QSqlQuery query;
-query.prepare("DELETE from fournisseur where idfournisseur=:idfournisseur");
-         query.bindValue(0, idfournisseur);
+    bool success = false;
 
-         return query.exec();
+       if (userExists(idfournisseur))
+        {
+            QSqlQuery queryDelete;
+            queryDelete.prepare("DELETE FROM fournisseur WHERE idfournisseur=:idfournisseur");
+            QString res2=QString::number(idfournisseur);
+                     queryDelete.bindValue(":idfournisseur", res2);
+
+            success = queryDelete.exec();
+
+            if(!success)
+                qDebug() << "Delete user failure:" << queryDelete.lastError();
+            else
+                qDebug() << "User successfully deleted" << idfournisseur;
+
+
+        }
+        else
+        {
+            qDebug() << "Error deleting user: user does not exist";
+        }
+
+        return success;
 }
    QSqlQueryModel* Fournisseur::afficher()
    {
@@ -54,11 +74,75 @@ query.prepare("DELETE from fournisseur where idfournisseur=:idfournisseur");
             model->setQuery("SELECT* FROM FOURNISSEUR");
             model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
             model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
-            model->setHeaderData(1, Qt::Horizontal, QObject::tr("date d'ajout"));
-            model->setHeaderData(1, Qt::Horizontal, QObject::tr("date d'expiration"));
-            model->setHeaderData(1, Qt::Horizontal, QObject::tr("description"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("date d'ajout"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("date d'expiration"));
+            model->setHeaderData(4, Qt::Horizontal, QObject::tr("description"));
 
 
 
       return model;
    }
+
+   bool Fournisseur:: userExists(const int& idfournisseur) const
+   {
+       bool exists = false;
+
+       QSqlQuery checkQuery;
+       checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE idfournisseur=:idfournisseur");
+       checkQuery.bindValue(":idfournisseur", idfournisseur);
+
+       if (checkQuery.exec())
+       {
+           if (checkQuery.next())
+           {
+               exists = true;
+           }
+       }
+       else
+       {
+           qDebug() << "User not found:" << checkQuery.lastError();
+       }
+
+       return exists;
+   }
+  Fournisseur Fournisseur::chercher(int idfournisseur){
+
+           Fournisseur E1;
+
+           QSqlQuery checkQuery;
+           checkQuery.prepare("SELECT * FROM fournisseur WHERE idfournisseur = :idfournisseur");
+           checkQuery.bindValue(":idfournisseur", idfournisseur);
+
+           if (checkQuery.exec())
+           {
+               if (checkQuery.next())
+               {
+                   E1.setid(checkQuery.value(0).toInt());
+                   E1.setnom(checkQuery.value(1).toString());
+                   E1.setdateajout(checkQuery.value(2).toDate());
+                   E1.setdateexpr(checkQuery.value(3).toDate());
+                   E1.setdescription(checkQuery.value(4).toString());
+
+
+                   return E1;
+               }
+           }
+           else
+           {
+               qDebug() << "User not found:" << checkQuery.lastError();
+           }
+   E1.setnom("vide");
+   return E1;
+       }
+
+  bool Fournisseur::modifier(int idfournisseur,QString nom,QDate dateajout,QDate dateexpr,QString description)
+  {
+      QSqlQuery query;
+      query.prepare("update fournisseur set idfournisseur=:idfournisseur,nom=:nom,dateajout=:dateajout,dateexpr=:dateexpr,description=:description");
+      query.bindValue(":idfournisseur",idfournisseur);
+       query.bindValue(":nom", nom);
+        query.bindValue(":dateajout", dateajout);
+            query.bindValue(":dateexpr", dateexpr);
+                query.bindValue(":description", description);
+      return    query.exec();
+  }
