@@ -14,37 +14,6 @@
    <string>ajout_de_produit</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_6">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1261</width>
-      <height>711</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::StrongFocus</enum>
-    </property>
-    <property name="toolTip">
-     <string/>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../background.jpg</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QDateTimeEdit" name="dateTimeEdit">
     <property name="geometry">
      <rect>
@@ -2433,6 +2402,47 @@ QLineEdit:focus
         <width>741</width>
         <height>471</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView
+{
+    alternate-background-color: #1F1F1F;
+    gridline-color: white;
+    color: white;
+
+    font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+}
+QTableView::item 
+{
+    color: white;
+}
+
+QTableView::item:focus
+{
+    color: gray;
+    background: #0063cd;
+}
+QTableView::item:selected
+{
+    color: red;
+    background: #0063cd;
+}
+
+QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 1px solid #b1b1b1;
+    border-radius: 1px;
+    width: 7px;
+    height: 7px;
+    margin: 0px 5px 0 5px;
+}
+
+    padding-left:10px;
+    height:100px;
+    width:180px;
+    color: #5a5a5a;
+    border-bottom :1px solid #f0f0f0;</string>
       </property>
      </widget>
     </widget>
@@ -5327,22 +5337,28 @@ QLineEdit:focus
      </widget>
     </widget>
    </widget>
-   <widget class="QLabel" name="label_18">
+   <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>1050</x>
-      <y>330</y>
-      <width>181</width>
-      <height>171</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1261</width>
+      <height>711</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../179992563_2061987063944450_2369188766024851440_n.jpg</pixmap>
+     <pixmap>../../../../background.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
+   <zorder>label_6</zorder>
+   <zorder>dateTimeEdit</zorder>
+   <zorder>tabWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -2,7 +2,7 @@
 #define EMPLOYEE_H
 #include <QString>
 #include <QDate>
-#include <qsqlquerymodel.h>
+#include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlError>
 class Employee
