@@ -1,5 +1,5 @@
 #include "connexion.h"
-
+///test test 123//
 connexion::connexion()
 {
 
@@ -8,7 +8,7 @@ connexion::connexion()
 bool connexion::ouvrirconnexion()
 {bool test=false;
 QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-db.setDatabaseName("test-bd");
+db.setDatabaseName("Nextech");
 db.setUserName("mahmoud");//inserer nom de l'utilisateur
 db.setPassword("09092001");//inserer mot de passe de cet utilisateur
 

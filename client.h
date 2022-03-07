@@ -26,7 +26,18 @@ public:
     bool ajouter_client();
     QSqlQueryModel* afficher();
     bool supprimer(int);
-    bool chercher_client(int);
+
+
+
+    bool chercher_client_bool(const int& id_client) const;; //traja3 bool bech nesthakoha fel modifier w supprimer //
+    client chercher_client(int);
+
+
+    bool modifier_client(int,QString,QString,int,QString,QString);
+
+    QSqlQueryModel* trier_nom();
+    QSqlQueryModel* trier_prenom();
+    QSqlQueryModel* trier_nb_pts();
 
 private :
     int id_client;
