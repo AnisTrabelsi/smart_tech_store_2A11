@@ -3,7 +3,7 @@
  #include "fournisseur.h"
 #include <QSqlDatabase>
 #include <qmessagebox.h>
-#include <QIntValidator>
+#include <QIntValidator> //controle saisie
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

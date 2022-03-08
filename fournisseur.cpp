@@ -1,8 +1,8 @@
 #include "fournisseur.h"
 #include <QSqlQuery>
-#include <QSqlQueryModel>
-#include <QSqlDatabase>
-#include <QObject>
+#include <QSqlQueryModel> //creer un tableau pour stocker les donnés
+#include <QSqlDatabase> //connect to database
+#include <QObject> //private section class slots
 
 Fournisseur::Fournisseur()
 {
@@ -89,7 +89,7 @@ bool Fournisseur::supprimer(int idfournisseur){
 
        QSqlQuery checkQuery;
        checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE idfournisseur=:idfournisseur");
-       checkQuery.bindValue(":idfournisseur", idfournisseur);
+       checkQuery.bindValue(":idfournisseur", idfournisseur); //tab3th lvaleur mte3na lel requete
 
        if (checkQuery.exec())
        {
