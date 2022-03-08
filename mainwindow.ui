@@ -71,7 +71,7 @@ font-size: 20px;
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -96,7 +96,7 @@ font-size: 20px;
     </property>
     <widget class="QWidget" name="AjouterProduit">
      <attribute name="title">
-      <string>Ajouter Produit</string>
+      <string>Ajouter Fournisseur</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox">
       <property name="enabled">
@@ -1914,7 +1914,7 @@ QLineEdit:focus
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
-      <string>Afficher Produit</string>
+      <string>Afficher Fournisseur</string>
      </attribute>
      <widget class="QTableView" name="view">
       <property name="geometry">
@@ -1925,11 +1925,52 @@ QLineEdit:focus
         <height>261</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView
+{
+    alternate-background-color: #1F1F1F;
+    gridline-color: white;
+    color: white;
+
+    font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+}
+QTableView::item 
+{
+    color: white;
+}
+
+QTableView::item:focus
+{
+    color: gray;
+    background: #0063cd;
+}
+QTableView::item:selected
+{
+    color: red;
+    background: #0063cd;
+}
+
+QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 1px solid #b1b1b1;
+    border-radius: 1px;
+    width: 7px;
+    height: 7px;
+    margin: 0px 5px 0 5px;
+}
+
+    padding-left:10px;
+    height:100px;
+    width:180px;
+    color: #5a5a5a;
+    border-bottom :1px solid #f0f0f0;</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Supprimer Produit</string>
+      <string>Supprimer Fournisseur</string>
      </attribute>
      <widget class="QGroupBox" name="suppression">
       <property name="geometry">
@@ -2233,7 +2274,7 @@ QPushButton:focus
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Modifier Produit</string>
+      <string>Modifier Fournisseur</string>
      </attribute>
      <widget class="QGroupBox" name="suppression_2">
       <property name="geometry">
@@ -2250,7 +2291,7 @@ font: 75 15pt &quot;MS Shell Dlg 2&quot;;
 color:white</string>
       </property>
       <property name="title">
-       <string>Suppression</string>
+       <string>rechercher</string>
       </property>
       <widget class="QLabel" name="label_14">
        <property name="geometry">
@@ -4287,20 +4328,17 @@ QLineEdit:focus
 }</string>
        </property>
       </widget>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="valider_2">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>600</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{
+      <widget class="QPushButton" name="valider_2">
+       <property name="geometry">
+        <rect>
+         <x>640</x>
+         <y>210</y>
+         <width>131</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
 
 color: white;
 background-color:Transparent;;
@@ -4313,10 +4351,13 @@ font-size: 15px;
 
 
 }</string>
-    </property>
-    <property name="text">
-     <string>Valider</string>
-    </property>
+       </property>
+       <property name="text">
+        <string>Valider</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
