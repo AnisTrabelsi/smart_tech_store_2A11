@@ -54,14 +54,6 @@ QSqlQueryModel* Employee::afficher(){
 
     return model;
 }
-/*bool Employee::supprimer(int matricule){
-    QSqlQuery query;
-query.prepare("DELETE from employee where matricule=:matricule");
-QString res2=QString::number(matricule);
-         query.bindValue(":matricule", res2);
-
-         return query.exec();
-}*/
 
 bool Employee::supprimer(int matricule){
     bool success = false;
@@ -142,37 +134,7 @@ E1.setnom("vide");
 return E1;
     }
 
-/*QSqlQueryModel* Employee::chercher(int matricule){
 
-
-    QSqlQueryModel * model= new QSqlQueryModel();
-
-     model->setQuery("select * from voyageurs where matricule=(:matricule)");
-     model->setHeaderData(0, Qt::Horizontal, QObject::tr("matricule"));
-     model->setHeaderData(1, Qt::Horizontal, QObject::tr("tel "));
-     model->setHeaderData(2, Qt::Horizontal, QObject::tr("nom"));
-     model->setHeaderData(3, Qt::Horizontal, QObject::tr("prenom"));
-    return model;
-*/
-
-    /*QSqlQuery checkQuery;
-    checkQuery.prepare("SELECT matricule FROM employee WHERE matricule = (:matricule)");
-    checkQuery.bindValue(":matricule", matricule);
-
-    if (checkQuery.exec())
-    {
-        if (checkQuery.next())
-        {
-           return Employee;
-        }
-    }
-    else
-    {
-        qDebug() << "User not found:" << checkQuery.lastError();
-    }
-*/
-
-                                         // }
 bool Employee::modifier(int matricule,QString nom,QString prenom,QString e_mail,QDate date_embauche,int salaire,QString mot_de_passe)
 {
     QSqlQuery query;
