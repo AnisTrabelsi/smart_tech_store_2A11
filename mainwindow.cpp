@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator>
+#include <QSqlQuery>
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
                                           ui(new Ui::MainWindow)
 {
@@ -21,11 +22,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_valider_clicked()
 {
     int idCommande = ui->idCommande->text().toInt();
+    QDate date_Commande = ui->date_Commande->date();
     int num_Tel = ui->num_Tel->text().toInt();
     int quantity = ui->quantity->text().toInt();
     int Paiment_Valide = ui->Paiment_Valide->text().toInt();
     QString mode_Livraison = ui->mode_Livraison->text();
-    QDate date_Commande = ui->date_Commande->date();
     Commande C(idCommande, num_Tel, quantity, Paiment_Valide, mode_Livraison, date_Commande);
     bool test = C.ajouterCommande();
     if (test)
@@ -79,9 +80,9 @@ void MainWindow::on_pb_supprimer_clicked()
 void MainWindow::on_cherchermodif_clicked()
 {
     Commande C1;
-    C1 = C1.supprimerCommande(ui->supp->text().toInt());
+    C1 = C1.chercher_Commande(ui->supp->text().toInt());
 
-    if (C1.getNumTel() != 0)
+    if (C1.getIdCommande() != 0)
     {
 
         ui->idCommande_3->setText(QString::number(C1.getIdCommande()));
@@ -102,7 +103,7 @@ void MainWindow::on_cherchermodif_clicked()
     }
 }
 
-void MainWindow::on_valider_2_clicked()
+void MainWindow::on_valider_3_clicked()
 {
 
     int idCommande = ui->idCommande_3->text().toInt();

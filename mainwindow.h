@@ -22,7 +22,7 @@ private slots:
 
     void on_cherchermodif_clicked();
 
-    void on_valider_2_clicked();
+   void on_valider_3_clicked();
 
 private:
     Ui::MainWindow *ui;

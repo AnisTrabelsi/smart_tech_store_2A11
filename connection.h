@@ -5,7 +5,7 @@
 
 class Connection
 {
-    QSqlDatabase db;
+
 
 public:
     Connection();
