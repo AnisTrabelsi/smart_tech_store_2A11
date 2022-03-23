@@ -62,7 +62,7 @@ background :#333;
       <x>30</x>
       <y>50</y>
       <width>1191</width>
-      <height>541</height>
+      <height>651</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -270,6 +270,9 @@ QLineEdit:focus
        <property name="text">
         <string>                   &quot;C&quot; </string>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QPushButton" name="pb_ajouter">
        <property name="geometry">
@@ -382,6 +385,9 @@ QLineEdit:focus
        <property name="text">
         <string>                  &quot;RIEN&quot;</string>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QLabel" name="label">
        <property name="geometry">
@@ -453,7 +459,7 @@ QLineEdit:focus
         <string>prenom</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="id_nbpts_2">
+      <widget class="QLineEdit" name="nbpts">
        <property name="geometry">
         <rect>
          <x>250</x>
@@ -696,7 +702,7 @@ QLineEdit:focus
        <string>nb pts</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pb_client_dumois_2">
+     <widget class="QPushButton" name="pb_chercher_aff">
       <property name="geometry">
        <rect>
         <x>1090</x>
@@ -748,6 +754,37 @@ QPushButton:focus
       </property>
       <property name="text">
        <string>trier selon</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="historique">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>470</y>
+        <width>431</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+      </property>
+      <property name="text">
+       <string>Historique</string>
       </property>
      </widget>
     </widget>
@@ -1004,6 +1041,9 @@ font-size: 15px;
 QLineEdit:focus
 {border:2px solid #FBAD25;
 }</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QLineEdit" name="id_classe">
@@ -1296,6 +1336,21 @@ QPushButton:focus
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>statistiques</string>
+     </attribute>
+     <widget class="QCustomPlot" name="plot" native="true">
+      <property name="geometry">
+       <rect>
+        <x>279</x>
+        <y>130</y>
+        <width>761</width>
+        <height>351</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1310,6 +1365,14 @@ QPushButton:focus
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

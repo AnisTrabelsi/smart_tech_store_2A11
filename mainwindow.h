@@ -29,21 +29,32 @@ private slots:
 
     void on_pb_modifier_clicked();
 
-    void on_prenom_cursorPositionChanged(int arg1, int arg2);
 
-    void on_pb_client_dumois_2_clicked();
 
-    void on_pb_chercher_client_aff_clicked();
 
     void on_radio_nom_clicked();
 
-    void on_tabWidget_currentChanged(int index);
 
     void on_radio_prenom_clicked();
 
-    void on_radio_id_clicked();
 
     void on_radio_nb_pts_clicked();
+
+    void on_pb_client_dumois_clicked();
+
+    void on_pb_chercher_aff_clicked();
+
+    void on_reset_clicked();
+
+
+
+
+
+
+
+
+    void on_tabWidget_currentChanged(int index);
+
 
 private:
     Ui::MainWindow *ui;
