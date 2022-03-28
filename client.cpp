@@ -79,7 +79,7 @@ bool client::ajouter_client()
     client c;
     int cas;
     cas=1;
-   /* historique(cas,c);*/
+   historique(cas,nom+" "+prenom);
 
 
     return  query.exec();
@@ -176,12 +176,23 @@ QSqlQueryModel* client::afficher()
 
     ////classification tee clients////
    /* fel ligne hedha maach yheb yekhdm*/
+
+
+
+//maj tee nb des pts tee kol client//
+    QSqlQuery q3;
+    q3.exec("update client set nb_points=(select count(*) from commande where (client.id_client = commande.id_client));");
+
+
+
+//maj ml c ll b//
     QSqlQuery q1;
 
     q1.exec("update client set classe='b' WHERE (select count(*) from commande where (client.id_client = commande.id_client))>=2");
 
 
 
+    //maj ml b ll a//
     QSqlQuery q2;
 
     q2.exec("update client set classe='a' WHERE (select count(*) from commande where (client.id_client = commande.id_client))>=4");
@@ -433,19 +444,34 @@ void client::statistique(QVector<double>* ticks,QVector<QString> *labels)
 
 
 
-QString client:: historique(int a,client c)
+void client:: historique(int a,QString name)
 {  QString text;
     if(a==1)
-      { text=QString(" le client  '%1   '%2' a ete ajouté \n ").arg(c.getnom(),c.prenom);}
+      { text=QString(" le client  '%1'a ete ajouté \n ").arg(name);}
 
     else if(a==2)
-      { text=QString(" le client  '%1   '%2' a ete modifié \n ").arg(c.getnom(),c.prenom);}
+      { text=QString(" le client  '%1' a ete modifié \n ").arg(name);}
 
 
-else { text=QString(" le client  '%1   '%2' a ete supprimé \n ").arg(c.getnom(),c.prenom);}
+else { text=QString(" le client  '%1'   '%2' a ete supprimé \n ").arg(name);}
+QSqlQuery query;
+
+QDate date = QDate::currentDate();
+QString formatteddate = date.toString("dd:MM:yyyy");
 
 
-    return text;
+    // Création d'un objet QFile
+    QFile file("historique.txt");
+    // On ouvre notre fichier en lecture seule et on vérifie l'ouverture
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+qDebug() << "fichier echouée:" << query.lastError();
+    // Création d'un objet QTextStream à partir de notre objet QFile
+    QTextStream flux(&file);
+    // On choisit le codec correspondant au jeu de caractères que l'on souhaite ; ici, UTF-8
+    flux.setCodec("UTF-8");
+    // Écriture des différentes lignes dans le fichier
+    flux <<formatteddate+"\n" <<  text<<  endl;
+
 }
 
 

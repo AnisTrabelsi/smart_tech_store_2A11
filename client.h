@@ -41,7 +41,7 @@ public:
     client chercher_client(int);
 
     bool modifier_client(int,QString,QString,int,QString,QString);
- QString historique(int,client);
+ void historique(int,QString);
 
     ///tri///
     QSqlQueryModel* trier_nom();
