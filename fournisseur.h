@@ -2,8 +2,8 @@
 #define FOURNISSEUR_H
 #include <QDate>
 #include <QString>
-#include <QSqlQueryModel>  //create table
-#include <QDebug> //check errors
+#include <QSqlQueryModel>  //affichage (interaction entre code bd et qt)
+#include <QDebug> //debug
 #include <QSqlError> //afficher les erreurs spécifiquement
 class Fournisseur
 {

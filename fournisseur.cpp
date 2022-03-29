@@ -1,6 +1,6 @@
 #include "fournisseur.h"
-#include <QSqlQuery>
-#include <QSqlQueryModel> //creer un tableau pour stocker les donnés
+#include <QSqlQuery> //manipulation des requetes du sql
+#include <QSqlQueryModel> //lire les donnés et les afficher (tableau)
 #include <QSqlDatabase> //connect to database
 #include <QObject> //private section class slots
 
@@ -89,7 +89,7 @@ bool Fournisseur::supprimer(int idfournisseur){
 
        QSqlQuery checkQuery;
        checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE idfournisseur=:idfournisseur");
-       checkQuery.bindValue(":idfournisseur", idfournisseur); //tab3th lvaleur mte3na lel requete
+       checkQuery.bindValue(":idfournisseur", idfournisseur); //tab3th lvaleur mte3na lel bd
 
        if (checkQuery.exec())
        {
@@ -138,7 +138,7 @@ bool Fournisseur::supprimer(int idfournisseur){
   bool Fournisseur::modifier(int idfournisseur,QString nom,QDate dateajout,QDate dateexpr,QString description)
   {
       QSqlQuery query;
-      query.prepare("update fournisseur set idfournisseur=:idfournisseur,nom=:nom,dateajout=:dateajout,dateexpr=:dateexpr,description=:description");
+      query.prepare("update fournisseur set nom=:nom,dateajout=:dateajout,dateexpr=:dateexpr,description=:description  WHERE idfournisseur = :idfournisseur");
       query.bindValue(":idfournisseur",idfournisseur);
        query.bindValue(":nom", nom);
         query.bindValue(":dateajout", dateajout);
