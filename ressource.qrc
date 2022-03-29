@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/sons">
+        <file>sons/not.wav</file>
+    </qresource>
+</RCC>
