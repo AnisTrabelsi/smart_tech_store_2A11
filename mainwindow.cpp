@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui->setupUi(this);
 
     ui->view->setModel(C.afficherCommande());
+    ui->view_2->setModel(C.TriCommande());
 }
 
 MainWindow::~MainWindow()
@@ -80,7 +81,7 @@ void MainWindow::on_pb_supprimer_clicked()
 void MainWindow::on_cherchermodif_clicked()
 {
     Commande C1;
-    C1 = C1.chercher_Commande(ui->supp->text().toInt());
+    C1 = C1.chercher_Commande(ui->idmodif->text().toInt());
 
     if (C1.getIdCommande() != 0)
     {

@@ -33,6 +33,7 @@ public:
     bool ajouterCommande();
     bool supprimerCommande(int);
     QSqlQueryModel *afficherCommande();
+    QSqlQueryModel *TriCommande();
     bool userExists(const int &idCommande) const;
     bool modifier_Commande(int, int, int, int, QString, QDate);
     Commande chercher_Commande(const int &idCommande);

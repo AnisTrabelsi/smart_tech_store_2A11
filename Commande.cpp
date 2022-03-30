@@ -197,3 +197,17 @@ bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QStrin
     query.bindValue(":paiment", paiment);
     return query.exec();
 }
+
+QSqlQueryModel *Commande::TriCommande()
+{
+    QSqlQueryModel *model = new QSqlQueryModel();
+    model->setQuery("SELECT* FROM Commande ORDER BY ID_COMMANDE");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("mode_Livraison"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Numero_Tel"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantity"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Paiment valide"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date Commande"));
+
+    return model;
+}
