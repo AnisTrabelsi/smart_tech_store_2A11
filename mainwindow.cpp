@@ -1,159 +1,199 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "employee.h"
 #include <QSqlDatabase>
 #include <qmessagebox.h>
-#include <QSqlQuery>
 #include <QIntValidator>
+#include <facture.h>
+#include<QIntValidator>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->le_matricule->setValidator(new QIntValidator(0,999999,this));
-    ui->le_salaire->setValidator(new QIntValidator(0,999999,this));
-    ui->tab_employee->setModel(E.afficher());
-}
+    ui->TVA_A->setValidator(new QIntValidator(0,99,this));
+    ui->tab_facture->setModel(F.afficher());
 
+
+    ui->tttva_A->setValidator(new QIntValidator(0,9999999,this));
+ ui->totalht_A->setValidator(new QIntValidator(0,9999999,this));
+ui->ttttc_A->setValidator(new QIntValidator(0,9999999,this));
+ui->remise_A->setValidator(new QIntValidator(0,99,this));
+}
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
 void MainWindow::on_pb_ajouter_clicked()
-{
-    int matricule=ui->le_matricule->text().toInt();
-    QString nom=ui->le_nom->text();
-    QString prenom=ui->le_prenom->text();
-    QString e_mail=ui->le_e_mail->text();
-    QString mot_de_passe=ui->le_mot_de_passe->text();
-    QDate date_embauche=ui->le_date_embauche->date();
-    int salaire=ui->le_salaire->text().toInt();
-    Employee E(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe);
+{   int nfacture=7;
+    int etat=ui->Etat_A->currentIndex();
+    int tva=ui->TVA_A->text().toInt();
+    int total_tva=ui->tttva_A->text().toInt();
+    int total_ht=ui->totalht_A->text().toInt();
+    int total_ttc=ui->ttttc_A->text().toInt();
+    int modedereglement=ui->modedereglement_A->currentIndex();
+    int remise=ui->remise_A->text().toInt();
+    int matricule=ui->matricule_A->text().toInt();
+    int id_commande=ui->idcommande_A->text().toInt();
+    QDate datedecreation=ui->dateajout_A->date();
+    QString remarque=ui->remarque_A->text();
+facture F(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,matricule,id_commande,datedecreation,remarque);
 
-
-    bool test=E.ajouter();
-    if(test)
-  {
-  QMessageBox::information(nullptr, QObject::tr("Ajouter un employee"),
-                    QObject::tr("employee ajouté.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
-ui->tab_employee->setModel(E.afficher());
-  }
-    else
+bool test=F.ajouter();
+      if(test)
     {
-        QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                    QObject::tr("Erreur !.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
+    QMessageBox::information(nullptr, QObject::tr("Ajouter un equipement"),
+                      QObject::tr("fournisseur ajouté.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
 
+    ui->Etat_A->clear();
+    ui->TVA_A->clear();
+    ui->tttva_A->clear();
+    ui->totalht_A->clear();
+    ui->ttttc_A->clear();
+    ui->modedereglement_A->clear();
+    ui->remise_A->clear();
+    ui->matricule_A->clear();
+    ui->idcommande_A->clear();
+    ui->dateajout_A->clear();
+    ui->remarque_A->clear();
     }
-    ui->le_matricule->clear();
-    ui->le_nom->clear();
-    ui->le_prenom->clear();
-    ui->le_e_mail->clear();
-    ui->le_mot_de_passe->clear();
-    ui->le_date_embauche->clear();
-    ui->le_salaire->clear();
+      else
+      {
+          QMessageBox::critical(nullptr, QObject::tr("Supprimer un equipement"),
+                      QObject::tr("Erreur !.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+
+      }
+
+ ui->tab_facture->setModel(F.afficher());
 }
+
 
 
 void MainWindow::on_pb_supprimer_clicked()
 {
-    Employee E1;
-    E1.setmatricule(ui->le_matricule_supp->text().toInt());
-    bool test=E1.supprimer(E1.getmatricule());
+   facture f1;
+   f1.set_nfacture(ui->nfacture_S->text().toInt());
+        bool test=f1.supprimer(f1.get_nfacture());
 
-    if(test)
-  {
-  QMessageBox::information(nullptr, QObject::tr("supprimer un employee"),
-                    QObject::tr("Employee supprimé.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
-ui->tab_employee->setModel(E.afficher()); //refresh
-  }
-    else
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                    QObject::tr("employee introuvable !.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
+        if(test)
 
-    }
-    ui->le_matricule_supp->clear();
+      {
+      QMessageBox::information(nullptr, QObject::tr("supprimer un fournisseur"),
+                        QObject::tr("fournisseur supprimé.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+ui->tab_facture->setModel(F.afficher());
+ui->nfacture_S->clear();
+        }
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un fournisseur"),
+                        QObject::tr("Erreur !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+
+
 
 }
-
-
-
-
 
 
 void MainWindow::on_pb_modifier_clicked()
 {
 
-    Employee E1;
-    E1=E1.chercher(ui->le_matriculeM->text().toInt());
 
-    if(E1.getnom()!="vide") //employe trouvé
-  {
+    facture f1;
+    f1=f1.chercher(ui->nfacture_MM->text().toInt());
 
-      ui->le_matricule_2->setText( QString::number(E1.getmatricule()) ) ;
-      ui->le_nom_2->setText( E1.getnom() ) ;
-      ui->le_prenom_2->setText( E1.getprenom() ) ;
-      ui->le_e_mail_2->setText(E1.gete_mail());
-     ui->le_date_embauche_2->setDate(E1.getdate_embauche());
-      ui->le_salaire_2->setText( QString::number(E1.getsalaire()) ) ;
-      ui->le_mot_de_passe_2->setText(E1.getmot_de_passe());
+        if(f1.get_remarque()!="user not found")
+      {
 
-ui->tab_employee->setModel(E.afficher()); //refresh
-  }
-    else //introuvable
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                    QObject::tr("employee introuvable !.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
 
-    }
-    ui->le_matricule_supp->clear();
+           ui->nfacture_MM->setText( QString::number(f1.get_nfacture()));
+           ui->Etat_A->setCurrentIndex(f1.get_etat());
+           ui->modedereglement_M->setCurrentIndex(f1.get_modedereglement());
+           ui->dateajout_M->setDate( f1.get_datedecreation());
+           ui->TVA_M->setText( QString::number(f1.get_tva()));
+           ui->tttva_M->setText( QString::number(f1.get_total_tva()));
+           ui->totalht_M->setText( QString::number(f1.get_total_ht()));
+           ui->ttttc_M->setText( QString::number(f1.get_total_ttc()));
+           ui->remise_M->setText( QString::number(f1.get_remise()));
+           ui->matricule_M->setText( QString::number(f1.get_matricule()));
+           ui->idcommande_M->setText( QString::number(f1.get_id_commande()));
+           ui->remarque_M->setText(f1.get_remarque() );
+           ui->client_M->setText(f1.get_nom());
+      }
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+                        QObject::tr("employee introuvable !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+
+
+
+
 }
-
-
 
 void MainWindow::on_pb_modifier_2_clicked()
 {
-    int matricule=ui->le_matricule_2->text().toInt();
-    QString nom=ui->le_nom_2->text();
-    QString prenom=ui->le_prenom_2->text();
-    QString e_mail=ui->le_e_mail_2->text();
-    QString mot_de_passe=ui->le_mot_de_passe_2->text();
-    QDate date_embauche=ui->le_date_embauche_2->date();
-    int salaire=ui->le_salaire_2->text().toInt();
-    Employee E(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe);
+    int nfacture=ui->nfacture_MM->text().toInt();
+    int etat=ui->Etat_M->currentIndex();
+    int tva=ui->TVA_M->text().toInt();
+    int total_tva=ui->tttva_M->text().toInt();
+    int total_ht=ui->totalht_M->text().toInt();
+    int total_ttc=ui->ttttc_M->text().toInt();
+    int modedereglement=ui->modedereglement_M->currentIndex();
+    int remise=ui->remise_M->text().toInt();
+    int matricule=ui->matricule_M->text().toInt();
+    int id_commande=ui->idcommande_M->text().toInt();
+    QDate datedecreation=ui->dateajout_M->date();
+    QString remarque=ui->remarque_M->text();
+facture F(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,matricule,id_commande,datedecreation,remarque);
 
-Employee E1;
-int test=E1.userExists(matricule);
-if(test==true)
-{
-    if(int test1=E1.modifier(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe)==true){
-        QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
-                          QObject::tr("employee modifié.\n"
-                                      "Click Cancel to exit."), QMessageBox::Cancel);
-      ui->tab_employee->setModel(E.afficher());
-    }
-    else
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                    QObject::tr("Erreur de modification!.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
 
-    }
+  facture F1;
+  int test=F1.userExists(nfacture);
 
+  if(test==true)
+  {
+      if(int test1=F1.modifier(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,matricule,id_commande,datedecreation,remarque)==true){
+          QMessageBox::information(nullptr, QObject::tr("modifier un fournisseur"),
+                            QObject::tr("fournisseur modifié.\n"
+                                        "Click Cancel to exit."), QMessageBox::Cancel);
+     ui->tab_facture->setModel(F.afficher());
+      }
+      else
+      {
+          QMessageBox::critical(nullptr, QObject::tr("Supprimer un modifé"),
+                      QObject::tr("Erreur de modification!.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+
+      }
+
+  }
+
+      else
+      {
+          QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+                      QObject::tr("Erreur !.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+
+      }
 }
 
-    else
-    {
-        QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                    QObject::tr("Erreur !.\n"
-                                "Click Cancel to exit."), QMessageBox::Cancel);
+void MainWindow::on_matricule_A_editingFinished()
+{
+    
+    
+    
+    
+    
+}
 
-    }
+void MainWindow::on_pushButton_clicked()
+{ui->tab_facture_2->setModel(F.trier());
 
 }

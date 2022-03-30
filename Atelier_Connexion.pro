@@ -25,13 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    employee.cpp \
+    facture.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp
 
 HEADERS += \
-    employee.h \
+    facture.h \
         mainwindow.h \
     connection.h
 
