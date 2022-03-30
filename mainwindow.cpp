@@ -5,6 +5,7 @@
 #include <qmessagebox.h>
 #include <QSqlQuery>
 #include <QIntValidator>
+#include <QValidator>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,6 +13,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->le_matricule->setValidator(new QIntValidator(0,999999,this));
     ui->le_salaire->setValidator(new QIntValidator(0,999999,this));
+    QRegExp rx("[a-zA-Z]+");
+    QValidator *validator = new QRegExpValidator(rx, this);
+
+
+    ui->le_nom->setValidator(validator);
+    ui->le_prenom->setValidator(validator);
+   /*QRegExp emailT("^[A-Z0-9a-z._-]{1,}@(\\w+)(\\.(\\w+))(\\.(\\w+))?(\\.(\\w+))?$");
+    QValidator *validateur = new QRegExpValidator(emailT, this);
+
+
+    ui->le_e_mail->setValidator(validateur);*/
+    ui->le_salaire->setValidator(new QIntValidator(0,999999,this));
+    QRegExp expEmail("\\b[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}\\b");
+              QRegExpValidator *valEmail =new QRegExpValidator(expEmail,this);
+              ui->le_e_mail->setValidator(valEmail);
     ui->tab_employee->setModel(E.afficher());
 }
 
@@ -22,6 +38,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pb_ajouter_clicked()
 {
+
+    if( ui->le_matricule->text().isEmpty() || ui->le_nom->text().isEmpty()|| ui->le_prenom->text().isEmpty()|| ui->le_e_mail->text().isEmpty()|| ui->le_mot_de_passe->text().isEmpty()|| ui->le_salaire->text().isEmpty()  )
+       {
+           QMessageBox::warning(nullptr, QObject::tr("Attention"),
+                                QObject::tr("Veuillez remplir tout les champs.\n"), QMessageBox::Ok);
+       }
+       else{
+
+
     int matricule=ui->le_matricule->text().toInt();
     QString nom=ui->le_nom->text();
     QString prenom=ui->le_prenom->text();
@@ -29,9 +54,9 @@ void MainWindow::on_pb_ajouter_clicked()
     QString mot_de_passe=ui->le_mot_de_passe->text();
     QDate date_embauche=ui->le_date_embauche->date();
     int salaire=ui->le_salaire->text().toInt();
+    if(ui->le_e_mail->text().contains(QRegExp("\\b[a-zA-Z0-9.%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}\\b")))
+    {
     Employee E(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe);
-
-
     bool test=E.ajouter();
     if(test)
   {
@@ -39,7 +64,7 @@ void MainWindow::on_pb_ajouter_clicked()
                     QObject::tr("employee ajouté.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
 ui->tab_employee->setModel(E.afficher());
-  }
+  }}
     else
     {
         QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
@@ -47,13 +72,17 @@ ui->tab_employee->setModel(E.afficher());
                                 "Click Cancel to exit."), QMessageBox::Cancel);
 
     }
-    ui->le_matricule->clear();
+    }
+
+
+
+    /*ui->le_matricule->clear();
     ui->le_nom->clear();
     ui->le_prenom->clear();
     ui->le_e_mail->clear();
     ui->le_mot_de_passe->clear();
     ui->le_date_embauche->clear();
-    ui->le_salaire->clear();
+    ui->le_salaire->clear();*/
 }
 
 
@@ -156,4 +185,9 @@ if(test==true)
 
     }
 
+}
+
+void MainWindow::on_pb_trier_clicked()
+{
+     ui->tab_trier->setModel(E.trier());
 }

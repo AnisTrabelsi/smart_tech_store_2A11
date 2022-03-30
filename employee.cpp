@@ -50,7 +50,7 @@ QSqlQueryModel* Employee::afficher(){
           model->setHeaderData(3, Qt::Horizontal, QObject::tr("e-mail"));
           model->setHeaderData(4, Qt::Horizontal, QObject::tr("date d'embauche"));
           model->setHeaderData(5, Qt::Horizontal, QObject::tr("salaire"));
-          model->setHeaderData(0, Qt::Horizontal, QObject::tr("mot de passe"));
+          model->setHeaderData(6, Qt::Horizontal, QObject::tr("mot de passe"));
 
     return model;
 }
@@ -147,4 +147,18 @@ bool Employee::modifier(int matricule,QString nom,QString prenom,QString e_mail,
                   query.bindValue(":salaire", salaire);
                       query.bindValue(":mot_de_passe", mot_de_passe);
     return    query.exec();
+}
+QSqlQueryModel* Employee::trier()
+{
+    QSqlQueryModel* model=new QSqlQueryModel();
+          model->setQuery("SELECT *  FROM employee ORDER BY matricule");
+          model->setHeaderData(0, Qt::Horizontal, QObject::tr("identifiant"));
+          model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
+          model->setHeaderData(2, Qt::Horizontal, QObject::tr("prénom"));
+          model->setHeaderData(3, Qt::Horizontal, QObject::tr("e-mail"));
+          model->setHeaderData(4, Qt::Horizontal, QObject::tr("date d'embauche"));
+          model->setHeaderData(5, Qt::Horizontal, QObject::tr("salaire"));
+          model->setHeaderData(6, Qt::Horizontal, QObject::tr("mot de passe"));
+
+    return model;
 }

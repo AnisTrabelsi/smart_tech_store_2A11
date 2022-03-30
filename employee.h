@@ -31,6 +31,7 @@ public:
     //QSqlQueryModel* chercher(int);
     bool modifier(int,QString,QString,QString,QDate,int,QString);
     Employee chercher(int matricule);
+     QSqlQueryModel* trier();
 private:
 int matricule;
 QString nom,prenom,e_mail,mot_de_passe;

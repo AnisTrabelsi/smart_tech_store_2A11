@@ -74,7 +74,7 @@ font-size: 20px;
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -2400,7 +2400,89 @@ QLineEdit:focus
         <x>50</x>
         <y>20</y>
         <width>741</width>
-        <height>471</height>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView
+{
+    alternate-background-color: #1F1F1F;
+    gridline-color: white;
+    color: white;
+
+    font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+}
+QTableView::item 
+{
+    color: white;
+}
+
+QTableView::item:focus
+{
+    color: gray;
+    background: #0063cd;
+}
+QTableView::item:selected
+{
+    color: red;
+    background: #0063cd;
+}
+
+QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 1px solid #b1b1b1;
+    border-radius: 1px;
+    width: 7px;
+    height: 7px;
+    margin: 0px 5px 0 5px;
+}
+
+    padding-left:10px;
+    height:100px;
+    width:180px;
+    color: #5a5a5a;
+    border-bottom :1px solid #f0f0f0;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_trier">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>270</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+      </property>
+      <property name="text">
+       <string>Trier</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tab_trier">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>310</y>
+        <width>741</width>
+        <height>201</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3043,7 +3125,7 @@ QPushButton:focus
 }</string>
        </property>
        <property name="text">
-        <string>Chercher</string>
+        <string>Rechercher</string>
        </property>
       </widget>
      </widget>
@@ -3195,7 +3277,7 @@ QPushButton:focus
        <bool>false</bool>
       </property>
       <property name="title">
-       <string>Ajout</string>
+       <string>Recherche</string>
       </property>
       <widget class="QLabel" name="label_11">
        <property name="geometry">
