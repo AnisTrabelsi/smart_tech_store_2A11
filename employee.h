@@ -5,6 +5,11 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlError>
+
+
+#include <QPieSlice>
+#include <QPieSeries>
+#include <QtCharts>
 class Employee
 {
 public:
@@ -28,10 +33,11 @@ public:
     QSqlQueryModel* afficher();
     bool supprimer(int);
     bool userExists(const int& matricule) const;
-    //QSqlQueryModel* chercher(int);
     bool modifier(int,QString,QString,QString,QDate,int,QString);
     Employee chercher(int matricule);
      QSqlQueryModel* trier();
+     // QSqlQueryModel * statistic();
+      void stat();
 private:
 int matricule;
 QString nom,prenom,e_mail,mot_de_passe;

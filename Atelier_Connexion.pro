@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql
+QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,16 +27,19 @@ CONFIG += c++11
 
 SOURCES += \
     employee.cpp \
+    home.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp
 
 HEADERS += \
     employee.h \
+    home.h \
         mainwindow.h \
     connection.h
 
 FORMS += \
+        home.ui \
         mainwindow.ui
 
 # Default rules for deployment.

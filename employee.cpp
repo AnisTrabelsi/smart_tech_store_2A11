@@ -162,3 +162,50 @@ QSqlQueryModel* Employee::trier()
 
     return model;
 }
+/*QSqlQueryModel * Employee::statistic()
+{
+    QSqlQueryModel * model=new QSqlQueryModel();
+       model->setQuery("select matricule,(count(matricule)*100/ (select count(*)from employee)) as pourcentage from employee group by matricule");
+       model->setHeaderData(0,Qt::Horizontal,QObject::tr("matricule"));
+       model->setHeaderData(1,Qt::Horizontal,QObject::tr("percentage"));
+       return model;
+
+
+}*/
+void Employee::stat() {
+    QSqlQueryModel * model= new QSqlQueryModel();
+       model->setQuery("select * from employee where salaire >= 1000");
+       float dispo1=model->rowCount();
+
+       model->setQuery("select * from employee where salaire <1000");
+       float dispo=model->rowCount();
+
+       float total=dispo1+dispo;
+           QString a=QString("Cadre . " +QString::number((dispo1*100)/total,'f',2)+"%" );
+           QString b=QString("employee .  "+QString::number((dispo*100)/total,'f',2)+"%" );
+           QPieSeries *series = new QPieSeries();
+           series->append(a,dispo1);
+           series->append(b,dispo);
+       if (dispo1!=0)
+       {QPieSlice *slice = series->slices().at(0);
+           slice->setLabelVisible();
+           slice->setPen(QPen());}
+       if ( dispo!=0)
+       {
+           QPieSlice *slice1 = series->slices().at(1);
+           slice1->setLabelVisible();
+       }
+
+       QChart *chart = new QChart();
+
+
+       chart->addSeries(series);
+       chart->setTitle("Salaire des employes :Nb employes: "+ QString::number(total));
+       chart->legend()->hide();
+
+
+       QChartView *chartView = new QChartView(chart);
+       chartView->setRenderHint(QPainter::Antialiasing);
+       chartView->resize(1000,500);
+       chartView->show();
+}
