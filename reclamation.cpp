@@ -69,9 +69,9 @@ bool reclamation::supprimer(int idreclamation){
       QSqlQueryModel* model=new QSqlQueryModel();
             model->setQuery("SELECT* FROM reclamation");
             model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
-            model->setHeaderData(2, Qt::Horizontal, QObject::tr("date reclamation"));
-            model->setHeaderData(3, Qt::Horizontal, QObject::tr("description"));
-            model->setHeaderData(4, Qt::Horizontal, QObject::tr("idfournisseur"));
+            model->setHeaderData(1, Qt::Horizontal, QObject::tr("date reclamation"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("description"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("idfournisseur"));
 
 
 

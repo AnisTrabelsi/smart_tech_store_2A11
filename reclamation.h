@@ -21,7 +21,9 @@ public:
     void setdescription(QString);
        void setidfournisseur(int);
   bool ajouter();
+
     bool supprimer(int);
+      bool archiver(int);
   QSqlQueryModel* afficher();
       bool userExists(const int& idreclamation) const;
       reclamation chercher(int idreclamation);

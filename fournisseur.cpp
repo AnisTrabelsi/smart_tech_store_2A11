@@ -33,7 +33,21 @@ bool Fournisseur::ajouter()
 
     QSqlQuery query;
     QString id_string= QString::number(idfournisseur);
-    query.prepare("INSERT INTO FOURNISSEUR (IDFOURNISSEUR, NOM, DATEAJOUT, DATEEXPR, DESCRIPTION) "
+    query.prepare("INSERT INTO fournisseur (IDFOURNISSEUR, NOM, DATEAJOUT, DATEEXPR, DESCRIPTION) "
+                  "VALUES (:idfournisseur, :nom, :dateajout, :dateexpr, :description)");
+    query.bindValue(":idfournisseur", id_string);
+    query.bindValue(":nom", nom);
+    query.bindValue(":dateajout", dateajout);
+     query.bindValue(":dateexpr", dateexpr);
+      query.bindValue(":description", description);
+            return query.exec();
+}
+bool Fournisseur::ajouterarchive()
+{
+
+    QSqlQuery query;
+    QString id_string= QString::number(idfournisseur);
+    query.prepare("INSERT INTO fourarchive (IDFOURNISSEUR, NOM, DATEAJOUT, DATEEXPR, DESCRIPTION) "
                   "VALUES (:idfournisseur, :nom, :dateajout, :dateexpr, :description)");
     query.bindValue(":idfournisseur", id_string);
     query.bindValue(":nom", nom);
@@ -44,8 +58,36 @@ bool Fournisseur::ajouter()
 }
 bool Fournisseur::supprimer(int idfournisseur){
     bool success = false;
+       if (userExists1(idfournisseur))
+        {
+            QSqlQuery queryDelete;
+            queryDelete.prepare("DELETE FROM fourarchive WHERE idfournisseur=:idfournisseur");
+            QString res2=QString::number(idfournisseur);
+                     queryDelete.bindValue(":idfournisseur", res2);
+
+            success = queryDelete.exec();
+
+            if(!success)
+                qDebug() << "Delete user failure:" << queryDelete.lastError();
+            else
+                qDebug() << "User successfully deleted" << idfournisseur;
+
+
+        }
+        else
+        {
+            qDebug() << "Error deleting user: user does not exist";
+        }
+
+        return success;
+}
+bool Fournisseur::archiver(int idfournisseur){
+    bool success = false;
+    Fournisseur f1;
        if (userExists(idfournisseur))
         {
+           f1=chercher(idfournisseur);
+           f1.ajouterarchive();
             QSqlQuery queryDelete;
             queryDelete.prepare("DELETE FROM fournisseur WHERE idfournisseur=:idfournisseur");
             QString res2=QString::number(idfournisseur);
@@ -67,10 +109,26 @@ bool Fournisseur::supprimer(int idfournisseur){
 
         return success;
 }
-   QSqlQueryModel* Fournisseur::afficher()
+   QSqlQueryModel* Fournisseur::afficher(int a)
    {
       QSqlQueryModel* model=new QSqlQueryModel();
             model->setQuery("SELECT* FROM FOURNISSEUR");
+            if (a==1)
+            {
+             model->setQuery("SELECT* FROM FOURNISSEUR ORDER BY nom");
+            }
+            else if (a==2)
+                   {
+                     model->setQuery("SELECT* FROM FOURNISSEUR ORDER BY dateajout");
+            }
+            else if (a==3)
+                   {
+                     model->setQuery("SELECT* FROM FOURNISSEUR ORDER BY dateexpr");
+            }
+            else if (a==0)
+                   {
+                     model->setQuery("SELECT* FROM FOURNISSEUR ORDER BY idfournisseur");
+            }
             model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
             model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
             model->setHeaderData(2, Qt::Horizontal, QObject::tr("date d'ajout"));
@@ -82,12 +140,50 @@ bool Fournisseur::supprimer(int idfournisseur){
       return model;
    }
 
+
+   QSqlQueryModel* Fournisseur::afficherarchive()
+   {
+      QSqlQueryModel* model=new QSqlQueryModel();
+            model->setQuery("SELECT* FROM fourarchive");
+
+            model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+            model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("date d'ajout"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("date d'expiration"));
+            model->setHeaderData(4, Qt::Horizontal, QObject::tr("description"));
+
+
+
+      return model;
+   }
    bool Fournisseur:: userExists(const int& idfournisseur) const
    {
        bool exists = false;
 
        QSqlQuery checkQuery;
        checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE idfournisseur=:idfournisseur");
+       checkQuery.bindValue(":idfournisseur", idfournisseur); //tab3th lvaleur mte3na lel bd
+
+       if (checkQuery.exec())
+       {
+           if (checkQuery.next())
+           {
+               exists = true;
+           }
+       }
+       else
+       {
+           qDebug() << "User not found:" << checkQuery.lastError();
+       }
+
+       return exists;
+   }
+   bool Fournisseur:: userExists1(const int& idfournisseur) const
+   {
+       bool exists = false;
+
+       QSqlQuery checkQuery;
+       checkQuery.prepare("SELECT idfournisseur FROM fourarchive WHERE idfournisseur=:idfournisseur");
        checkQuery.bindValue(":idfournisseur", idfournisseur); //tab3th lvaleur mte3na lel bd
 
        if (checkQuery.exec())
@@ -166,7 +262,7 @@ bool Fournisseur::supprimer(int idfournisseur){
            Fournisseur E1;
 
            QSqlQuery checkQuery;
-           checkQuery.prepare("SELECT * FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+           checkQuery.prepare("SELECT * FROM fournisseur WHERE dateexpr<to_date(sysdate,'dd-mm-yy')");
            checkQuery.bindValue(":dateexpr", dateexpr);
 
 
@@ -200,7 +296,7 @@ bool Fournisseur::supprimer(int idfournisseur){
              Fournisseur F;
               QSqlQuery queryDelete;
               int idfournisseur=F.cherchersys();
-              queryDelete.prepare("DELETE FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+              queryDelete.prepare("DELETE FROM fournisseur WHERE dateexpr<to_date(sysdate,'dd-mm-yy')");
                        queryDelete.bindValue(":idfournisseur", idfournisseur);
 queryDelete.bindValue(":dateexpr", dateexpr);
 
@@ -226,7 +322,7 @@ queryDelete.bindValue(":dateexpr", dateexpr);
       bool exists = false;
 
       QSqlQuery checkQuery;
-      checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+      checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE dateexpr<to_date(sysdate,'dd-mm-yy')");
       checkQuery.bindValue(":dateexpr", dateexpr); //tab3th lvaleur mte3na lel bd
 
       if (checkQuery.exec())
@@ -243,3 +339,60 @@ queryDelete.bindValue(":dateexpr", dateexpr);
 
       return exists;
   }
+  bool Fournisseur::restore(int idfournisseur){
+      bool success = false;
+
+     if (userExists1(idfournisseur))
+      {
+         Fournisseur F1=chercherarchive(idfournisseur);
+        bool test=F1.ajouter();
+          QSqlQuery queryDelete;
+          queryDelete.prepare("DELETE FROM fourarchive WHERE idfournisseur=:idfournisseur");
+          QString res2=QString::number(idfournisseur);
+                   queryDelete.bindValue(":idfournisseur", res2);
+
+          success = queryDelete.exec();
+
+          if(!success)
+              qDebug() << "Delete user failure:" << queryDelete.lastError();
+          else
+              qDebug() << "User successfully deleted" << idfournisseur;
+
+
+      }
+      else
+      {
+          qDebug() << "Error deleting user: user does not exist";
+      }
+
+      return success;
+  }
+  Fournisseur Fournisseur::chercherarchive(int idfournisseur){
+
+           Fournisseur E1;
+
+           QSqlQuery checkQuery;
+           checkQuery.prepare("SELECT * FROM fourarchive WHERE idfournisseur = :idfournisseur");
+           checkQuery.bindValue(":idfournisseur", idfournisseur);
+
+           if (checkQuery.exec())
+           {
+               if (checkQuery.next())
+               {
+                   E1.setid(checkQuery.value(0).toInt());
+                   E1.setnom(checkQuery.value(1).toString());
+                   E1.setdateajout(checkQuery.value(2).toDate());
+                   E1.setdateexpr(checkQuery.value(3).toDate());
+                   E1.setdescription(checkQuery.value(4).toString());
+
+
+                   return E1;
+               }
+           }
+           else
+           {
+               qDebug() << "User not found:" << checkQuery.lastError();
+           }
+   E1.setnom("vide");
+   return E1;
+       }

@@ -21,14 +21,20 @@ public:
     void setdateexpr(QDate);
     void setdescription(QString);
   bool ajouter();
+    bool ajouterarchive();
     bool supprimer(int);
+     bool archiver(int);
       bool supprimersys();
-  QSqlQueryModel* afficher();
+      bool restore(int);
+  QSqlQueryModel* afficher(int a);
+  QSqlQueryModel* afficherarchive();
     QSqlQueryModel* trier();
       bool userExists(const int& idfournisseur) const;
+          bool userExists1(const int& idfournisseur) const;
         bool userExistsys(const QDate& dateexpr) const;
       bool modifier(int,QString,QDate,QDate,QString);
       Fournisseur chercher(int idfournisseur);
+      Fournisseur chercherarchive(int idfournisseur);
        int cherchersys();
 private:
     int idfournisseur;
