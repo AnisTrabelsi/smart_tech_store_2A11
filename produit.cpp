@@ -55,53 +55,28 @@ bool Produit::ajouter(){
 }
 
 bool Produit::supprimer(int Ref_produit){
-    bool test=false;
+   bool test=false;
     if (Existence_produit(Ref_produit))
     {QSqlQuery query;
-        QSqlQuery query2;
-        query.prepare("Delete from Produit where Ref_produit=:Ref_produit");
-        query.bindValue(0, Ref_produit);
 
-        query2.prepare("select * from Produit where Ref_produit=:Ref_produit");
-        query2.bindValue(0, Ref_produit);
-
-        QString Ref_produit_string = query2.value(0).toString();
-        QString Libelle = query2.value(1).toString();
-        QString Prix_string = query2.value(2).toString();
-        QString Quantite_string = query2.value(3).toString();
-        QString IDFournisseur_string = query2.value(4).toString();
-        QString IDCategorie_string = query2.value(5).toString();
+          query.prepare("Delete from Produit where Ref_produit=:Ref_produit");
+          query.bindValue(0, Ref_produit);
 
 
-        // Création d'un objet QFile
-        QFile file("Produit.txt");
-        // On ouvre notre fichier en lecture seule et on vérifie l'ouverture
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-            qDebug() << "fichier echouée:" << query.lastError();
-        // Création d'un objet QTextStream à partir de notre objet QFile
-        QTextStream flux(&file);
-        // On choisit le codec correspondant au jeu de caractères que l'on souhaite ; ici, UTF-8
-        flux.setCodec("UTF-8");
-        // Écriture des différentes lignes dans le fichier
-        flux <<"aaaa: " << query2.value(0).TextFormat <<"bbb: " << query2.value(1).TextFormat <<"gggg: " <<Prix_string <<Quantite_string << IDCategorie_string <<IDFournisseur_string <<  endl;
-        test=query.exec();
-
-
-        if(!test)
-            qDebug() << "suppression echouée:" << query.lastError();
-        else
-            qDebug() << "suppression de produit réussie:" << Ref_produit ;
+test=query.exec();
+if(!test)
+qDebug() << "suppression echouée:" << query.lastError();
+else
+    qDebug() << "suppression de produit réussie:" << Ref_produit ;
     }
     else
     {
         qDebug() << "la référence du produit n'existe pas";
     }
-
-
-
     return test;
 
 }
+
 
 QSqlQueryModel* Produit::afficher()
 {
@@ -263,21 +238,44 @@ QSqlQueryModel* Produit::tri_libelle()
     return model;
 }
 
-QSqlQueryModel * Produit::statistic()
+
+
+
+QSqlQueryModel* Produit::afficher_produit(QString Ref_produit)
 {
-    QSqlQueryModel * model=new QSqlQueryModel();
-    model->setQuery("select Libelle_produit,(Quantite*100/ (select sum(Quantite) from Produit) ) as pourcentage from Produit group by Libelle_produit");
-    model->setHeaderData(0,Qt::Horizontal,QObject::tr("Libéllé Produit"));
-    model->setHeaderData(1,Qt::Horizontal,QObject::tr("% Quantité"));
+    QSqlQuery query;
+    query.prepare("SELECT * FROM Produit WHERE Ref_produit=:Ref_produit ");
+    query.bindValue(":Ref_produit",Ref_produit);
+    QSqlQueryModel* model= new QSqlQueryModel();
+    query.exec();
+    model->setQuery(query);
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Ref_produit"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Libelle_produit"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prix"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantite"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDCategorie"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("IDFournisseur"));
 
     return model;
-
-
 }
 
 
+void Produit::calculer(int IDcategorie,int pourcentage)
+{// lors de l'ajout ou modif je recuppere pourcentage et IDcategorie et je fais mon calcul par la commande sql
+    QSqlQuery query2;
+    query2.prepare("update Produit set prix=((prix*:pourcentage)/100) where IDcategorie=:IDcategoriep  ");
+    query2.bindValue(":pourcentage",100-pourcentage);
+    query2.bindValue(":IDcategoriep",IDcategorie);
 
+    query2.exec();
+}
 
+void Produit::calculerapressupp(int IDcategorie,int pourcentage)
+{// lors de l'ajout ou modif je recuppere pourcentage et IDcategorie et je fais mon calcul par la commande sql
+    QSqlQuery query2;
+    query2.prepare("update Produit set prix=((prix*100)/:pourcentage) where IDcategorie=:IDcategoriep  ");
+    query2.bindValue(":pourcentage",100-pourcentage);
+    query2.bindValue(":IDcategoriep",IDcategorie);
 
-
-
+    query2.exec();
+}

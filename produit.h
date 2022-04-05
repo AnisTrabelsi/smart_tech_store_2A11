@@ -27,18 +27,20 @@ public:
         void setfournisseur(int);
 
         bool ajouter();
+        bool supprimer(int);
+        bool Existence_produit(const int& Ref_produit) const;
+        bool modifier(int,QString,int,int,int,int);
         QSqlQueryModel* afficher();
         QSqlQueryModel* tri_croissant();
         QSqlQueryModel* tri_decroissant();
         QSqlQueryModel* tri_ref();
         QSqlQueryModel* tri_libelle();
         QSqlQueryModel* tri_quantite();
-        QSqlQueryModel* statistic();
-
-        bool supprimer(int);
-        bool Existence_produit(const int& Ref_produit) const;
-        bool modifier(int,QString,int,int,int,int);
         Produit chercher(int Ref_produit);
+        QSqlQueryModel* afficher_produit(QString Ref_produit);
+        void calculer(int,int);
+        void calculerapressupp(int,int);
+
 private:
  int Ref_produit,Quantite,IDCategorie,IDFournisseur;
  QString Libelle_produit;

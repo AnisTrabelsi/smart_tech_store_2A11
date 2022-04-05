@@ -4,9 +4,20 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql \
+quick
+QT       += core gui charts
+QT      += printsupport
+QT  += core network
+QT       += core gui network
+QT  +=svg
+QT += quick
+QT += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG  += c++11 console
+CONFIG -= app_bundle
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
@@ -33,22 +44,34 @@ QT += widgets multimedia
 
 
 
-TARGET = test_son
 
 TEMPLATE = app
 
 SOURCES += \
+    chatserver.cpp \
+    chatsocket.cpp \
+    dumessengerconnectiondialog.cpp \
+    exportexcel.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-    produit.cpp
+    produit.cpp \
+    promotion.cpp \
+    smtp.cpp
 
 HEADERS += \
+    chatserver.h \
+    chatsocket.h \
+    dumessengerconnectiondialog.h \
+    exportexcel.h \
         mainwindow.h \
     connection.h \
-    produit.h
+    produit.h \
+    promotion.h \
+    smtp.h
 
 FORMS += \
+        dumessengerconnectiondialog.ui \
         mainwindow.ui
 
 # Default rules for deployment.
@@ -58,3 +81,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     ressource.qrc
+
+DISTFILES += \
+    libeay32.dll \
+    smtp.exe \
+    ssleay32.dll

@@ -3,11 +3,23 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "connection.h"
+#include "chatserver.h"
+using namespace ApexAlliance;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    //se connecter au serveur du chat
     Connection c;
     bool test=c.createconnect();
+    ChatServer Server;
+        if(!Server.startServer(3333)){
+            qDebug()<<"Error:"<<Server.errorString();
+            //return 1;
+
+        }
+        qDebug()<<"Server   started ...";
     MainWindow w;
     if(test)
     {w.show();

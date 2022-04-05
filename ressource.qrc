@@ -1,5 +1,12 @@
 <RCC>
     <qresource prefix="/sons">
         <file>sons/not.wav</file>
+        <file>sons/not2.wav</file>
+        <file>sons/not3.wav</file>
+        <file>sons/not4.wav</file>
+        <file>sons/not5.wav</file>
+        <file>sons/not6.wav</file>
+        <file>sons/not7.wav</file>
+        <file>sons/not8.wav</file>
     </qresource>
 </RCC>
