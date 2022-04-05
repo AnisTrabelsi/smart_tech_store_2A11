@@ -84,13 +84,7 @@ void home::on_pb_ajouter_2_clicked()
 
 
 
-        /*ui->le_matricule->clear();
-        ui->le_nom->clear();
-        ui->le_prenom->clear();
-        ui->le_e_mail->clear();
-        ui->le_mot_de_passe->clear();
-        ui->le_date_embauche->clear();
-        ui->le_salaire->clear();*/
+
 
 }
 
@@ -347,3 +341,14 @@ void home::on_pb_supprimer_3_clicked()
 }
 
 
+
+void home::on_reset_ajouter_3_clicked()
+{
+    ui->le_matricule_3->clear();
+    ui->le_nom_3->clear();
+    ui->le_prenom_3->clear();
+    ui->le_e_mail_3->clear();
+    ui->le_mot_de_passe_3->clear();
+    ui->le_date_embauche_3->clear();
+    ui->le_salaire_3->clear();
+}

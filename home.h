@@ -43,6 +43,8 @@ private slots:
 
     void on_pb_modifier_3_clicked();
 
+    void on_reset_ajouter_3_clicked();
+
 private:
     Ui::home *ui;
 };
