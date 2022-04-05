@@ -5,13 +5,17 @@
 #include <QIntValidator>
 #include <facture.h>
 #include<QIntValidator>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->TVA_A->setValidator(new QIntValidator(0,99,this));
-    ui->tab_facture->setModel(F.afficher());
+    ui->tab_facture->setModel(F.afficherho("facture",0));
+    ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
+
+
 
 
     ui->tttva_A->setValidator(new QIntValidator(0,9999999,this));
@@ -66,37 +70,12 @@ bool test=F.ajouter();
 
       }
 
- ui->tab_facture->setModel(F.afficher());
+ ui->tab_facture->setModel(F.afficherho("facture",0));
 }
 
 
 
-void MainWindow::on_pb_supprimer_clicked()
-{
-   facture f1;
-   f1.set_nfacture(ui->nfacture_S->text().toInt());
-        bool test=f1.supprimer(f1.get_nfacture());
 
-        if(test)
-
-      {
-      QMessageBox::information(nullptr, QObject::tr("supprimer un fournisseur"),
-                        QObject::tr("fournisseur supprimé.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-ui->tab_facture->setModel(F.afficher());
-ui->nfacture_S->clear();
-        }
-        else
-        {
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un fournisseur"),
-                        QObject::tr("Erreur !.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-
-        }
-
-
-
-}
 
 
 void MainWindow::on_pb_modifier_clicked()
@@ -104,7 +83,7 @@ void MainWindow::on_pb_modifier_clicked()
 
 
     facture f1;
-    f1=f1.chercher(ui->nfacture_MM->text().toInt());
+    f1=f1.chercher(ui->nfacture_MM->text().toInt(),"FACTURE");
 
         if(f1.get_remarque()!="user not found")
       {
@@ -163,7 +142,7 @@ facture F(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,
           QMessageBox::information(nullptr, QObject::tr("modifier un fournisseur"),
                             QObject::tr("fournisseur modifié.\n"
                                         "Click Cancel to exit."), QMessageBox::Cancel);
-     ui->tab_facture->setModel(F.afficher());
+    ui->tab_facture->setModel(F.afficherho("facture",0));
       }
       else
       {
@@ -194,6 +173,146 @@ void MainWindow::on_matricule_A_editingFinished()
 }
 
 void MainWindow::on_pushButton_clicked()
-{ui->tab_facture_2->setModel(F.trier());
+{
+    //ui->tab_facture_2->setModel(F.trier());
+
+}
+
+void MainWindow::on_recuperer_clicked()
+{
+    facture f1;
+    f1.set_nfacture(ui->nfacture_R->text().toInt());
+
+    bool test=f1.supprimer(f1.get_nfacture(),"FACTURE_ARCHIVE");
+
+    if(test)
+
+  {
+  QMessageBox::information(nullptr, QObject::tr("supprimer une facture"),
+                    QObject::tr("facture supprimé.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+ui->tab_facture->setModel(F.afficherho("facture",0));
+ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
+
+ui->nfacture_S->clear();
+    }
+    else
+    {
+        QMessageBox::critical(nullptr, QObject::tr("Supprimer une facture"),
+                    QObject::tr("Erreur !.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+
+
+
+}
+void MainWindow::on_pb_supprimer_clicked()
+{
+   facture f1;
+   f1.set_nfacture(ui->nfacture_S->text().toInt());
+
+
+   bool test=f1.supprimer(f1.get_nfacture(),"FACTURE");
+
+        if(test)
+
+      {
+      QMessageBox::information(nullptr, QObject::tr("supprimer un fournisseur"),
+                        QObject::tr("fournisseur supprimé.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+ui->tab_facture->setModel(F.afficherho("facture",0));
+ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
+
+ui->nfacture_S->clear();
+        }
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer un fournisseur"),
+                        QObject::tr("Erreur !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }}
+
+void MainWindow::on_pb_modifier_3_clicked()
+{facture f1;
+
+    f1.set_nfacture(ui->nfacture_MM->text().toInt());
+
+f1.imprimer();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+                model->setQuery("select * from facture WHERE total_ht>5000");
+                float dispo1=model->rowCount();
+
+                model->setQuery("select * from facture WHERE total_ht<5000");
+                float dispo=model->rowCount();
+
+                float total=dispo1+dispo;
+                    QString a=QString("plus . " +QString::number((dispo1*100)/total,'f',2)+"%" );
+                    QString b=QString("moins .  "+QString::number((dispo*100)/total,'f',2)+"%" );
+                    QPieSeries *series = new QPieSeries();
+                    series->append(a,dispo1);
+                    series->append(b,dispo);
+                if (dispo1!=0)
+                {QPieSlice *slice = series->slices().at(0);
+                    slice->setLabelVisible();
+                    slice->setPen(QPen());}
+                if ( dispo!=0)
+                {
+                    QPieSlice *slice1 = series->slices().at(1);
+                    slice1->setLabelVisible();
+                }
+
+                QChart *chart = new QChart();
+
+
+                chart->addSeries(series);
+               // chart->setTitle(""+ QString::number(total));
+                chart->legend()->hide();
+
+
+                QChartView *chartView = new QChartView(chart);
+                chartView->setRenderHint(QPainter::Antialiasing);
+                chartView->resize(1000,500);
+                chartView->show();
+}
+
+
+
+void MainWindow::on_radioButton_clicked()
+{
+    ui->tab_facture->setModel(F.afficherho("facture",0));
+
+  }
+
+void MainWindow::on_radioButton_2_clicked()
+{
+    ui->tab_facture->setModel(F.afficherho("facture",1));
+
+}
+
+void MainWindow::on_radioButton_3_clicked()
+{
+    ui->tab_facture->setModel(F.afficherho("facture",2));
+}
+
+void MainWindow::on_recuperer_2_clicked()
+{
+
+//ui->tabs->setModel(F.afficherho())
+
+    ui->tabs->setModel(F.afficherpar(ui->nomr->text(),0));
+}
+
+void MainWindow::on_recuperer_3_clicked()
+{
+facture f;
+f.regrouper(ui->nomr->text());
+ui->tab_facture->setModel(F.afficherho("facture",0));
+ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
 
 }

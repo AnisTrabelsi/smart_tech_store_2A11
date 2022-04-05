@@ -5,6 +5,10 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlError>
+#include<QPrinter>
+#include<QPrintDialog>
+#include<QPainter>
+#include<QTextDocument>
 class facture
 {
 
@@ -25,15 +29,17 @@ public:
     facture();
     facture(int,int,int,int,int,int,int,int,int,int,QDate,QString );
      bool ajouter();
-     bool supprimer(int);
-     QSqlQueryModel* afficher();
+     bool supprimer(int idfacture,QString table);
+QSqlQueryModel* afficherho(QString name,int a);
      bool userExists(const int& nfacture) const;
      bool modifier(int,int,int,int,int,int,int,int,int,int,QDate,QString);
-     facture chercher(int idfacture) ;
+     void regrouper(QString name);
+facture chercher(int idfacture,QString table);
 QSqlQueryModel* trier();
-
-
-
+QSqlQueryModel* afficherpar(QString name,int a);
+bool copytotable(QString name,facture f);
+void imprimer();
+void cherchers(QString &nom,QString &prenom,int idfacture );
 
      int get_nfacture(){return nfacture;}
      int get_etat(){return etat;}
