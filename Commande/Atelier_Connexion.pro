@@ -1,12 +1,9 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2018-10-26T21:45:23
-#
-#-------------------------------------------------
 QT       += charts
 QT       += core gui sql
+QT       += quick
+QT       += qml quick
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets quickwidgets
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
@@ -26,20 +23,31 @@ CONFIG += c++11
 
 SOURCES += \
     Commande.cpp \
+    civraison.cpp \
+    livraison.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    map.cpp
 
 HEADERS += \
     Commande.h \
     categorie.h \
+    civraison.h \
+    livraison.h \
     mainwindow.h \
-    connection.h
+    connection.h \
+    map.h
 
 FORMS += \
-        mainwindow.ui
+        livraison.ui \
+        mainwindow.ui \
+        map.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    qml.qrc

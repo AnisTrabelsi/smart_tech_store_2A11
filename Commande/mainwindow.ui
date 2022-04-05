@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../Users/Adam/Desktop/background.png</pixmap>
+     <pixmap>background.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -667,7 +667,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>690</x>
         <y>190</y>
         <width>131</width>
         <height>41</height>
@@ -3829,7 +3829,7 @@ QLineEdit:focus
 }</string>
        </property>
        <property name="text">
-        <string>2</string>
+        <string/>
        </property>
       </widget>
       <widget class="QPushButton" name="pb_supprimer">
