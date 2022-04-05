@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "connection.h"
 #include "home.h"
+#include "mdp_oub.h"
 #include <QMessageBox>
 #include <QDebug>
 MainWindow::MainWindow(QWidget *parent) :
@@ -39,4 +40,12 @@ if(c.Authentification(login,mdp)==0)
   QMessageBox::critical(this,"Connexion","login et mdp incorrecte");
   qDebug()<< "Mot de passe et login incorrect";
 }
+}
+
+void MainWindow::on_pushButton_mdp_oub_clicked()
+{
+    mdp_oub m(nullptr);
+    this->hide();
+    m.setModal(this);
+    m.exec();
 }

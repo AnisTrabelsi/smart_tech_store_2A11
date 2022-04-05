@@ -28,6 +28,10 @@ private slots:
 
     void on_pb_stat_clicked();
 
+    void on_pb_modifier_5_clicked();
+
+    void on_restaurer_clicked();
+
 private:
     Ui::home *ui;
 };

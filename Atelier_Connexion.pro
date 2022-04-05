@@ -30,17 +30,20 @@ SOURCES += \
     home.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    mdp_oub.cpp
 
 HEADERS += \
     employee.h \
     home.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    mdp_oub.h
 
 FORMS += \
         home.ui \
-        mainwindow.ui
+        mainwindow.ui \
+        mdp_oub.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

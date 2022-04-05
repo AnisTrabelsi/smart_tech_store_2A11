@@ -303,7 +303,7 @@ QLineEdit:focus
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>50</x>
        <y>150</y>
        <width>93</width>
        <height>28</height>
@@ -576,6 +576,37 @@ font-size: 15px;
 QLineEdit:focus
 {border:2px solid #FBAD25;
 }</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_mdp_oub">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>150</y>
+       <width>151</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+     </property>
+     <property name="text">
+      <string>Mot de passe oublié</string>
      </property>
     </widget>
    </widget>

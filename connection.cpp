@@ -27,6 +27,7 @@ int Connection::Authentification(QString login,QString pwd)
 
         QSqlQuery query;
         QSqlQuery query2;
+
         query.prepare("SELECT matricule FROM employee WHERE matricule = \'"+login+"\' AND mot_de_passe =\'"+pwd+"\'");
         query2.prepare("SELECT * FROM SYNDIQUE where LOGIN_SY=\'"+login+"\' AND MDP_SY=\'"+pwd+"\'");
 
