@@ -28,12 +28,14 @@ SOURCES += \
     fournisseur.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    reclamation.cpp
 
 HEADERS += \
     fournisseur.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    reclamation.h
 
 FORMS += \
         mainwindow.ui

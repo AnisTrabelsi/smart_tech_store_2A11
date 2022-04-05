@@ -22,10 +22,14 @@ public:
     void setdescription(QString);
   bool ajouter();
     bool supprimer(int);
+      bool supprimersys();
   QSqlQueryModel* afficher();
+    QSqlQueryModel* trier();
       bool userExists(const int& idfournisseur) const;
+        bool userExistsys(const QDate& dateexpr) const;
       bool modifier(int,QString,QDate,QDate,QString);
       Fournisseur chercher(int idfournisseur);
+       int cherchersys();
 private:
     int idfournisseur;
     QString nom, description;

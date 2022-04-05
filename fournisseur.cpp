@@ -44,7 +44,6 @@ bool Fournisseur::ajouter()
 }
 bool Fournisseur::supprimer(int idfournisseur){
     bool success = false;
-
        if (userExists(idfournisseur))
         {
             QSqlQuery queryDelete;
@@ -145,4 +144,102 @@ bool Fournisseur::supprimer(int idfournisseur){
             query.bindValue(":dateexpr", dateexpr);
                 query.bindValue(":description", description);
       return    query.exec();
+  }
+  QSqlQueryModel* Fournisseur::trier()
+  {
+      QSqlQueryModel* model=new QSqlQueryModel();
+            model->setQuery("SELECT* FROM FOURNISSEUR ORDER BY dateajout");
+            model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
+            model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
+            model->setHeaderData(2, Qt::Horizontal, QObject::tr("date d'ajout"));
+            model->setHeaderData(3, Qt::Horizontal, QObject::tr("date d'expiration"));
+            model->setHeaderData(4, Qt::Horizontal, QObject::tr("description"));
+
+
+
+      return model;
+  }
+
+
+  int Fournisseur::cherchersys(){
+
+           Fournisseur E1;
+
+           QSqlQuery checkQuery;
+           checkQuery.prepare("SELECT * FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+           checkQuery.bindValue(":dateexpr", dateexpr);
+
+
+           if (checkQuery.exec())
+           {
+               if (checkQuery.next())
+               {
+                   E1.setid(checkQuery.value(0).toInt());
+                   E1.setnom(checkQuery.value(1).toString());
+                   E1.setdateajout(checkQuery.value(2).toDate());
+                   E1.setdateexpr(checkQuery.value(3).toDate());
+                   E1.setdescription(checkQuery.value(4).toString());
+
+
+                   return E1.getid();
+               }
+           }
+           else
+           {
+               qDebug() << "User not found:" << checkQuery.lastError();
+           }
+   E1.setnom("vide");
+   return E1.getid();
+       }
+
+
+  bool Fournisseur::supprimersys(){
+      bool success = false;
+         if (userExistsys(dateexpr))
+          {
+             Fournisseur F;
+              QSqlQuery queryDelete;
+              int idfournisseur=F.cherchersys();
+              queryDelete.prepare("DELETE FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+                       queryDelete.bindValue(":idfournisseur", idfournisseur);
+queryDelete.bindValue(":dateexpr", dateexpr);
+
+              success = queryDelete.exec();
+
+              if(!success)
+                  qDebug() << "Delete user failure:" << queryDelete.lastError();
+              else
+                  qDebug() << "User successfully deleted" << idfournisseur;
+
+
+          }
+          else
+          {
+              qDebug() << "Error deleting user: user does not exist";
+          }
+
+          return success;
+  }
+
+  bool Fournisseur:: userExistsys(const QDate &dateexpr) const
+  {
+      bool exists = false;
+
+      QSqlQuery checkQuery;
+      checkQuery.prepare("SELECT idfournisseur FROM fournisseur WHERE to_date(dateexpr,'dd-mm-yy')<to_date(sysdate,'dd-mm-yy')");
+      checkQuery.bindValue(":dateexpr", dateexpr); //tab3th lvaleur mte3na lel bd
+
+      if (checkQuery.exec())
+      {
+          if (checkQuery.next())
+          {
+              exists = true;
+          }
+      }
+      else
+      {
+          qDebug() << "User not found:" << checkQuery.lastError();
+      }
+
+      return exists;
   }

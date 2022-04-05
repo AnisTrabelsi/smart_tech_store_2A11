@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "fournisseur.h"
+#include "reclamation.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -27,9 +28,16 @@ private slots:
 
 
 
+    void on_pushButton_clicked();
+
+    void on_valider_3_clicked();
+
+    void on_act_clicked();
+
 private:
     Ui::MainWindow *ui;
     Fournisseur F;
+     reclamation R;
 };
 
 #endif // MAINWINDOW_H

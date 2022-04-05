@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
  #include "fournisseur.h"
+ #include "reclamation.h"
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator> //controle saisie
@@ -12,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 ui->idfournisseur->setValidator(new QIntValidator (0, 99999, this));
 ui->idfournisseur_2->setValidator(new QIntValidator (0, 99999, this));
 ui->view->setModel(F.afficher());
+ui->view_2->setModel(R.afficher());
+
 
 }
 MainWindow::~MainWindow()
@@ -143,3 +146,61 @@ void MainWindow::on_valider_2_clicked()
         }
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+   ui->viewt->setModel(F.trier());
+}
+
+void MainWindow::on_valider_3_clicked()
+{
+
+    int idreclamation=ui->idreclamation->text().toInt();
+  QDate datereclamation=ui->datereclamation->date();
+  QString description=ui->descriptionr->text();
+     int idfournisseur=ui->idf->text().toInt();
+  reclamation F(idreclamation,datereclamation,description,idfournisseur);
+  bool test=F.ajouter();
+      if(test)
+    {
+    QMessageBox::information(nullptr, QObject::tr("Ajouter un equipement"),
+                      QObject::tr("fournisseur ajouté.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+ui->view_2->setModel(R.afficher());
+    }
+      else
+      {
+          QMessageBox::critical(nullptr, QObject::tr("Supprimer un equipement"),
+                      QObject::tr("Erreur !.\n"
+                                  "Click Cancel to exit."), QMessageBox::Cancel);
+
+      }
+      ui->idreclamation->clear();
+
+      ui->datereclamation->clear();
+       ui->descriptionr->clear();
+        ui->idf->clear();
+
+
+}
+
+void MainWindow::on_act_clicked()
+{
+    Fournisseur F;
+    int idfournisseur=F.cherchersys();
+   bool test=F.supprimersys();
+   if(test)
+ {
+ QMessageBox::information(nullptr, QObject::tr("suppresion jawha fesfes un equipement"),
+                   QObject::tr("fournisseur ajouté.\n"
+                               "Click Cancel to exit."), QMessageBox::Cancel);
+ui->view->setModel(F.afficher());
+ }
+   else
+   {
+       QMessageBox::critical(nullptr, QObject::tr("mchina un equipement"),
+                   QObject::tr("Erreur !.\n"
+                               "Click Cancel to exit."), QMessageBox::Cancel);
+
+   }
+}
