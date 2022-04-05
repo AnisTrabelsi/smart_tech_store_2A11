@@ -15,9 +15,12 @@ mdp_oub::~mdp_oub()
     delete ui;
 }
 
-void mdp_oub::on_pushButton_clicked()
-{
 
+
+
+
+void mdp_oub::on_pb_ajouter_2_clicked()
+{
     Employee E;
     QString code;
     code=ui->le_code->text();
@@ -37,8 +40,9 @@ void mdp_oub::on_pushButton_clicked()
     }
 }
 
-void mdp_oub::on_pushButton_2_clicked()
+void mdp_oub::on_pb_ajouter_3_clicked()
 {
+
     QString code=ui->le_code->text();
         QString mot_de_passe=ui->nouv->text();
 
@@ -79,4 +83,3 @@ void mdp_oub::on_pushButton_2_clicked()
 
         }
 }
-

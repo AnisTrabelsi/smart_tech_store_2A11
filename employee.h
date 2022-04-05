@@ -7,9 +7,6 @@
 #include <QSqlError>
 
 
-#include <QPieSlice>
-#include <QPieSeries>
-#include <QtCharts>
 class Employee
 {
 public:
@@ -32,11 +29,12 @@ public:
     void setsalaire(int);
     void setcode(int);
     bool ajouter();
-    QSqlQueryModel* afficher();
+    QSqlQueryModel* afficher(int);
     QSqlQueryModel* afficherarchive();
     bool ajouterarchive();
     bool supprimer(int);
      bool supprimerarchive(int);
+      bool supprimerdefinitif(int);
     bool userExists(const int& matricule) const;
     bool userExistsarchive(const int& matricule) const;
     bool modifier(int,QString,QString,QString,QDate,int,QString,int);
@@ -44,8 +42,6 @@ public:
     Employee chercherarchive(int matricule);
     int cherchercode(int code);
      QSqlQueryModel* trier();
-     // QSqlQueryModel * statistic();
-      void stat();
       int mdp_oub(QString code);
       int searchbycode(QString code);
       bool modifmdp(QString,int);

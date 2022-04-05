@@ -16,9 +16,12 @@ public:
     ~mdp_oub();
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+
+
+    void on_pb_ajouter_2_clicked();
+
+    void on_pb_ajouter_3_clicked();
 
 private:
     Ui::mdp_oub *ui;

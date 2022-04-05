@@ -47,11 +47,27 @@ query.prepare("INSERT INTO EMPLOYEE (MATRICULE,NOM,PRENOM,E_MAIL,DATE_EMBAUCHE,S
          return query.exec();
 
 }
-QSqlQueryModel* Employee::afficher(){
+QSqlQueryModel* Employee::afficher(int a){
 
 
     QSqlQueryModel* model=new QSqlQueryModel();
-          model->setQuery("SELECT *  FROM employee");
+model->setQuery("SELECT *  FROM employee");
+          if(a==0)
+          {
+              model->setQuery("SELECT *  FROM employee order by matricule");
+          }
+          else if(a==1){
+              model->setQuery("SELECT *  FROM employee order by nom");
+          }
+          else if(a==2){
+              model->setQuery("SELECT *  FROM employee order by prenom");
+          }
+          else if(a==3){
+              model->setQuery("SELECT *  FROM employee order by date_embauche");
+          }
+          else if(a==4){
+              model->setQuery("SELECT *  FROM employee order by salaire");
+          }
           model->setHeaderData(0, Qt::Horizontal, QObject::tr("identifiant"));
           model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
           model->setHeaderData(2, Qt::Horizontal, QObject::tr("prénom"));
@@ -152,6 +168,33 @@ bool Employee::supprimerarchive(int matricule){
 
     return success;
 }
+bool Employee::supprimerdefinitif(int matricule){
+    bool success = false;
+
+   if (userExistsarchive(matricule))
+    {
+       Employee E1=chercherarchive(matricule);
+        QSqlQuery queryDelete;
+        queryDelete.prepare("DELETE FROM archiveemp WHERE matricule=:matricule");
+        QString res2=QString::number(matricule);
+                 queryDelete.bindValue(":matricule", res2);
+
+        success = queryDelete.exec();
+
+        if(!success)
+            qDebug() << "Delete user failure:" << queryDelete.lastError();
+        else
+            qDebug() << "User successfully deleted" << matricule;
+
+
+    }
+    else
+    {
+        qDebug() << "Error deleting user: user does not exist";
+    }
+
+    return success;
+        }
 
 bool Employee:: userExists(const int& matricule) const
 {
@@ -321,43 +364,7 @@ QSqlQueryModel* Employee::trier()
 
 
 }*/
-void Employee::stat() {
-    QSqlQueryModel * model= new QSqlQueryModel();
-       model->setQuery("select * from employee where salaire >= 1000");
-       float dispo1=model->rowCount();
 
-       model->setQuery("select * from employee where salaire <1000");
-       float dispo=model->rowCount();
-
-       float total=dispo1+dispo;
-           QString a=QString("Cadre . " +QString::number((dispo1*100)/total,'f',2)+"%" );
-           QString b=QString("employee .  "+QString::number((dispo*100)/total,'f',2)+"%" );
-           QPieSeries *series = new QPieSeries();
-           series->append(a,dispo1);
-           series->append(b,dispo);
-       if (dispo1!=0)
-       {QPieSlice *slice = series->slices().at(0);
-           slice->setLabelVisible();
-           slice->setPen(QPen());}
-       if ( dispo!=0)
-       {
-           QPieSlice *slice1 = series->slices().at(1);
-           slice1->setLabelVisible();
-       }
-
-       QChart *chart = new QChart();
-
-
-       chart->addSeries(series);
-       chart->setTitle("Salaire des employes :Nb employes: "+ QString::number(total));
-       chart->legend()->hide();
-
-
-       QChartView *chartView = new QChartView(chart);
-       chartView->setRenderHint(QPainter::Antialiasing);
-       chartView->resize(1000,500);
-       chartView->show();
-}
 int Employee::mdp_oub(QString code)
 {
     QSqlDatabase bd = QSqlDatabase::database();

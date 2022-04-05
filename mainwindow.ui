@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Gestion des Clients</string>
+   <string>login</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="label_6">
@@ -51,7 +51,7 @@ font: 75 15pt &quot;MS Shell Dlg 2&quot;;
 color:white</string>
     </property>
     <property name="title">
-     <string>Modification</string>
+     <string>Authentification</string>
     </property>
     <widget class="QLabel" name="label_11">
      <property name="geometry">

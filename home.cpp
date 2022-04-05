@@ -29,7 +29,7 @@ home::home(QWidget *parent) :
                   QRegExpValidator *valEmail =new QRegExpValidator(expEmail,this);
                   ui->le_e_mail_3->setValidator(valEmail);
                   Employee E;
-        ui->tab_employee_2->setModel(E.afficher());
+        ui->tab_employee_2->setModel(E.afficher(0));
          ui->tablearchive->setModel(E.afficherarchive());
 }
 
@@ -70,7 +70,7 @@ void home::on_pb_ajouter_2_clicked()
       QMessageBox::information(nullptr, QObject::tr("Ajouter un employee"),
                         QObject::tr("employee ajouté.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
-    ui->tab_employee_2->setModel(E.afficher());
+    ui->tab_employee_2->setModel(E.afficher(0));
      ui->tablearchive->setModel(E.afficherarchive());
       }}
         else
@@ -98,7 +98,7 @@ void home::on_pb_supprimer_2_clicked()
 {
     Employee E1;
         E1.setmatricule(ui->le_matricule_supp_2->text().toInt());
-        bool test=E1.supprimer(E1.getmatricule());
+        bool test=E1.supprimerdefinitif(E1.getmatricule());
       ui->tablearchive->setModel(E1.afficherarchive());
         if(test)
       {
@@ -106,7 +106,7 @@ void home::on_pb_supprimer_2_clicked()
                         QObject::tr("Employee supprimé.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
       Employee E;
-    ui->tab_employee_2->setModel(E.afficher()); //refresh
+    ui->tab_employee_2->setModel(E.afficher(0)); //refresh
       }
         else
         {
@@ -118,34 +118,6 @@ void home::on_pb_supprimer_2_clicked()
         ui->le_matricule_supp_2->clear();
 }
 
-void home::on_pb_modifier_3_clicked()
-{
-    Employee E1;
-       E1=E1.chercher(ui->le_matriculeM_2->text().toInt());
-
-       if(E1.getnom()!="vide") //employe trouvé
-     {
-
-         ui->le_matricule_4->setText( QString::number(E1.getmatricule()) ) ;
-         ui->le_nom_4->setText( E1.getnom() ) ;
-         ui->le_prenom_4->setText( E1.getprenom() ) ;
-         ui->le_e_mail_4->setText(E1.gete_mail());
-        ui->le_date_embauche_4->setDate(E1.getdate_embauche());
-         ui->le_salaire_4->setText( QString::number(E1.getsalaire()) ) ;
-         ui->le_mot_de_passe_4->setText(E1.getmot_de_passe());
-         ui->le_code->setText(QString::number(E1.getcode()));
-   Employee  E;
-   ui->tab_employee_2->setModel(E.afficher()); //refresh
-     }
-       else //introuvable
-       {
-           QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
-                       QObject::tr("employee introuvable !.\n"
-                                   "Click Cancel to exit."), QMessageBox::Cancel);
-
-       }
-       ui->le_matricule_supp_2->clear();
-}
 
  void home::on_pb_modifier_4_clicked()
 {
@@ -163,14 +135,11 @@ void home::on_pb_modifier_3_clicked()
     int test=E1.userExists(matricule);
     if(test==true)
     {
-        QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
-                          QObject::tr("dkhal.\n"
-                                      "Click Cancel to exit."), QMessageBox::Cancel);
         if(int test1=E1.modifier(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe,code)==true){
             QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
                               QObject::tr("employee modifié.\n"
                                           "Click Cancel to exit."), QMessageBox::Cancel);
-          ui->tab_employee_2->setModel(E.afficher());
+          ui->tab_employee_2->setModel(E.afficher(0));
 
         }
         else
@@ -192,19 +161,76 @@ void home::on_pb_modifier_3_clicked()
         }
 }
 
-void home::on_pb_trier_2_clicked()
-{
-    Employee E;
-     ui->tab_trier_2->setModel(E.trier());
-}
 
 void home::on_pb_stat_clicked()
 {
-   Employee E;
-E.stat();
+    QSqlQueryModel * model= new QSqlQueryModel();
+       model->setQuery("select * from employee where salaire >= 1000");
+       float dispo1=model->rowCount();
+
+       model->setQuery("select * from employee where salaire <1000");
+       float dispo=model->rowCount();
+
+       float total=dispo1+dispo;
+           QString a=QString("Cadre . " +QString::number((dispo1*100)/total,'f',2)+"%" );
+           QString b=QString("employee .  "+QString::number((dispo*100)/total,'f',2)+"%" );
+           QPieSeries *series = new QPieSeries();
+           series->append(a,dispo1);
+           series->append(b,dispo);
+       if (dispo1!=0)
+       {QPieSlice *slice = series->slices().at(0);
+           slice->setLabelVisible();
+           slice->setPen(QPen());}
+       if ( dispo!=0)
+       {
+           QPieSlice *slice1 = series->slices().at(1);
+           slice1->setLabelVisible();
+       }
+
+       QChart *chart = new QChart();
+
+
+       chart->addSeries(series);
+       chart->setTitle("Salaire des employes :Nb employes: "+ QString::number(total));
+
+
+
+       QChartView *chartView = new QChartView(chart);
+       chartView->setRenderHint(QPainter::Antialiasing);
+       chartView->resize(1000,500);
+       chartView->show();
+
 }
 
-void home::on_pb_modifier_5_clicked()
+void home::on_pb_modifier_3_clicked()
+{
+    Employee E1;
+            E1=E1.chercher(ui->le_matriculeM_2->text().toInt());
+
+            if(E1.getnom()!="vide")
+          {
+
+              ui->le_matricule_4->setText( QString::number(E1.getmatricule()) ) ;
+              ui->le_nom_4->setText( E1.getnom() ) ;
+              ui->le_prenom_4->setText( E1.getprenom() ) ;
+              ui->le_e_mail_4->setText(E1.gete_mail());
+             ui->le_mot_de_passe_4->setText(E1.getmot_de_passe());
+             ui->le_date_embauche_4->setDate(E1.getdate_embauche());
+            ui->le_salaire_4->setText( QString::number(E1.getsalaire()));
+             ui->le_code->setText( QString::number(E1.getcode()));
+
+   ui->tab_employee_2->setModel(E1.afficher(0));
+          }
+            else //introuvable
+            {
+                QMessageBox::critical(nullptr, QObject::tr("chercher Employee"),
+                            QObject::tr("employee introuvable !.\n"
+                                        "Click Cancel to exit."), QMessageBox::Cancel);
+
+            }
+}
+
+/*void home::on_pb_modifier_5_clicked()
 {
     int matricule=ui->le_matricule_4->text().toInt();
         QString nom=ui->le_nom_4->text();
@@ -227,7 +253,7 @@ void home::on_pb_modifier_5_clicked()
             QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
                               QObject::tr("employee modifié.\n"
                                           "Click Cancel to exit."), QMessageBox::Cancel);
-          ui->tab_employee_2->setModel(E.afficher());
+          ui->tab_employee_2->setModel(E.afficher(0));
         }
         else
         {
@@ -246,7 +272,7 @@ void home::on_pb_modifier_5_clicked()
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
         }
-}
+}*/
 
 void home::on_restaurer_clicked()
 {
@@ -260,7 +286,7 @@ void home::on_restaurer_clicked()
                         QObject::tr("Employee restauré.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
       Employee E;
-    ui->tab_employee_2->setModel(E.afficher()); //refresh
+    ui->tab_employee_2->setModel(E.afficher(0)); //refresh
       }
         else
         {
@@ -271,3 +297,53 @@ void home::on_restaurer_clicked()
         }
         ui->le_matricule_supp_2->clear();
 }
+
+void home::on_radioButton_clicked()
+{
+    Employee E;
+     ui->tab_employee_2->setModel(E.afficher(1));
+}
+
+void home::on_radioButton_2_clicked()
+{
+    Employee E;
+     ui->tab_employee_2->setModel(E.afficher(2));
+}
+
+void home::on_radioButton_3_clicked()
+{
+    Employee E;
+     ui->tab_employee_2->setModel(E.afficher(3));
+}
+
+void home::on_radioButton_4_clicked()
+{
+    Employee E;
+     ui->tab_employee_2->setModel(E.afficher(4));
+}
+
+void home::on_pb_supprimer_3_clicked()
+{
+    Employee E1;
+        E1.setmatricule(ui->le_matricule_supp_3->text().toInt());
+        bool test=E1.supprimer(E1.getmatricule());
+      ui->tablearchive->setModel(E1.afficherarchive());
+        if(test)
+      {
+      QMessageBox::information(nullptr, QObject::tr("archiver un employee"),
+                        QObject::tr("Employee archivé.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+      Employee E;
+    ui->tab_employee_2->setModel(E.afficher(0)); //refresh
+      }
+        else
+        {
+            QMessageBox::critical(nullptr, QObject::tr("archiver un employee"),
+                        QObject::tr("employee introuvable !.\n"
+                                    "Click Cancel to exit."), QMessageBox::Cancel);
+
+        }
+        ui->le_matricule_supp_3->clear();
+}
+
+
