@@ -2,4 +2,5 @@
     <qresource prefix="/sound">
         <file>congratulations.wav</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

@@ -105,27 +105,13 @@ if(c1.chercher_client_bool(id)==true)
     client c;
    c=c1.chercher_client(id);
 
-   QString nom_client_file= c.nom;
-   QString prenom_client_file= c.prenom;
-   QString nom_fichier=QString("%1_%2").arg(nom_client_file,prenom_client_file);//fichier b esm lclient///
 
-
-    // Création d'un objet QFile
-    QFile file(nom_fichier+".txt");
-    // On ouvre notre fichier en lecture seule et on vérifie l'ouverture
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-qDebug() << "fichier echouée:" << query.lastError();
-    // Création d'un objet QTextStream à partir de notre objet QFile
-    QTextStream flux(&file);
-    // On choisit le codec correspondant au jeu de caractères que l'on souhaite ; ici, UTF-8
-    flux.setCodec("UTF-8");
-    // Écriture des différentes lignes dans le fichier
-    flux <<"'le nom du'id du  client est :  " << c.getid() <<" \n le nom du client est :  " << c.getnom() <<" \n prenom est : " <<c.getprenom() <<"\n nombre des points est  :  " <<c.getnb_points() <<"\n sa classe est  :  " <<c.getclasse()  <<  endl;
 
 ///historique//
+
     int cas;
-    cas=1;
-    /*historique(cas,c1);*/
+    cas=3;
+     historique(cas,c.getnom()+""+c.getprenom());
 
 
 
@@ -162,15 +148,15 @@ bool client::modifier_client(int id_client, QString nom , QString prenom,int nb_
        client c1;
        c1=c1.chercher_client(id_client);
          int cas;
-         cas=3;
-         /*historique(cas,c1);*/
+         cas=2;
+      historique(cas,c1.getnom()+""+c1.getprenom());
 
   return    query.exec();
 }
 
 
 
-QSqlQueryModel* client::afficher()
+QSqlQueryModel* client::afficher() ///maaha mis a jour zeda ///
 {
 
 
@@ -180,12 +166,20 @@ QSqlQueryModel* client::afficher()
 
 
 //maj tee nb des pts tee kol client//
+
+    ///maj tee points//
     QSqlQuery q3;
     q3.exec("update client set nb_points=(select count(*) from commande where (client.id_client = commande.id_client));");
 
 
+    ///maj tee cadeaux//
+    QSqlQuery q4;
+    q4.exec("update client set cadeau_client='ecouteurs' where classe='b';");
+    QSqlQuery q5;
+    q5.exec("update client set cadeau_client='casque' where classe='a';");
 
-//maj ml c ll b//
+///maj tee classet///
+  //maj ml c ll b//
     QSqlQuery q1;
 
     q1.exec("update client set classe='b' WHERE (select count(*) from commande where (client.id_client = commande.id_client))>=2");
@@ -205,12 +199,12 @@ QSqlQueryModel* model=new QSqlQueryModel();
 
 
   model->setQuery("SELECT* FROM CLIENT ");
-  model->setHeaderData(0, Qt::Horizontal, QObject::tr("identifiant"));
+  model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
   model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
   model->setHeaderData(2, Qt::Horizontal, QObject::tr("prenom"));
-  model->setHeaderData(3, Qt::Horizontal, QObject::tr("nombre des points "));
-  model->setHeaderData(4, Qt::Horizontal, QObject::tr("classe du client "));
-  model->setHeaderData(5, Qt::Horizontal, QObject::tr("cadeau client"));
+  model->setHeaderData(3, Qt::Horizontal, QObject::tr("nb pts "));
+  model->setHeaderData(4, Qt::Horizontal, QObject::tr("classe"));
+  model->setHeaderData(5, Qt::Horizontal, QObject::tr("cadeau "));
   return  model;
 
 
@@ -228,7 +222,7 @@ client  client::chercher_client(int id_client)
  {
 
         client c1;
-
+int cas;
         QSqlQuery checkQuery;
         checkQuery.prepare("SELECT * FROM CLIENT  WHERE id_client = :id_client");
         checkQuery.bindValue(":id_client",id_client);
@@ -246,7 +240,8 @@ client  client::chercher_client(int id_client)
                 c1.setnb_points(checkQuery.value(3).toInt());
                 c1.setclasse(checkQuery.value(4).toString());
                 c1.setcadeau_client(checkQuery.value(5).toString());
-
+                cas=4;
+             historique(cas,c1.getnom()+""+c1.getprenom());
 
 
                 return c1 ;
@@ -435,12 +430,14 @@ void client::statistique(QVector<double>* ticks,QVector<QString> *labels)
     q.exec("select nom||' '||prenom from client");
     while (q.next())
     {
-        QString classe = q.value(0).toString();
-        i++;
+        QString nom = q.value(0).toString(); //tekhou nom//
+        i++;   //tkadem fel axe des abcisses//
         *ticks<<i;
-        *labels <<classe;
+        *labels <<nom;
     }
 }
+
+
 
 
 
@@ -453,27 +450,30 @@ void client:: historique(int a,QString name)
       { text=QString(" le client  '%1' a ete modifié \n ").arg(name);}
 
 
-else { text=QString(" le client  '%1'   '%2' a ete supprimé \n ").arg(name);}
+else if(a==3) { text=QString(" le client  '%1'   a ete supprimé \n ").arg(name);}
+
+    else if(a==4) { text=QString(" vous avez recherché le client '%1' \n ").arg(name);}
+
 QSqlQuery query;
 
 QDate date = QDate::currentDate();
 QString formatteddate = date.toString("dd:MM:yyyy");
 
 
-    // Création d'un objet QFile
-    QFile file("historique.txt");
-    // On ouvre notre fichier en lecture seule et on vérifie l'ouverture
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-qDebug() << "fichier echouée:" << query.lastError();
-    // Création d'un objet QTextStream à partir de notre objet QFile
-    QTextStream flux(&file);
-    // On choisit le codec correspondant au jeu de caractères que l'on souhaite ; ici, UTF-8
-    flux.setCodec("UTF-8");
-    // Écriture des différentes lignes dans le fichier
-    flux <<formatteddate+"\n" <<  text<<  endl;
+
+
+QFile file ("his.txt");
+   if (!file.open(QIODevice::WriteOnly|QIODevice::Append | QIODevice::Text))
+    qDebug()<<"erreur";
+   QTextStream out(&file);
+   out << formatteddate+"\n"<<text<<endl;
+
+
+
+
+
 
 }
-
 
 
 

@@ -1,3 +1,4 @@
+
 QT       += core gui
 QT       += core gui multimedia multimediawidgets sql location \
     quick
@@ -23,6 +24,7 @@ QT += multimedia
 SOURCES += \
     client.cpp \
     connexion.cpp \
+    exportexcel.cpp \
     gagnant.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -31,6 +33,7 @@ SOURCES += \
 HEADERS += \
     client.h \
     connexion.h \
+    exportexcel.h \
     gagnant.h \
     mainwindow.h \
     qcustomplot.h
@@ -47,3 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
+DISTFILES +=

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1261</width>
+    <width>1264</width>
     <height>751</height>
    </rect>
   </property>
@@ -59,10 +59,10 @@ background :#333;
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>50</y>
       <width>1191</width>
-      <height>651</height>
+      <height>641</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -89,7 +89,7 @@ font-size: 25px;
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>4</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -499,57 +499,39 @@ QLineEdit:focus
        <rect>
         <x>40</x>
         <y>40</y>
-        <width>761</width>
-        <height>401</height>
+        <width>691</width>
+        <height>371</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QTableView
-{
-    alternate-background-color: #1F1F1F;
-    gridline-color: white;
-    color: white;
-
-    font: 75 9pt &quot;MS Shell Dlg 2&quot;;
-}
-QTableView::item 
-{
-    color: white;
+       <string notr="true">QWidget {
+    background-color: #333333;
+    color: #fffff8;
 }
 
-QTableView::item:focus
-{
-    color: gray;
-    background: #0063cd;
-}
-QTableView::item:selected
-{
-    color: red;
-    background: #0063cd;
+QHeaderView::section {
+    background-color: #646464;
+    padding: 4px;
+    border: 1px solid #fffff8;
+    font-size: 14pt;
 }
 
-QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
-    color: #b1b1b1;
-    background-color: #323232;
-    border: 1px solid #b1b1b1;
-    border-radius: 1px;
-    width: 7px;
-    height: 7px;
-    margin: 0px 5px 0 5px;
+QTableWidget {
+    gridline-color: #fffff8;
+    font-size: 12pt;
 }
 
-    padding-left:10px;
-    height:100px;
-    width:180px;
-    color: #5a5a5a;
-    border-bottom :1px solid #f0f0f0;</string>
+QTableWidget QTableCornerButton::section {
+    background-color: #646464;
+    border: 1px solid #fffff8;
+}</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pb_client_dumois">
       <property name="geometry">
        <rect>
         <x>830</x>
-        <y>290</y>
+        <y>240</y>
         <width>321</width>
         <height>41</height>
        </rect>
@@ -580,7 +562,7 @@ QPushButton:focus
       <property name="geometry">
        <rect>
         <x>830</x>
-        <y>350</y>
+        <y>300</y>
         <width>321</width>
         <height>41</height>
        </rect>
@@ -756,7 +738,7 @@ QPushButton:focus
        <string>trier selon</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="historique">
+     <widget class="QPushButton" name="exporter">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -784,7 +766,20 @@ QPushButton:focus
 }</string>
       </property>
       <property name="text">
-       <string>Historique</string>
+       <string>exporter</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser">
+      <property name="geometry">
+       <rect>
+        <x>855</x>
+        <y>350</y>
+        <width>281</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color :white; </string>
       </property>
      </widget>
     </widget>
@@ -1352,13 +1347,23 @@ QPushButton:focus
      </widget>
     </widget>
    </widget>
+   <widget class="QLineEdit" name="time">
+    <property name="geometry">
+     <rect>
+      <x>1072</x>
+      <y>20</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1261</width>
+     <width>1264</width>
      <height>22</height>
     </rect>
    </property>

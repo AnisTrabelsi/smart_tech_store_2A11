@@ -10,13 +10,19 @@
 #include"QApplication"
 #include"QIntValidator"
 #include"QSqlQuery"
-#include "historique.h"
-
+#include "exportexcel.h"
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
+    QTime time =QTime::currentTime();
+
+     QString time_text = time.toString("hh:mm:ss");
+
+
     ui->setupUi(this);
     ui->id->setValidator( new QIntValidator(0, 9999999, this));
     ui->nbpts->setValidator( new QIntValidator(0, 9999999, this));
@@ -36,7 +42,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tab_client->setModel(C.afficher());
 
-
+/* back ground music
+    QMediaPlayer *backmusic = new QMediaPlayer();
+    backmusic->setMedia(QUrl("qrc:/sound/congratulations.wav"));
+    backmusic->play();
+*/
 }
 
 
@@ -109,7 +119,6 @@ void MainWindow::on_pb_supprimer_clicked()
 ////button chercher tee tableau modifier//
 void MainWindow::on_pb_chercher_client_clicked()
 {  client c1;
-
   c1=c1.chercher_client(ui->id_chercher->text().toInt());
 
 
@@ -294,6 +303,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
                //axe des abscisses
               QVector<double> ticks;
               QVector<QString> labels;
+
               client c;
               c.statistique(&ticks,&labels);
 
@@ -324,13 +334,13 @@ void MainWindow::on_tabWidget_currentChanged(int index)
               ui->plot->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
               ui->plot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
 
-              // ajout des données  (statistiques de la quantité)//
+              // ajout des données  (statistiques des nb pts)//
 
               QVector<double> PlaceData;
               QSqlQuery q1("select nb_points from client ");
               while (q1.next()) {
-                            int  nbr_fautee = q1.value(0).toInt();
-                            PlaceData<< nbr_fautee;
+                            int  nbr_points = q1.value(0).toInt();
+                            PlaceData<< nbr_points;
                               }
               amande->setData(ticks, PlaceData);
 
@@ -350,11 +360,67 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 }
 
 
-/*
-void MainWindow::on_historique_clicked()
-{
-historique h;
-h.setModal(true);
-h.exec();
+
+
+void MainWindow::on_exporter_clicked()
+{QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
+                                                 tr("Excel Files (*.xls)"));
+ if (fileName.isEmpty())
+     return;
+
+ exportExcel obj(fileName, "mydata", ui->tab_client);
+
+ //colums to export
+ obj.addField(0, "id_client", "char(20)");
+ obj.addField(1, "nom", "char(20)");
+ obj.addField(2, "prenom", "char(20)");
+ obj.addField(3, "nb_pts", "char(20)");
+ obj.addField(4, "classe", "char(20)");
+ obj.addField(5, "cadeau", "char(20)");
+
+
+
+ int retVal = obj.export2Excel();
+ if( retVal > 0)
+ {
+     QMessageBox::information(this, tr("Done"),
+                              QString(tr("%1 records exported!")).arg(retVal)
+                              );
+ }
+
 }
-*/
+
+
+
+void MainWindow::on_pb_historique_client_clicked()
+{
+
+client c;
+QFile file("his.txt");
+      if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+           QMessageBox::information(0,"info",file.errorString());
+               QTextStream lecture(&file);
+               ui->textBrowser->setText(lecture.readAll());
+               QString montext = lecture.readAll();
+               QMessageBox::information(nullptr, QObject::tr("Text History is open"),
+                           QObject::tr("Text History is successfully displayed.\n"
+                                       "Click Cancel to exit."), QMessageBox::Cancel);
+               //QMessageBox::information(this, "Fichier", montext);
+               file.close();
+
+}
+
+void MainWindow::myfunction()
+
+{
+    QTime time =QTime::currentTime();
+
+    QString time_text = time.toString("hh:mm:ss");
+
+    ui->time->setText(time_text);
+}
+
+
+
+
+
