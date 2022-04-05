@@ -94,12 +94,43 @@ bool Commande::ajouterCommande()
      query.bindValue(":paiment", Paiment_Valide);
     return query.exec();
 }
+bool Commande::ajouterCommandeA()
+{
+
+    QSqlQuery query;
+    //QString idcommnade_string = QString::number(idCommande);
+    query.prepare("INSERT INTO COMMANDEA (ID_COMMANDE,DATE_COMMANDE,MODE_LIVRAISON,NUM_TEL,QUANTITE,PAIMENT_VALIDE) "
+                  "VALUES (:idCommande,:date_Commande,:mode_Livraison, :num_Tel, :quantity , :paiment)");
+    query.bindValue(":idCommande", idCommande);
+    query.bindValue(":mode_Livraison", mode_Livraison);
+    query.bindValue(":date_Commande", date_Commande);
+    query.bindValue(":num_Tel", num_Tel);
+    query.bindValue(":quantity", quantity);
+     query.bindValue(":paiment", Paiment_Valide);
+    return query.exec();
+}
+bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QString Livraison, QDate date)
+{
+    QSqlQuery query;
+    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,quantite=:quantity,PAIMENT_VALIDE=:paiment");
+    query.bindValue(":idCommande", id);
+    query.bindValue(":mode_Livraison", Livraison);
+    query.bindValue(":date_Commande", date);
+    query.bindValue(":num_Tel", Tel);
+    query.bindValue(":quantity", quant);
+    query.bindValue(":paiment", paiment);
+    return query.exec();
+}
+
 bool Commande::supprimerCommande(int id)
 {
+    Commande c2;
     bool success = false;
 
-    if (userExists(id))
+    if (CommandeExists(id))
     {
+        c2=chercher_Commande(id);
+        c2.ajouterCommandeA();
         QSqlQuery queryDelete;
         queryDelete.prepare("DELETE FROM Commande WHERE id_Commande=:idCommande");
         queryDelete.bindValue(":idCommande", id);
@@ -118,10 +149,22 @@ bool Commande::supprimerCommande(int id)
 
     return success;
 }
-QSqlQueryModel *Commande::afficherCommande()
+QSqlQueryModel *Commande::afficherCommande(int a)
 {
     QSqlQueryModel *model = new QSqlQueryModel();
     model->setQuery("SELECT* FROM Commande");
+    if(a==1)
+    {
+          model->setQuery("SELECT* FROM Commande order by NUM_TEL");
+}
+    else if(a==2)
+    {
+        model->setQuery("SELECT* FROM Commande order by PAIMENT_VALIDE");
+    }
+    else if (a==3)
+    {
+        model->setQuery("SELECT* FROM Commande order by ID_COMMANDE");
+    }
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("mode_Livraison"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Numero_Tel"));
@@ -132,7 +175,7 @@ QSqlQueryModel *Commande::afficherCommande()
     return model;
 }
 
-bool Commande::userExists(const int &id) const
+bool Commande::CommandeExists(const int &id) const
 {
     bool exists = false;
 
@@ -185,29 +228,4 @@ Commande Commande::chercher_Commande(const int &id)
     return C1;
 }
 
-bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QString Livraison, QDate date)
-{
-    QSqlQuery query;
-    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,quantite=:quantity,PAIMENT_VALIDE=:paiment");
-    query.bindValue(":idCommande", id);
-    query.bindValue(":mode_Livraison", Livraison);
-    query.bindValue(":date_Commande", date);
-    query.bindValue(":num_Tel", Tel);
-    query.bindValue(":quantity", quant);
-    query.bindValue(":paiment", paiment);
-    return query.exec();
-}
 
-QSqlQueryModel *Commande::TriCommande()
-{
-    QSqlQueryModel *model = new QSqlQueryModel();
-    model->setQuery("SELECT* FROM Commande ORDER BY ID_COMMANDE");
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("mode_Livraison"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Numero_Tel"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantity"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Paiment valide"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date Commande"));
-
-    return model;
-}

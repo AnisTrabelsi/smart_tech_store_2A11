@@ -1,4 +1,7 @@
 #pragma once
+#include <QPieSlice>
+#include <QPieSeries>
+#include <QtCharts>
 #include "Commande.h"
 #include <QMainWindow>
 
@@ -23,8 +26,14 @@ private slots:
     void on_cherchermodif_clicked();
 
    void on_valider_3_clicked();
+   void on_pushButton_clicked();
+   void on_NUM_clicked();
+   void on_PAIMENT_clicked();
+   void on_ID_clicked();
 
 private:
     Ui::MainWindow *ui;
     Commande C;
+
+
 };
