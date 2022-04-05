@@ -224,49 +224,7 @@ void home::on_pb_modifier_3_clicked()
             }
 }
 
-/*void home::on_pb_modifier_5_clicked()
-{
-    int matricule=ui->le_matricule_4->text().toInt();
-        QString nom=ui->le_nom_4->text();
-        QString prenom=ui->le_prenom_4->text();
-        QString e_mail=ui->le_e_mail_4->text();
-        QString mot_de_passe=ui->le_mot_de_passe_4->text();
-        QDate date_embauche=ui->le_date_embauche_4->date();
-        int salaire=ui->le_salaire_4->text().toInt();
-       int code=ui->le_code->text().toInt();
-        Employee E(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe,code);
 
-    Employee E1;
-    int test=E1.userExists(matricule);
-    if(test==true)
-    {
-        QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
-                          QObject::tr("dkhal.\n"
-                                      "Click Cancel to exit."), QMessageBox::Cancel);
-        if(int test1=E1.modifier(matricule,nom,prenom,e_mail,date_embauche,salaire,mot_de_passe,code)==true){
-            QMessageBox::information(nullptr, QObject::tr("modifier un employee"),
-                              QObject::tr("employee modifié.\n"
-                                          "Click Cancel to exit."), QMessageBox::Cancel);
-          ui->tab_employee_2->setModel(E.afficher(0));
-        }
-        else
-        {
-            QMessageBox::critical(nullptr, QObject::tr("modifier un employee"),
-                        QObject::tr("Erreur de modification!.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-
-        }
-
-    }
-
-        else
-        {
-            QMessageBox::critical(nullptr, QObject::tr("modifier un employee"),
-                        QObject::tr("Erreur !.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-
-        }
-}*/
 
 void home::on_restaurer_clicked()
 {

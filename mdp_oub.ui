@@ -99,7 +99,7 @@ QPushButton:focus
 }</string>
    </property>
    <property name="text">
-    <string>enter</string>
+    <string>Entrer</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_23">

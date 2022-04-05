@@ -27,8 +27,6 @@ private slots:
 
     void on_pb_stat_clicked();
 
-    //void on_pb_modifier_5_clicked();
-
     void on_restaurer_clicked();
 
     void on_radioButton_clicked();

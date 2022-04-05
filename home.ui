@@ -73,7 +73,7 @@ font-size: 20px;
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="iconSize">
     <size>
@@ -5003,7 +5003,7 @@ QLineEdit:focus
      <widget class="QPushButton" name="pb_modifier_4">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>330</x>
         <y>240</y>
         <width>131</width>
         <height>41</height>
@@ -5034,37 +5034,6 @@ QPushButton:focus
       </property>
       <property name="text">
        <string>modifier</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="reset_ajouter_4">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>240</y>
-        <width>131</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-
-color: white;
-background-color:Transparent;;
-border-width: 2px;
-border-color: #F9F9F9;
-border-style: solid;
-border-radius: 7;
-padding: 3px;
-font-size: 15px;
-
-
-}
-QPushButton:focus
-{border:2px solid #FBAD25;
-}</string>
-      </property>
-      <property name="text">
-       <string>reset</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="le_matricule_4">
