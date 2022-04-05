@@ -1,13 +1,14 @@
 #ifndef LIVRAISON_H
 #define LIVRAISON_H
 
-#include <QWidget>
+#include <QDialog>
+#include "civraison.h"
 
 namespace Ui {
 class Livraison;
 }
 
-class Livraison : public QWidget
+class Livraison : public QDialog
 {
     Q_OBJECT
 
@@ -20,6 +21,7 @@ private slots:
 
 private:
     Ui::Livraison *ui;
+    CIVRAISON CI;
 };
 
 #endif // LIVRAISON_H

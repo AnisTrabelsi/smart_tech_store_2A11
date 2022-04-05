@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 #include "Commande.h"
 #include "Commande.cpp"
+#include "livraison.h"
+#include "civraison.h"
+#include "civraison.cpp"
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator>
@@ -36,6 +39,7 @@ void MainWindow::on_NUM_clicked()
       }
 void MainWindow::on_valider_clicked()
 {
+    Livraison L(nullptr);
     if( ui->idCommande->text().isEmpty() || ui->date_Commande->text().isEmpty() || ui->num_Tel->text().isEmpty() || ui->quantity->text().isEmpty() || ui->Paiment_Valide->text().isEmpty()|| ui->mode_Livraison->text().isEmpty()  )
                {
                    QMessageBox::warning(nullptr, QObject::tr("Attention"),
@@ -48,9 +52,16 @@ void MainWindow::on_valider_clicked()
     int quantity = ui->quantity->text().toInt();
     int Paiment_Valide = ui->Paiment_Valide->text().toInt();
     QString mode_Livraison = ui->mode_Livraison->text();
+    if(mode_Livraison=="LIVRAISON")
+    {
+
+        L.show();
+        L.exec();
+
+
+    }
     Commande C(idCommande, num_Tel, quantity, Paiment_Valide, mode_Livraison, date_Commande);
     bool test = C.ajouterCommande();
-
     if (test)
     {
         QMessageBox::information(nullptr, QObject::tr("Ajouter un equipement"),
@@ -67,6 +78,7 @@ void MainWindow::on_valider_clicked()
                               QMessageBox::Cancel);
     }
     }
+
     ui->idCommande->clear();
     ui->num_Tel->clear();
     ui->quantity->clear();

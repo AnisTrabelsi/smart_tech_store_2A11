@@ -3,20 +3,18 @@
 #include <QSqlQueryModel>
 #include <QSqlDatabase>
 #include <QObject>
+
 CIVRAISON::CIVRAISON()
 {
     idlivraison=0;
-    code_postal=0;
-    Region="";
-    Ville="";
 }
 CIVRAISON::CIVRAISON(int a,int b,QString c,QString d,QDate e)
 {
-    idlivraison=a;
-    code_postal=b;
-    Region=c;
-    Ville=d;
-    date_livraison=e;
+    this->idlivraison=a;
+    this->code_postal=b;
+    this->Region=c;
+    this->Ville=d;
+    this->date_livraison=e;
 }
 
 int CIVRAISON::getIdLivraison()
@@ -62,14 +60,14 @@ void CIVRAISON::setDateL(QDate a)
 }
 bool CIVRAISON::ajouterLivraison()
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO LIVRAISON (ID_LIVRAISON,REGION,VILLE,CODE_POSTAL,DATE_DE_LIVRAISON) "
+    QSqlQuery query1;
+    query1.prepare("INSERT INTO LIVRAISON (ID_LIVRAISON,REGION,VILLE,CODE_POSTAL,DATE_DE_LIVRAISON) "
                   "VALUES (:idlivraison,:Region,:Ville,:code,:date_livraison)");
-    query.bindValue(":idlivraison",idlivraison);
-    query.bindValue(":Region",Region);
-    query.bindValue(":Ville",Ville);
-    query.bindValue(":code",code_postal);
-    query.bindValue(":date_livraison",date_livraison);
-    return query.exec();
+    query1.bindValue(":idlivraison",idlivraison);
+    query1.bindValue(":Region",Region);
+    query1.bindValue(":Ville",Ville);
+    query1.bindValue(":code",code_postal);
+    query1.bindValue(":date_livraison",date_livraison);
+    return query1.exec();
 
 }

@@ -98,7 +98,7 @@ public:
         background = new QLabel(centralWidget);
         background->setObjectName(QStringLiteral("background"));
         background->setGeometry(QRect(-40, -10, 1261, 711));
-        background->setPixmap(QPixmap(QString::fromUtf8("../../../Users/Adam/Desktop/background.png")));
+        background->setPixmap(QPixmap(QString::fromUtf8("background.png")));
         background->setScaledContents(true);
         background->setTextInteractionFlags(Qt::NoTextInteraction);
         tabWidget = new QTabWidget(centralWidget);
@@ -272,7 +272,7 @@ public:
         label_4->setAutoFillBackground(false);
         pushButton = new QPushButton(tab_4);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(700, 190, 131, 41));
+        pushButton->setGeometry(QRect(690, 190, 131, 41));
         pushButton->setStyleSheet(QLatin1String("QPushButton{\n"
 "\n"
 "color: white;\n"
@@ -1431,7 +1431,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1462,7 +1462,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(AjouterCommande), QApplication::translate("MainWindow", "Ajouter Commande", Q_NULLPTR));
         suppression->setTitle(QApplication::translate("MainWindow", "Suppression", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "ID", Q_NULLPTR));
-        supp->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));
+        supp->setText(QString());
         pb_supprimer->setText(QApplication::translate("MainWindow", "Supprimer", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Supprimer Commande", Q_NULLPTR));
         suppression_2->setTitle(QApplication::translate("MainWindow", "Chercher", Q_NULLPTR));

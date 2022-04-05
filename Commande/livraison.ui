@@ -990,7 +990,7 @@ QLineEdit:focus
 }</string>
       </property>
      </widget>
-     <widget class="QDateEdit" name="date_Commande">
+     <widget class="QDateEdit" name="date_Livraison">
       <property name="geometry">
        <rect>
         <x>340</x>
@@ -1008,32 +1008,6 @@ QLineEdit:focus
        <rect>
         <x>340</x>
         <y>130</y>
-        <width>221</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QLineEdit{
-color: white;
-background-color:Transparent;;
-border-width: 2px;
-border-color: #F9F9F9;
-border-style: solid;
-border-radius: 7;
-padding: 3px;
-font-size: 15px;
-
-}
-QLineEdit:focus
-{border:2px solid #FBAD25;
-}</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="Ville">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>190</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -2466,6 +2440,67 @@ QLineEdit:focus
 {border:2px solid #FBAD25;
 }</string>
       </property>
+     </widget>
+     <widget class="QComboBox" name="ville">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>190</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit{
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+}
+QLineEdit:focus
+{border:2px solid #FBAD25;
+}</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>Tunis</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>BIzerte</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sousse</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Kairouan</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sfax</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Beja</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Jerba</string>
+       </property>
+      </item>
      </widget>
     </widget>
    </widget>
