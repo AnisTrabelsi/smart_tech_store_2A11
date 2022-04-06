@@ -32,7 +32,6 @@ SOURCES += \
 
 HEADERS += \
     Commande.h \
-    categorie.h \
     civraison.h \
     livraison.h \
     mainwindow.h \

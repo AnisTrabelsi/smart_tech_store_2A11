@@ -4,7 +4,6 @@
 #include "Commande.cpp"
 #include "livraison.h"
 #include "civraison.h"
-#include "civraison.cpp"
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator>

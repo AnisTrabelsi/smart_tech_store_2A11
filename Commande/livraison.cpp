@@ -6,6 +6,7 @@
 #include <qmessagebox.h>
 #include <QIntValidator>
 #include <QSqlQuery>
+#include "map.h"
 
 Livraison::Livraison(QWidget *parent) :
     QDialog(parent),
@@ -21,6 +22,7 @@ Livraison::~Livraison()
 
 void Livraison::on_valider_clicked()
 {
+
     if( ui->idLivraison->text().isEmpty() || ui->date_Livraison->text().isEmpty() || ui->Code->text().isEmpty() || ui->Region->text().isEmpty())
                {
                    QMessageBox::warning(nullptr, QObject::tr("Attention"),
@@ -30,30 +32,79 @@ void Livraison::on_valider_clicked()
     int idlivraison = ui->idLivraison->text().toInt();
     int code_postal = ui->Code->text().toInt();
     QString Region = ui->Region->text();
-    QString ville;
+    QString Ville;
        if(ui->ville->currentIndex()==0)
-         ville="Tunis";
+         Ville="Tunis";
        else if (ui->ville->currentIndex()==1)
               {
-               ville="Bizerte";}
+               Ville="Bizerte";}
            else if (ui->ville->currentIndex()==2)
                         {
-                         ville="Sousse";}
+                         Ville="Sousse";}
        else if (ui->ville->currentIndex()==3)
                     {
-                     ville="Kairouan";}
+                     Ville="Kairouan";}
        else if (ui->ville->currentIndex()==4)
                     {
-                     ville="Sfax";}
+                     Ville="Sfax";}
        else if (ui->ville->currentIndex()==5)
                     {
-                     ville="Beja";}
+                     Ville="Beja";}
        else if (ui->ville->currentIndex()==6)
                     {
-                     ville="Jerba";}
+                     Ville="Djerba";}
 
     QDate date_livraison = ui->date_Livraison->date();
-    CIVRAISON(idlivraison,code_postal,Region,ville,date_livraison);
+    if(Ville=="Tunis")
+    {
+        Map m(nullptr,0);
+        m.show();
+        m.exec();
+    }
+    else if(Ville=="Bizerte")
+    {
+        Map m(nullptr,1);
+        m.show();
+        m.exec();
+
+    }
+    else if(Ville=="Sousse")
+    {
+        Map m(nullptr,2);
+        m.show();
+        m.exec();
+
+    }
+    else if(Ville=="Kairouan")
+    {
+        Map m(nullptr,3);
+        m.show();
+        m.exec();
+
+    }
+    else if(Ville=="Sfax")
+    {
+        Map m(nullptr,4);
+        m.show();
+        m.exec();
+
+    }
+    else if(Ville=="Beja")
+    {
+        Map m(nullptr,5);
+        m.show();
+        m.exec();
+
+    }
+    else if(Ville=="Djerba")
+    {
+        Map m(nullptr,6);
+        m.show();
+        m.exec();
+
+    }
+
+    CIVRAISON CI(idlivraison,code_postal,Region,Ville,date_livraison);
     bool test2 = CI.ajouterLivraison();
 
     if (test2)
