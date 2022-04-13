@@ -40,6 +40,7 @@ public:
         QSqlQueryModel* afficher_produit(QString Ref_produit);
         void calculer(int,int);
         void calculerapressupp(int,int);
+         void warning();
 
 private:
  int Ref_produit,Quantite,IDCategorie,IDFournisseur;

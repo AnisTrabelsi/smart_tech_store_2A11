@@ -13,6 +13,8 @@ QT       += core gui network
 QT  +=svg
 QT += quick
 QT += core gui multimedia multimediawidgets
+QT += multimedia
+QT       += core gui  serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -48,10 +50,12 @@ QT += widgets multimedia
 TEMPLATE = app
 
 SOURCES += \
+    arduino.cpp \
     chatserver.cpp \
     chatsocket.cpp \
     dumessengerconnectiondialog.cpp \
     exportexcel.cpp \
+    incendie.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
@@ -60,10 +64,12 @@ SOURCES += \
     smtp.cpp
 
 HEADERS += \
+    arduino.h \
     chatserver.h \
     chatsocket.h \
     dumessengerconnectiondialog.h \
     exportexcel.h \
+    incendie.h \
         mainwindow.h \
     connection.h \
     produit.h \
@@ -72,6 +78,7 @@ HEADERS += \
 
 FORMS += \
         dumessengerconnectiondialog.ui \
+        incendie.ui \
         mainwindow.ui
 
 # Default rules for deployment.

@@ -19,6 +19,8 @@
 #include <QCameraViewfinder>
 #include <QCameraImageCapture>
 #include <QMenu>
+#include "arduino.h"
+#include "incendie.h"
 
 namespace Ui {
 class MainWindow;
@@ -106,6 +108,10 @@ private slots:
     void on_upload_clicked();
 
 
+    void update_label();   // slot permettant la mise à jour du label état de la lampe 1,
+    // ce slot est lancé à chaque réception d'un message de Arduino
+
+
 
 private:
     Ui::MainWindow *ui;
@@ -129,6 +135,10 @@ private:
            QAction *mTurnOnAction;
            QAction *mTurnOffAction;
            QAction *mCaptureAction;
+
+
+           QByteArray data; // variable contenant les données reçues
+           Arduino A; // objet temporaire
 };
 
 #endif // MAINWINDOW_H

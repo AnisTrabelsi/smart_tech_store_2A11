@@ -12,6 +12,8 @@
 #include <QFileDialog>
 #include <QTcpSocket>
 #include <QAbstractSocket>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -125,6 +127,19 @@ MainWindow::MainWindow(QWidget *parent) :
                         mCameraImageCapture->capture(filename);
                         mCamera->unlock();
                     });
+         ////////////////////////Arduino
+                  int ret=A.connect_arduino(); // lancer la connexion à arduino
+                    switch(ret){
+                    case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+                        break;
+                    case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+                       break;
+                    case(-1):qDebug() << "arduino is not available";
+                    }
+                     QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+                     //le slot update_label suite à la reception du signal readyRead (reception des données).
+
+
 }
 
 MainWindow::~MainWindow()
@@ -309,7 +324,7 @@ void MainWindow::on_stat_clicked()
     model->setQuery("select * from Produit where Prix >1500 ");
     float Prix3=model->rowCount();
     float total=Prix1+Prix2+Prix3;
-    QString a=QString("moins de 1000 dt "+QString::number((Prix1*100)/total,'f',2)+"%" );
+    QString a=QString("moins de 1000 dt "+QString::number((Prix1*100)/total,'f',2)+"%" );  //legende
     QString b=QString("entre 1000 dt et 1500 dt "+QString::number((Prix2*100)/total,'f',2)+"%" );
     QString c=QString("+1500 dt "+QString::number((Prix3*100)/total,'f',2)+"%" );
     QPieSeries *series = new QPieSeries();
@@ -688,11 +703,11 @@ if(Pour3!=0)
 
 void MainWindow::on_export_but_pour_clicked()
 {QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
-                                                 tr("Excel Files (*.xls)"));
+                                                 tr("Excel Files (*.xls)"));  //intitialisation du fichier excel
  if (fileName.isEmpty())
      return;
 
- exportExcel obj(fileName, "mydata", ui->tab_promotion);
+ exportExcel obj(fileName, "mydata", ui->tab_promotion);  //stocker les données afiichées dans le tableau
 
  //colums to export
  obj.addField(0, "IDpromotion", "char(20)");
@@ -704,7 +719,7 @@ void MainWindow::on_export_but_pour_clicked()
 
 
 
- int retVal = obj.export2Excel();
+ int retVal = obj.export2Excel();  //export
  if( retVal > 0)
  {
      QMessageBox::information(this, tr("Done"),
@@ -735,4 +750,30 @@ void MainWindow::on_upload_clicked()
     }
 }
 
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+
+    if(data=="1")
+{      P.warning();
+
+       /* QMessageBox::information(nullptr, QObject::tr("il y a une incendie"),
+                                 QObject::tr("Alerte.il y a une incendie !   \n"
+                                             "Click Cancel to exit."), QMessageBox::Cancel);*/
+          ui->tab_produit->setModel(P.afficher());
+          incendie i;
+              /* /QMediaPlayer music = new QMediaPlayer();
+               music->setMedia(QUrl("qrc:/sound/congratulations.wav"));
+               music->play();*/
+
+
+              i.setModal(true);
+               i.exec();
+
+
+}
+
+
+}
 
