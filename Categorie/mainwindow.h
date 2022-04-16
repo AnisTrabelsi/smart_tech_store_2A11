@@ -1,6 +1,7 @@
 #pragma once
 #include "categorie.h"
 #include <QMainWindow>
+#include "arduino.h"
 
 namespace Ui
 {
@@ -30,6 +31,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
      Categorie CA;
+     QByteArray data; // variable contenant les données reçues
+
+        Arduino A; // objet temporaire
 
 
 };
