@@ -99,8 +99,8 @@ font-size: 20px;
      </property>
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>30</y>
+       <x>20</x>
+       <y>20</y>
        <width>721</width>
        <height>451</height>
       </rect>
@@ -2451,20 +2451,7 @@ QLineEdit:focus
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QLineEdit{
-color: white;
-background-color:Transparent;;
-border-width: 2px;
-border-color: #F9F9F9;
-border-style: solid;
-border-radius: 7;
-padding: 3px;
-font-size: 15px;
-
-}
-QLineEdit:focus
-{border:2px solid #FBAD25;
-}</string>
+       <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <item>
        <property name="text">
@@ -2502,6 +2489,38 @@ QLineEdit:focus
        </property>
       </item>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>-190</y>
+        <width>711</width>
+        <height>671</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>background.png</pixmap>
+      </property>
+     </widget>
+     <zorder>label</zorder>
+     <zorder>label_3</zorder>
+     <zorder>reset_ajouter_2</zorder>
+     <zorder>label_10</zorder>
+     <zorder>valider</zorder>
+     <zorder>idLivraison</zorder>
+     <zorder>date_Livraison</zorder>
+     <zorder>Code</zorder>
+     <zorder>label_11</zorder>
+     <zorder>label_13</zorder>
+     <zorder>label_19</zorder>
+     <zorder>Region</zorder>
+     <zorder>ville</zorder>
     </widget>
    </widget>
   </widget>

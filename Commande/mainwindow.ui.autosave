@@ -71,7 +71,7 @@ font-size: 20px;
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -162,7 +162,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
        <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>NOM</string>
+       <string>Num phone</string>
       </property>
      </widget>
      <widget class="QRadioButton" name="PAIMENT">
@@ -178,7 +178,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
        <string notr="true">color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>Prenom</string>
+       <string>Paiment</string>
       </property>
      </widget>
      <widget class="QRadioButton" name="ID">

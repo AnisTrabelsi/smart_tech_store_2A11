@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>background.png</pixmap>
+     <pixmap>../../../../Users/Adam/Desktop/background.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -158,8 +158,11 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
         <height>31</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
-       <string>NOM</string>
+       <string>Libelle</string>
       </property>
      </widget>
      <widget class="QRadioButton" name="PAIMENT">
@@ -171,8 +174,11 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
         <height>21</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
-       <string>Prenom</string>
+       <string>Remise</string>
       </property>
      </widget>
      <widget class="QRadioButton" name="ID">
@@ -184,25 +190,28 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
         <height>21</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>ID</string>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QPlainTextEdit" name="plainTextEdit">
       <property name="geometry">
        <rect>
-        <x>550</x>
-        <y>390</y>
-        <width>161</width>
-        <height>71</height>
+        <x>600</x>
+        <y>410</y>
+        <width>101</width>
+        <height>31</height>
        </rect>
       </property>
-      <property name="html">
-       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:14pt;&quot;&gt;TRI PAR : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+      </property>
+      <property name="plainText">
+       <string>TRI PAR :</string>
       </property>
      </widget>
     </widget>
@@ -361,7 +370,7 @@ p, li { white-space: pre-wrap; }
        <string notr="true"/>
       </property>
       <property name="title">
-       <string>Ajouter Commande</string>
+       <string>Ajouter Categorie</string>
       </property>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
