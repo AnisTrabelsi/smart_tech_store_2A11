@@ -1,5 +1,8 @@
 #include "arduino.h"
-
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+#include <QSqlDatabase>
+#include <QObject>
 Arduino::Arduino()
 {
     data="";
@@ -20,6 +23,7 @@ QSerialPort *Arduino::getserial()
 int Arduino::connect_arduino()
 {   // recherche du port sur lequel la carte arduino identifée par  arduino_uno_vendor_id
     // est connectée
+    serialbuffer="";
     foreach (const QSerialPortInfo &serial_port_info, QSerialPortInfo::availablePorts()){
            if(serial_port_info.hasVendorIdentifier() && serial_port_info.hasProductIdentifier()){
                if(serial_port_info.vendorIdentifier() == arduino_uno_vendor_id && serial_port_info.productIdentifier()
@@ -59,14 +63,38 @@ int Arduino::close_arduino()
 
  QByteArray Arduino::read_from_arduino()
 {
-    if(serial->isReadable()){
-         data=serial->readAll(); //récupérer les données reçues
 
+    if(serial->isReadable()){
+        serial->waitForReadyRead(10);
+         data=serial->readAll();
          return data;
     }
  }
 
+ int Arduino::cherchercode(int code){
 
+     QSqlDatabase bd = QSqlDatabase::database();
+ int matricule;
+         QSqlQuery query;
+         query.prepare("SELECT matricule FROM employee WHERE code =:code");
+  query.bindValue(":code", code);
+
+         query.exec();
+         if (query.next())
+         {
+
+             matricule=query.value(0).toInt();
+              return matricule;
+         }
+         else {
+             return -1;
+         }
+
+ }
+ QByteArray Arduino::getdata()
+ {
+     return data;
+ }
 int Arduino::write_to_arduino( QByteArray d)
 
 {
@@ -79,3 +107,42 @@ int Arduino::write_to_arduino( QByteArray d)
 
 
 }
+QString Arduino::chercher(int code){
+
+    QSqlDatabase bd = QSqlDatabase::database();
+QString nom;
+        QSqlQuery query;
+        query.prepare("SELECT nom FROM employee WHERE code =:code");
+ query.bindValue(":code", code);
+
+        query.exec();
+        if (query.next())
+        {
+
+            nom=query.value(0).toString();
+             return nom;
+        }
+        else {
+            return "";
+        }
+    }
+/*int Employee::cherchercode(int code){
+
+    QSqlDatabase bd = QSqlDatabase::database();
+int matricule;
+        QSqlQuery query;
+        query.prepare("SELECT matricule FROM employee WHERE code =:code");
+ query.bindValue(":code", code);
+
+        query.exec();
+        if (query.next())
+        {
+
+            matricule=query.value(0).toInt();
+             return matricule;
+        }
+        else {
+            return -1;
+        }
+
+}*/

@@ -22,6 +22,7 @@ private slots:
     void on_pb_supprimer_clicked();
 
     void on_cherchermodif_clicked();
+    void update_label();
 
    void on_valider_3_clicked();
    void on_NUM_clicked();

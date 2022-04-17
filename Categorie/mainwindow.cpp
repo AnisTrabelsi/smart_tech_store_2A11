@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "categorie.h"
+#include "arduino.h"
 #include "categorie.cpp"
+#include <QString>
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator>
@@ -12,6 +14,42 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui->setupUi(this);
 
     ui->view->setModel(CA.afficherCategorie(0));
+    int ret=A.connect_arduino(); // lancer la connexion à arduino
+        switch(ret){
+        case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+            break;
+        case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+           break;
+        case(-1):qDebug() << "arduino is not available";
+        }
+         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+         //le slot update_label suite à la reception du signal readyRead (reception des données).
+
+}
+void MainWindow::update_label()
+{
+     data="";
+while(A.getdata().size()<5)
+{
+     data=A.read_from_arduino();
+}
+qDebug() << data ;
+
+ // data=A.read_from_arduino();
+  int D=data.toInt();
+//qDebug() << D ;
+
+    if(A.cherchercode(D)!=-1)
+{
+        QString nom=A.chercher(D);
+        qDebug() << nom ;
+        QByteArray x=nom.toUtf8();
+        qDebug() << x ;
+        A.write_to_arduino(x);
+    }
+    else
+A.write_to_arduino("0");
+data="";
 }
 
 MainWindow::~MainWindow()
