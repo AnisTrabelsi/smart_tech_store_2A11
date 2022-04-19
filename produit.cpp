@@ -283,7 +283,9 @@ void Produit::calculerapressupp(int IDcategorie,int pourcentage)
 void Produit::warning()
 {// lors de l'ajout ou modif je recuppere pourcentage et IDcategorie et je fais mon calcul par la commande sql
     QSqlQuery query;
+
     query.prepare("update Produit set Quantite=0  ");
+
     query.exec();
 }
 

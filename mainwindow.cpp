@@ -128,7 +128,7 @@ MainWindow::MainWindow(QWidget *parent) :
                         mCamera->unlock();
                     });
          ////////////////////////Arduino
-                  int ret=A.connect_arduino(); // lancer la connexion à arduino
+                    int ret=A.connect_arduino(); // lancer la connexion à arduino
                     switch(ret){
                     case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
                         break;
@@ -138,6 +138,8 @@ MainWindow::MainWindow(QWidget *parent) :
                     }
                      QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
                      //le slot update_label suite à la reception du signal readyRead (reception des données).
+
+
 
 
 }
@@ -755,25 +757,21 @@ void MainWindow::update_label()
 {
     data=A.read_from_arduino();
 
-    if(data=="1")
-{      P.warning();
-
-       /* QMessageBox::information(nullptr, QObject::tr("il y a une incendie"),
-                                 QObject::tr("Alerte.il y a une incendie !   \n"
-                                             "Click Cancel to exit."), QMessageBox::Cancel);*/
-          ui->tab_produit->setModel(P.afficher());
-          incendie i;
-              /* /QMediaPlayer music = new QMediaPlayer();
-               music->setMedia(QUrl("qrc:/sound/congratulations.wav"));
-               music->play();*/
+    if(data=="5")
+{
 
 
-              i.setModal(true);
-               i.exec();
+       P.warning();
+       ui->tab_produit->setModel(P.afficher());
+
+       incendie i;
+       i.setModal(true);
+       i.exec();
+
+    }}
 
 
+void MainWindow::on_stop_clicked()
+{
+   A.write_to_arduino(("0"));
 }
-
-
-}
-

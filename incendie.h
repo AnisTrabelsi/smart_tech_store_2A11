@@ -3,6 +3,10 @@
 
 #include <QDialog>
 #include "arduino.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QMediaPlayer>
+#include <QPixmap>
 namespace Ui {
 class incendie;
 }
@@ -16,11 +20,12 @@ public:
     ~incendie();
 
 private slots:
-    void on_stop_clicked();
+
+
 
 private:
     Ui::incendie *ui;
-
+QMediaPlayer *mMediaPlayer;
     QByteArray data; // variable contenant les données reçues
     Arduino A; // objet temporaire
 };

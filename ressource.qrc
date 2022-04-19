@@ -8,5 +8,8 @@
         <file>sons/not6.wav</file>
         <file>sons/not7.wav</file>
         <file>sons/not8.wav</file>
+        <file>sons/Danger Alarm Meme Sound Effect.wav</file>
+        <file>sons/gif2.gif</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

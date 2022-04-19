@@ -113,6 +113,8 @@ private slots:
 
 
 
+    void on_stop_clicked();
+
 private:
     Ui::MainWindow *ui;
     Produit P;
