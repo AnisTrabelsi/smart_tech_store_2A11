@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
   ui->setupUi(this);
 ui->idfournisseur->setValidator(new QIntValidator (0, 99999, this));
 ui->idreclamation->setValidator(new QIntValidator (0, 99999, this));
@@ -26,7 +27,6 @@ if(test)
 ui->view->setModel(F.afficher(0));
 }
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
