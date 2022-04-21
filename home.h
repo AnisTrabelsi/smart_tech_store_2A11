@@ -2,7 +2,7 @@
 #define HOME_H
 
 #include <QDialog>
-
+#include "arduino.h"
 #include <QPieSlice>
 #include <QPieSeries>
 #include <QtCharts>
@@ -19,6 +19,7 @@ public:
     ~home();
 
 private slots:
+     void update_label();
     void on_pb_ajouter_2_clicked();
 
     void on_pb_supprimer_2_clicked();
@@ -45,6 +46,9 @@ private slots:
 
 private:
     Ui::home *ui;
+    QByteArray data; // variable contenant les données reçues
+
+       Arduino A; // objet temporaire
 };
 
 #endif // HOME_H

@@ -15,7 +15,7 @@ char keyMap[rows][cols] = { // define the cymbols on the buttons of the keypad
     {'7', '8', '9', 'C'},
     {'*', '0', '#', 'D'}};
 
-byte rowPins[rows] = {11, 10, 9, 8}; // pins of the keypad²²²
+byte rowPins[rows] = {11, 10, 9, 8}; // pins of the keypad
 byte colPins[cols] = {7, 6, 5, 4};
 int k = 0;
 char arr[6];
@@ -36,7 +36,7 @@ void setup()
 void loop()
 {
   char whichKey = keypad.getKey();
-  if (etat == 0)
+  if (etat == 0) //etat intial
   {
     lcd.clear();
     lcd.setCursor(1, 0);
@@ -44,7 +44,7 @@ void loop()
     lcd.setCursor(1, 1);
     lcd.print("**write code**");
   }
-  if (Serial.available())
+  if (Serial.available()) //code introuvable
   {
     etat = 1;
     k = 0;
@@ -53,7 +53,6 @@ void loop()
     tab+=Serial.readString();
     lcd.clear();
     lcd.setCursor(0, 0);
-    //lcd.print(data);
     if (data == '0')
     {
       lcd.clear();
@@ -66,9 +65,8 @@ void loop()
       etat = 0;
       k = 0;
     }
-    if(data != '0')
+    if(data != '0') //code trouvé
     {
-      //tab=Serial.readString();
       int j=0;
       lcd.clear();
       lcd.setCursor(0, 0);
@@ -101,6 +99,7 @@ void loop()
     lcd.clear();
     k = 0;
   }
+  // define valid keys
   else if (whichKey == '0' || whichKey == '1' || whichKey == '2' || whichKey == '3' || whichKey == '4' || whichKey == '5' || whichKey == '6' || whichKey == '7' || whichKey == '8' || whichKey == '9')
   {
     etat = 1;
@@ -110,6 +109,7 @@ void loop()
     arr[k] = whichKey;
     k++;
   }
+  //envoi du code au qt pour le tester
   if(k==5){
     Serial.write(arr);
   k=0;
