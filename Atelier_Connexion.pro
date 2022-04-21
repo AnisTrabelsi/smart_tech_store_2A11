@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui sql
+QT       += charts
+QT       += serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,18 +27,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
     employee.cpp \
+    home.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    mdp_oub.cpp
 
 HEADERS += \
+    arduino.h \
     employee.h \
+    home.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    mdp_oub.h
 
 FORMS += \
-        mainwindow.ui
+        home.ui \
+        mainwindow.ui \
+        mdp_oub.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

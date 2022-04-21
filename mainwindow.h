@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "employee.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -16,18 +16,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pb_ajouter_clicked();
+    void on_pushButton_2_clicked();
 
-    void on_pb_supprimer_clicked();
-
-    void on_pb_modifier_clicked();
-
-
-    void on_pb_modifier_2_clicked();
+    void on_pushButton_mdp_oub_clicked();
 
 private:
     Ui::MainWindow *ui;
-    Employee E;
 };
 
 #endif // MAINWINDOW_H
