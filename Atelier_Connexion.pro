@@ -36,7 +36,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-    mdp_oub.cpp
+    mdp_oub.cpp \
+    menu.cpp
 
 HEADERS += \
     arduino.h \
@@ -46,13 +47,15 @@ HEADERS += \
     home.h \
         mainwindow.h \
     connection.h \
-    mdp_oub.h
+    mdp_oub.h \
+    menu.h
 
 FORMS += \
         facturew.ui \
         home.ui \
         mainwindow.ui \
-        mdp_oub.ui
+        mdp_oub.ui \
+        menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
