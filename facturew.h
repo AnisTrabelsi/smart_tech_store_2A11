@@ -50,6 +50,10 @@ private slots:
     void on_recuperer_3_clicked();
 
 
+
+
+    void on_pb_ajouter_4_clicked();
+
 private:
     Ui::factureW *ui;
       facture F;

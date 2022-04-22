@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "facturew.h"
 #include "ui_menu.h"
 #include"home.h"
 menu::menu(QWidget *parent) :
@@ -22,3 +23,13 @@ home h(nullptr);
      h.setModal(this);
      h.exec();
   }
+
+void menu::on_factureW_clicked()
+{
+    factureW f(nullptr);
+
+         this->hide();
+         f.setModal(this);
+         f.exec();
+
+}

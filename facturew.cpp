@@ -5,7 +5,7 @@
 #include <QSqlQuery>
 #include <QIntValidator>
 #include <QValidator>
-
+#include "menu.h"
 factureW::factureW(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::factureW)
@@ -325,4 +325,15 @@ f.regrouper(ui->nomr->text());
 ui->tab_facture->setModel(F.afficherho("facture",0));
 ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
 
+}
+
+
+
+void factureW::on_pb_ajouter_4_clicked()
+{
+    menu h(nullptr);
+
+     this->hide();
+     h.setModal(this);
+     h.exec();
 }

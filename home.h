@@ -44,6 +44,10 @@ private slots:
 
     void on_reset_ajouter_3_clicked();
 
+
+
+    void on_pb_ajouter_4_clicked();
+
 private:
     Ui::home *ui;
     QByteArray data; // variable contenant les données reçues

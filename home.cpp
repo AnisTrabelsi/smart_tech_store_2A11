@@ -1,4 +1,5 @@
 #include "home.h"
+#include "menu.h"
 #include "ui_home.h"
 #include "arduino.h"
 #include "employee.h"
@@ -345,4 +346,15 @@ void home::on_reset_ajouter_3_clicked()
     ui->le_mot_de_passe_3->clear();
     ui->le_date_embauche_3->clear();
     ui->le_salaire_3->clear();
+}
+
+
+
+void home::on_pb_ajouter_4_clicked()
+{
+    menu h(nullptr);
+
+     this->hide();
+     h.setModal(this);
+     h.exec();
 }

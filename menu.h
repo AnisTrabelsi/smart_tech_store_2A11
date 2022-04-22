@@ -18,6 +18,8 @@ public:
 private slots:
     void on_employeeW_clicked();
 
+    void on_factureW_clicked();
+
 private:
     Ui::menu *ui;
 };
