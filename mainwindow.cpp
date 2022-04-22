@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "connection.h"
+
 #include "home.h"
 #include "mdp_oub.h"
 #include <QMessageBox>
 #include <QDebug>
+#include"factureW.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -20,7 +22,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-home h(nullptr);
+//home h(nullptr);
+factureW h(nullptr);
 Connection  c;
 QString login;
 QString mdp;

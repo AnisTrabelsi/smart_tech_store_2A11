@@ -4,9 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql printsupport
 QT       += charts
 QT       += serialport
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,6 +30,8 @@ CONFIG += c++11
 SOURCES += \
     arduino.cpp \
     employee.cpp \
+    facture.cpp \
+    facturew.cpp \
     home.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -38,12 +41,15 @@ SOURCES += \
 HEADERS += \
     arduino.h \
     employee.h \
+    facture.h \
+    facturew.h \
     home.h \
         mainwindow.h \
     connection.h \
     mdp_oub.h
 
 FORMS += \
+        facturew.ui \
         home.ui \
         mainwindow.ui \
         mdp_oub.ui
