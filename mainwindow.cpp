@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tab_produit->setModel(P.afficher());
     ui->tab_promotion->setModel(P1.afficherp());
-
+ ui->tab_panier->setModel(P2.afficher());
     ////////////son//////////////////////////
     son=new QSound(":/sons/sons/not.wav");
     son1=new QSound(":/sons/sons/not2.wav");
@@ -774,4 +774,147 @@ void MainWindow::update_label()
 void MainWindow::on_stop_clicked()
 {
    A.write_to_arduino(("0"));
+}
+////////////////////////////////////////////////
+void MainWindow::on_pb_ajouter_achat_clicked()
+{bool test=false;
+    int Ref_produit=ui->refachat->text().toInt();
+    int ID_commande=ui->commandeachat->text().toInt();
+    int Quantite=ui->quatiteachat->text().toInt();
+    int ID_client=ui->clientachat->text().toInt();
+    int Numero=ui->numachat->text().toInt();
+
+    Panier P2(Numero,Ref_produit,Quantite,ID_commande,ID_client);
+    if (P2.Existence_quantite(Quantite))
+    {test=P2.ajouter();}
+    QMessageBox msgBox;
+    if(test)
+    { msgBox.setText("ajout avec success !");
+        son1->play();
+        P2.modifierquantiteproduit(Quantite,Ref_produit);
+        ui->tab_produit->setModel(P.afficher());
+        ui->tab_panier->setModel(P2.afficher());
+
+    }
+    else
+        msgBox.setText("ajout echoué !");
+    msgBox.exec();
+
+}
+
+void MainWindow::on_cherche_aff_achat_clicked()
+{Panier P2;
+    P2=P2.chercher(ui->chercher_aff_achat->text().toInt());
+
+
+        if(P2.getnumero()!=0){
+    QString input = ui->chercher_aff_achat->text();
+
+
+        ui->tab_panier->setModel(P2.afficher_panier(input));
+        son3->play();
+        }
+        else //introuvable
+        {
+            QMessageBox::critical(nullptr, QObject::tr("chercher numero de panier"),
+                                  QObject::tr("promotion introuvable !.\n"
+                                              "Click Cancel to exit."), QMessageBox::Cancel);
+}
+
+
+}
+
+void MainWindow::on_pb_supprimer_achat_clicked()
+{Panier P2,P3;
+    P2.setnumero(ui->le_num_supp_achat->text().toInt());
+     P2=P2.chercher(P2.getnumero());
+      P2.modifierquantiteproduit_apres_supp_acheter(P2.getQuantite(),P2.getRef_produit());
+    bool test=P2.supprimer(P2.getnumero());
+
+    QMessageBox msgBox;
+    if(test)
+       { msgBox.setText("suppression réussie !");
+
+    ui->tab_panier->setModel(P2.afficher());
+    ui->tab_produit->setModel(P.afficher());
+
+    son->play();
+    }
+    else
+    msgBox.setText("suppression echouée !");
+    msgBox.exec();
+
+}
+
+void MainWindow::on_pb_chercher_2_clicked()
+{Panier P2;
+    P2=P2.chercher(ui->la_recherche_achat->text().toInt());
+
+    if(P2.getnumero()!=0)
+    {
+        P2.modifierquantiteproduit_apres_supp_acheter(P2.getQuantite(),P2.getRef_produit());
+        ui->numero_mod_achat->setText(QString::number(P2.getnumero())) ;
+        ui->idclient_mod_achat->setText(QString::number(P2.getID_client())) ;
+        ui->cmd_mod_achat->setText(QString::number(P2.getID_commande())) ;
+        ui->quantite_mod_achat->setText(QString::number(P2.getQuantite()));
+        ui->ref_produit_mod_achat->setText(QString::number(P2.getRef_produit()));
+        ui->tab_produit->setModel(P.afficher());
+
+    }
+    else //introuvable
+    {
+        QMessageBox::critical(nullptr, QObject::tr("chercher une promotion"),
+                              QObject::tr("promotion introuvable !.\n"
+                                          "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+}
+
+}
+
+void MainWindow::on_pb_modifier_achat_clicked()
+{int Ref_produit=ui->ref_produit_mod_achat->text().toInt();
+    int ID_commande=ui->cmd_mod_achat->text().toInt();
+    int Quantite=ui->quantite_mod_achat->text().toInt();
+    int ID_client=ui->idclient_mod_achat->text().toInt();
+    int Numero=ui->numero_mod_achat->text().toInt();
+
+ Panier P2(Numero,Ref_produit,Quantite,ID_commande,ID_client);
+ Panier P3;
+ int test=P3.Existence_numero(Numero);
+
+ if(test==true)
+ {int test1=P2.modifier(Numero,Ref_produit,Quantite,ID_commande,ID_client);
+     if(test1==true){
+
+         QMessageBox::information(nullptr, QObject::tr("modifier un panier"),
+                                  QObject::tr("produit modifié.\n"
+                                              "Click Cancel to exit."), QMessageBox::Cancel);
+
+
+         P2.modifierquantiteproduit(Quantite,Ref_produit);
+
+         ui->tab_produit->setModel(P.afficher());
+         ui->tab_panier->setModel(P2.afficher());
+         son2->play();
+
+     }
+     else
+     {
+         QMessageBox::critical(nullptr, QObject::tr("modifier un panier"),
+                               QObject::tr("Erreur de modification!.\n"
+                                           "Click Cancel to exit."), QMessageBox::Cancel);
+
+     }
+
+ }
+
+ else
+ {
+     QMessageBox::critical(nullptr, QObject::tr("modifier une promotion"),
+                           QObject::tr("Erreur !.\n"
+                                       "Click Cancel to exit."), QMessageBox::Cancel);
+
+ }
+
 }

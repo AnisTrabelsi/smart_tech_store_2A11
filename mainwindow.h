@@ -21,7 +21,7 @@
 #include <QMenu>
 #include "arduino.h"
 #include "incendie.h"
-
+#include "panier.h"
 namespace Ui {
 class MainWindow;
 class QCamera;
@@ -115,10 +115,21 @@ private slots:
 
     void on_stop_clicked();
 
+    void on_pb_ajouter_achat_clicked();
+
+    void on_cherche_aff_achat_clicked();
+
+    void on_pb_supprimer_achat_clicked();
+
+    void on_pb_chercher_2_clicked();
+
+    void on_pb_modifier_achat_clicked();
+
 private:
     Ui::MainWindow *ui;
     Produit P;
     Promotion P1;
+    Panier P2;
     QTimer *timer;
     QSound *son;
     QSound *son1;

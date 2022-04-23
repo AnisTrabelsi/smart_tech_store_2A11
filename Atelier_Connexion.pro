@@ -57,8 +57,9 @@ SOURCES += \
     exportexcel.cpp \
     incendie.cpp \
         main.cpp \
-        mainwindow.cpp \
     connection.cpp \
+    mainwindow.cpp \
+    panier.cpp \
     produit.cpp \
     promotion.cpp \
     smtp.cpp
@@ -70,8 +71,9 @@ HEADERS += \
     dumessengerconnectiondialog.h \
     exportexcel.h \
     incendie.h \
-        mainwindow.h \
     connection.h \
+    mainwindow.h \
+    panier.h \
     produit.h \
     promotion.h \
     smtp.h
