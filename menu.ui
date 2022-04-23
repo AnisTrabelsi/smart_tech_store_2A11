@@ -221,10 +221,10 @@ QPushButton:focus
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>40</y>
-     <width>341</width>
-     <height>51</height>
+     <x>400</x>
+     <y>60</y>
+     <width>451</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">

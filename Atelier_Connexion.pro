@@ -11,6 +11,17 @@ QT       += core gui multimedia multimediawidgets sql location \
     quick
 QT += widgets charts
 
+QT       += core gui sql \
+quick
+QT       += core gui charts
+QT      += printsupport
+QT  += core network
+QT       += core gui network
+QT  +=svg
+QT += quick
+QT += core gui multimedia multimediawidgets
+QT += multimedia
+QT       += core gui  serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,46 +47,67 @@ CONFIG += c++11
 
 SOURCES += \
     arduino.cpp \
+    chatserver.cpp \
+    chatsocket.cpp \
     client.cpp \
     clientw.cpp \
+    dumessengerconnectiondialog.cpp \
     employee.cpp \
     exportexcel.cpp \
     facture.cpp \
     facturew.cpp \
     gagnant.cpp \
     home.cpp \
+    incendie.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
     mdp_oub.cpp \
     menu.cpp \
-    qcustomplot.cpp
+    panier.cpp \
+    produit.cpp \
+    produitw.cpp \
+    promotion.cpp \
+    qcustomplot.cpp \
+    smtp.cpp
 
 HEADERS += \
     arduino.h \
+    chatserver.h \
+    chatsocket.h \
     client.h \
     clientw.h \
+    dumessengerconnectiondialog.h \
     employee.h \
     exportexcel.h \
     facture.h \
     facturew.h \
     gagnant.h \
     home.h \
+    incendie.h \
         mainwindow.h \
     connection.h \
     mdp_oub.h \
     menu.h \
-    qcustomplot.h
+    panier.h \
+    produit.h \
+    produitw.h \
+    promotion.h \
+    qcustomplot.h \
+    smtp.h
 
 FORMS += \
         clientw.ui \
+        dumessengerconnectiondialog.ui \
         facturew.ui \
         gagnant.ui \
         historique.ui \
         home.ui \
+        incendie.ui \
         mainwindow.ui \
         mdp_oub.ui \
         menu.ui \
+        produitw.ui \
         statistics.ui
 
 # Default rules for deployment.
@@ -85,10 +117,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     congratulations.qrc \
-    res.qrc
+    congratulations.qrc \
+    res.qrc \
+    res.qrc \
+    ressource.qrc
 
 DISTFILES += \
+    Atelier_Connexion.pro.user \
+    Atelier_Connexion.pro.user.5a00d41 \
+    Atelier_Connexion.pro.user.725b3e0 \
+    Atelier_Connexion.pro.user.d567f1b.4.8-pre1 \
+    background.png \
     congratulations.mp3 \
     congratulations.wav \
+    fire_background_for_your_videos.mp4 \
+    libeay32.dll \
+    smtp.exe \
+    ssleay32.dll \
     test.txt \
     winner.jpg

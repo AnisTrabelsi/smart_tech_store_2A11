@@ -22,6 +22,8 @@ private slots:
 
     void on_clientW_clicked();
 
+    void on_produitW_clicked();
+
 private:
     Ui::menu *ui;
 };

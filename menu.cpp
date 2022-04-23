@@ -3,7 +3,7 @@
 #include "ui_menu.h"
 #include"home.h"
 #include "clientw.h"
-
+#include "produitw.h"
 menu::menu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::menu)
@@ -43,5 +43,14 @@ void menu::on_clientW_clicked()
     c.setModal(this);
     c.exec();
 
+
+}
+
+void menu::on_produitW_clicked()
+{produitw p(nullptr);
+
+    this->hide();
+    p.setModal(this);
+    p.exec();
 
 }

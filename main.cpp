@@ -2,12 +2,24 @@
 #include <QApplication>
 #include <QMessageBox>
 #include "connection.h"
+#include "chatserver.h"
+
+using namespace ApexAlliance;
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     Connection c;
+
     bool test=c.createconnect();
+    ChatServer Server;
+        if(!Server.startServer(3333)){
+            qDebug()<<"Error:"<<Server.errorString();
+            //return 1;
+
+        }
+        qDebug()<<"Server   started ...";
     if(test)
     {w.show();
         QMessageBox::information(nullptr, QObject::tr("database is open"),
