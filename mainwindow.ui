@@ -5914,7 +5914,7 @@ font-size: 20px;
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -13036,7 +13036,7 @@ font-size: 20px;
       </property>
       <widget class="QWidget" name="AjouterProduit_3">
        <attribute name="title">
-        <string>Ajouter Produit</string>
+        <string>Ajouter </string>
        </attribute>
        <widget class="QGroupBox" name="groupBox_9">
         <property name="enabled">
@@ -15148,14 +15148,14 @@ QLineEdit:focus
       </widget>
       <widget class="QWidget" name="tab_15">
        <attribute name="title">
-        <string>Afficher Produit</string>
+        <string>Afficher </string>
        </attribute>
        <widget class="QTableView" name="tab_panier">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>130</x>
           <y>30</y>
-          <width>771</width>
+          <width>651</width>
           <height>471</height>
          </rect>
         </property>
@@ -15207,7 +15207,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
         <property name="geometry">
          <rect>
           <x>860</x>
-          <y>280</y>
+          <y>290</y>
           <width>211</width>
           <height>28</height>
          </rect>
@@ -15263,7 +15263,7 @@ QLineEdit:focus
       </widget>
       <widget class="QWidget" name="tab_17">
        <attribute name="title">
-        <string>Supprimer Produit</string>
+        <string>Supprimer </string>
        </attribute>
        <widget class="QGroupBox" name="suppression_3">
         <property name="geometry">
@@ -15357,7 +15357,7 @@ QPushButton:focus
       </widget>
       <widget class="QWidget" name="tab_18">
        <attribute name="title">
-        <string>Modifier Produit</string>
+        <string>Modifier </string>
        </attribute>
        <widget class="QGroupBox" name="groupBox_11">
         <property name="geometry">
