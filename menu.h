@@ -24,6 +24,8 @@ private slots:
 
     void on_produitW_clicked();
 
+    void on_fournisseurW_clicked();
+
 private:
     Ui::menu *ui;
 };

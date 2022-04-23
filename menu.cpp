@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "facturew.h"
+#include "fournisseurw.h"
 #include "ui_menu.h"
 #include"home.h"
 #include "clientw.h"
@@ -52,5 +53,15 @@ void menu::on_produitW_clicked()
     this->hide();
     p.setModal(this);
     p.exec();
+
+}
+
+void menu::on_fournisseurW_clicked()
+{
+    fournisseurw f(nullptr);
+
+         this->hide();
+         f.setModal(this);
+         f.exec();
 
 }

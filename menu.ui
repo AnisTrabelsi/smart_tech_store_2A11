@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>560</y>
+     <y>600</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -172,7 +172,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>480</y>
+     <y>540</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -212,7 +212,7 @@ QPushButton:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../background.png</pixmap>
+    <pixmap>background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -241,6 +241,37 @@ QPushButton:focus
     <string>BIENVENUE</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="fournisseurW">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>470</y>
+     <width>491</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES FOURNISSEURS</string>
+   </property>
+  </widget>
   <zorder>menuBac</zorder>
   <zorder>commandeW</zorder>
   <zorder>livraisonW</zorder>
@@ -249,6 +280,7 @@ QPushButton:focus
   <zorder>employeeW</zorder>
   <zorder>clientW</zorder>
   <zorder>label</zorder>
+  <zorder>fournisseurW</zorder>
  </widget>
  <resources/>
  <connections/>

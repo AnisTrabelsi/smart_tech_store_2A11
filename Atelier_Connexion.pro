@@ -56,6 +56,8 @@ SOURCES += \
     exportexcel.cpp \
     facture.cpp \
     facturew.cpp \
+    fournisseur.cpp \
+    fournisseurw.cpp \
     gagnant.cpp \
     home.cpp \
     incendie.cpp \
@@ -69,6 +71,7 @@ SOURCES += \
     produitw.cpp \
     promotion.cpp \
     qcustomplot.cpp \
+    reclamation.cpp \
     smtp.cpp
 
 HEADERS += \
@@ -82,6 +85,8 @@ HEADERS += \
     exportexcel.h \
     facture.h \
     facturew.h \
+    fournisseur.h \
+    fournisseurw.h \
     gagnant.h \
     home.h \
     incendie.h \
@@ -94,12 +99,14 @@ HEADERS += \
     produitw.h \
     promotion.h \
     qcustomplot.h \
+    reclamation.h \
     smtp.h
 
 FORMS += \
         clientw.ui \
         dumessengerconnectiondialog.ui \
         facturew.ui \
+        fournisseurw.ui \
         gagnant.ui \
         historique.ui \
         home.ui \
