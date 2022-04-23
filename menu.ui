@@ -212,7 +212,7 @@ QPushButton:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../3la mayeti/background.png</pixmap>
+    <pixmap>../background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

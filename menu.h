@@ -20,6 +20,8 @@ private slots:
 
     void on_factureW_clicked();
 
+    void on_clientW_clicked();
+
 private:
     Ui::menu *ui;
 };

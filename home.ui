@@ -6319,7 +6319,7 @@ QLineEdit:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../../../background.png</pixmap>
+    <pixmap>../background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -6338,7 +6338,7 @@ QLineEdit:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../../../return.png</pixmap>
+    <pixmap>../../../../return.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

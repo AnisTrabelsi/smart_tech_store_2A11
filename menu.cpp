@@ -2,6 +2,8 @@
 #include "facturew.h"
 #include "ui_menu.h"
 #include"home.h"
+#include "clientw.h"
+
 menu::menu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::menu)
@@ -31,5 +33,15 @@ void menu::on_factureW_clicked()
          this->hide();
          f.setModal(this);
          f.exec();
+
+}
+
+void menu::on_clientW_clicked()
+{   clientw c(nullptr);
+
+    this->hide();
+    c.setModal(this);
+    c.exec();
+
 
 }
