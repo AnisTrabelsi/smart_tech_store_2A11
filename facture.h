@@ -26,6 +26,9 @@ class facture
     QString remarque;
 QString nom;
 public:
+int numberofrows(int  commande);
+QSqlQueryModel* chercheravancer(int);
+
     facture();
     facture(int,int,int,int,int,int,int,int,int,int,QDate,QString );
      bool ajouter();
@@ -38,7 +41,8 @@ facture chercher(int idfacture,QString table);
 QSqlQueryModel* trier();
 QSqlQueryModel* afficherpar(QString name,int a);
 bool copytotable(QString name,facture f);
-void imprimer();
+void imprimer(int);
+
 void cherchers(QString &nom,QString &prenom,int idfacture );
 
      int get_nfacture(){return nfacture;}

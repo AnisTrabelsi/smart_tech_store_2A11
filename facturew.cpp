@@ -249,7 +249,7 @@ void factureW::on_pb_modifier_3_clicked()
 
     f1.set_nfacture(ui->nfacture_MM->text().toInt());
 
-f1.imprimer();
+    f1.imprimer(ui->idcommande_M->text().toInt());
 }
 
 void factureW::on_pushButton_3_clicked()
@@ -336,4 +336,41 @@ void factureW::on_pb_ajouter_4_clicked()
      this->hide();
      h.setModal(this);
      h.exec();
+}
+
+void factureW::on_idcommande_A_editingFinished()
+{
+    QSqlQueryModel* model;
+
+ if(ui->idcommande_A->text()!=""){
+     facture f;
+     model=f.chercheravancer(ui->idcommande_A->text().toInt());
+  ui->tableView->setModel(model);
+ int n=f.numberofrows(ui->idcommande_A->text().toInt());
+ int prixht=0;
+ for (int i=0;i<n;++i) {
+     prixht+=model->data(model->index(i,0,QModelIndex()),Qt::DisplayRole).toInt()*model->data(model->index(i,2,QModelIndex()),Qt::DisplayRole).toInt();
+
+
+
+ }
+
+ ui->totalht_A->setText(QString::number(prixht));
+
+
+
+  }
+}
+
+void factureW::on_TVA_A_editingFinished()
+{
+
+    int prixht=ui->totalht_A->text().toInt();
+    if(prixht!=0){
+
+      ui->tttva_A->setText(QString::number((prixht*ui->TVA_A->text().toInt())/100));
+ui->ttttc_A->setText(QString::number((prixht+ui->tttva_A->text().toInt())));
+
+
+    }
 }

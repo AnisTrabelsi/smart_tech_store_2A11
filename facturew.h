@@ -54,6 +54,10 @@ private slots:
 
     void on_pb_ajouter_4_clicked();
 
+    void on_idcommande_A_editingFinished();
+
+    void on_TVA_A_editingFinished();
+
 private:
     Ui::factureW *ui;
       facture F;

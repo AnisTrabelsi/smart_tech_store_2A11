@@ -51,7 +51,7 @@ font-size: 20px;
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -493,8 +493,8 @@ QPushButton:focus
      <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>150</y>
+        <x>470</x>
+        <y>130</y>
         <width>151</width>
         <height>25</height>
        </rect>
@@ -685,10 +685,10 @@ QPushButton:focus
      <widget class="QLineEdit" name="remarque_A">
       <property name="geometry">
        <rect>
-        <x>640</x>
-        <y>140</y>
+        <x>610</x>
+        <y>120</y>
         <width>171</width>
-        <height>151</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="font">
@@ -3634,6 +3634,57 @@ QLineEdit:focus
         </layout>
        </item>
       </layout>
+     </widget>
+     <widget class="QTableView" name="tableView">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>210</y>
+        <width>441</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView
+{
+    alternate-background-color: #1F1F1F;
+    gridline-color: white;
+    color: white;
+
+    font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+}
+QTableView::item 
+{
+    color: white;
+}
+
+QTableView::item:focus
+{
+    color: gray;
+    background: #0063cd;
+}
+QTableView::item:selected
+{
+    color: red;
+    background: #0063cd;
+}
+
+QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
+    color: #b1b1b1;
+    background-color: #323232;
+    border: 1px solid #b1b1b1;
+    border-radius: 1px;
+    width: 7px;
+    height: 7px;
+    margin: 0px 5px 0 5px;
+}
+
+    padding-left:10px;
+    height:100px;
+    width:180px;
+    color: #5a5a5a;
+    border-bottom :1px solid #f0f0f0;</string>
+      </property>
      </widget>
     </widget>
    </widget>

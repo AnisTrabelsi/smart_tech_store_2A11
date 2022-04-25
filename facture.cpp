@@ -20,6 +20,24 @@ facture::facture()
 
      id_commande=0;
 }
+
+int facture::numberofrows(int  commande){
+    QSqlQuery query2;
+
+
+    query2.prepare("select count(ACHETER.QUANTITY) from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.COMMANDE_FK=:idcommande group by acheter.commande_fk");
+    query2.bindValue(":idcommande", commande);
+    query2.exec();
+    if(query2.next()){
+return query2.value(0).toInt();
+
+
+
+
+
+}
+
+}
 void facture::cherchers(QString &nom,QString &prenom,int idfacture ){
 
 
@@ -45,9 +63,60 @@ prenom=checkQuery.value(1).toString();
 
 
      }
+QSqlQueryModel* facture::chercheravancer(int idcommande){
+    /**/
+    QSqlQueryModel* model=new QSqlQueryModel();
+    QSqlQuery checkQuery;
+    checkQuery.prepare("select ACHETER.QUANTITY,ACHETER.REF_PRODUIT,PRODUIT.PRIX,produit.libelle_produit from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.COMMANDE_FK=:idcommande");
+    checkQuery.bindValue(":idcommande",idcommande);
+    if (checkQuery.exec())
+    {
+        if (checkQuery.next())
+        {
 
-void facture::imprimer(){
+        model->setQuery(checkQuery);
+        model->setHeaderData(0, Qt::Horizontal, QObject::tr("Quantity"));
+        model->setHeaderData(1, Qt::Horizontal, QObject::tr("REF_PRODUIT"));
+        model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRIX"));
+        model->setHeaderData(3, Qt::Horizontal, QObject::tr("LIBELLE_PRODUIT"));
+
+}
+    }
+    else
+    {
+        qDebug() << "User not found:" << checkQuery.lastError();
+
+    }
+
+
+
+
+
+
+
+    return model;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+};
+
+
+void facture::imprimer(int idcommande){
+    QSqlQueryModel* model;
 QString nom,prenom;
+  facture f;
 int y2=4600,y1=3200,y0=2000;
     facture f1=chercher(nfacture,"FACTURE");
     cherchers(nom,prenom,f1.get_nfacture());
@@ -62,7 +131,7 @@ int y2=4600,y1=3200,y0=2000;
      painter.drawText(200,1000,"FACTURE");
     painter.setFont(QFont("Verdana",12));
     painter.drawText(400,y0,"Nom de la compagine : NexTech");painter.drawText(6000,y0,"Date de creation : "+f1.get_datedecreation().toString());y0+=250;
-    painter.drawText(400,y0,"Adresse postale: 9000"); painter.drawText(6000,y0,"id_facture : "+QString::number(f1.get_nfacture()));             y0+=250;
+    painter.drawText(400,y0,"Adresse postale: 9000"); painter.drawText(6000,y0,"id_facture : "+QString::number(f1.get_nfacture()));y0+=250;
     painter.drawText(400,y0,"NUM : 56108211");                    y0+=250;
     painter.drawText(400,y0,"Mail :djpa@esprit.tn");y0+=250;
 
@@ -70,8 +139,24 @@ int y2=4600,y1=3200,y0=2000;
     painter.drawText(200,y1,"ENVOYER A :");y1+=250;
     painter.drawText(200,y1,"Nom :"+nom);y1+=250;
     painter.drawText(200,y1,"Prenom :"+prenom);y1+=250;
-
     painter.drawText(200,y2,"DESCRIPTION :");y2+=250;
+
+  model=f.chercheravancer(idcommande);
+  int n=f.numberofrows(idcommande);
+    painter.drawText(300,y2,"|      Quantity      |    REF_PRODUIT      |    PRIX      |    LIBELLE_PRODUIT   |");y2+=250;
+  for (int i=0;i<n;i++){
+
+
+    painter.drawText(300,y2,"|       "+model->data(model->index(i,0,QModelIndex()),Qt::DisplayRole).toString());
+    painter.drawText(2100,y2,"|       "+model->data(model->index(i,0,QModelIndex()),Qt::DisplayRole).toString());
+    painter.drawText(3800,y2,"        |      "+model->data(model->index(i,0,QModelIndex()),Qt::DisplayRole).toString());
+    painter.drawText(4800,y2,"           |      "+ model->data(model->index(i,0,QModelIndex()),Qt::DisplayRole).toString());
+    painter.drawText(6900,y2,"                |      ");
+
+y2+=250;
+
+  }
+
 
     painter.drawText(300,y2,"tva :"+QString::number(f1.get_tva()));y2+=250;
     painter.drawText(300,y2,"total_tva :"+QString::number(f1.get_total_tva()));y2+=250;
@@ -79,11 +164,11 @@ int y2=4600,y1=3200,y0=2000;
     painter.drawText(300,y2,"total_ht :"+QString::number(f1.get_total_ht()));y2+=250;
 
     switch (f1.get_modedereglement()) {
-    case 1:  painter.drawText(300,y2,"mode de reglement : espece"); ;
+    case 1:painter.drawText(300,y2,"mode de reglement : espece"); ;
     case 2:painter.drawText(300,y2,"mode de reglement : cheques bancaires");  ;
-    case 3: painter.drawText(300,y2,"mode de reglement : virement"); ;
+    case 3:painter.drawText(300,y2,"mode de reglement : virement"); ;
     case 4:painter.drawText(300,y2,"mode de reglement : cartes de crédit");  ;
-    default:painter.drawText(300,y2,"mode de reglement : inconnue"); ;
+   default:painter.drawText(300,y2,"mode de reglement : inconnue"); ;
 
     }y2+=250;
 
