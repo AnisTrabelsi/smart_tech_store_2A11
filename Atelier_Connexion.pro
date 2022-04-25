@@ -51,6 +51,7 @@ SOURCES += \
     chatsocket.cpp \
     client.cpp \
     clientw.cpp \
+    commandew.cpp \
     dumessengerconnectiondialog.cpp \
     employee.cpp \
     exportexcel.cpp \
@@ -80,6 +81,7 @@ HEADERS += \
     chatsocket.h \
     client.h \
     clientw.h \
+    commandew.h \
     dumessengerconnectiondialog.h \
     employee.h \
     exportexcel.h \
@@ -104,6 +106,7 @@ HEADERS += \
 
 FORMS += \
         clientw.ui \
+        commandew.ui \
         dumessengerconnectiondialog.ui \
         facturew.ui \
         fournisseurw.ui \
