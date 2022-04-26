@@ -76,6 +76,26 @@ else
 
 }
 
+bool Panier::supprimerparid(int id){
+   bool test=false;
+QSqlQuery query;
+
+          query.prepare("Delete from Acheter where ID_COMMANDE=:id");
+          query.bindValue(0, id);
+
+
+test=query.exec();
+if(!test)
+qDebug() << "suppression echouée:" << query.lastError();
+else
+    qDebug() << "suppression de Numero réussie:" << id ;
+
+
+    return test;
+
+}
+
+
 
 QSqlQueryModel* Panier::afficher()
 {

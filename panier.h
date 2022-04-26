@@ -20,7 +20,7 @@ public:
   int getID_commande();
     int getQuantite();
 
-
+bool supprimerparid(int id);
     void setnumero(int);
        void setRef_produit(int);
         void setID_client(int);

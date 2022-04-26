@@ -6,6 +6,10 @@
 #include<QString>
 #include<QDate>
 #include<QTableWidget>
+#include <QMessageBox>
+#include <QSqlError>
+#include <QFile>
+#include <QTextStream>
 facture::facture()
 {
      nfacture=0;
@@ -435,20 +439,20 @@ QSqlQueryModel* facture::afficherho(QString name,int a)
    QSqlQueryModel* model=new QSqlQueryModel();
    if(name=="facture"){
        if(a==0){
-         model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (commande.id_commande=facture.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.DATECREATION ");
+         model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (COMMANDE.id_commande=FACTURE.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.DATECREATION ");
    }else if(a==1){
-           model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (commande.id_commande=facture.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.TVA");
+           model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (COMMANDE.id_commande=FACTURE.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.TVA");
 
 
        }else {
 
-           model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (commande.id_commande=facture.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.TOTAL_HT ");
+           model->setQuery("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (COMMANDE.id_commande=FACTURE.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ORDER BY FACTURE.TOTAL_HT ");
 
        }
 
 
    }else
-   {         model->setQuery("select FACTURE_ARCHIVE.*,client.nom from FACTURE_ARCHIVE INNER JOIN COMMANDE on (commande.id_commande=FACTURE_ARCHIVE.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ");
+   {         model->setQuery("select FACTURE_ARCHIVE.*,client.nom from FACTURE_ARCHIVE INNER JOIN COMMANDE on (COMMANDE.id_commande=FACTURE_ARCHIVE.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) ");
 
    }
          model->setHeaderData(0, Qt::Horizontal, QObject::tr("nfacture"));
@@ -501,12 +505,13 @@ QSqlQueryModel* facture::afficher()
 
 
 QSqlQueryModel* facture::afficherpar(QString name,int a)
-{
+{    QMessageBox msgBox;
+
    QSqlQueryModel* model=new QSqlQueryModel();
    QSqlQuery query;
    query.prepare("select FACTURE.*,client.nom from FACTURE INNER JOIN COMMANDE on (commande.id_commande=facture.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) and client.nom =:name ");
    query.bindValue(":name", name);
-   query.exec();
+  if(query.exec()){
 model->setQuery(query);
          model->setHeaderData(0, Qt::Horizontal, QObject::tr("nfacture"));
          model->setHeaderData(1, Qt::Horizontal, QObject::tr("etat"));
@@ -521,6 +526,9 @@ model->setQuery(query);
          model->setHeaderData(10, Qt::Horizontal, QObject::tr("datedecreation"));
          model->setHeaderData(11, Qt::Horizontal, QObject::tr("remarque"));
          model->setHeaderData(12, Qt::Horizontal, QObject::tr("nom"));
+}
+
+ else {    qDebug() << "facture not found:" << query.lastError();   }
 
 
 
@@ -528,6 +536,7 @@ model->setQuery(query);
 }
 
 void facture::regrouper(QString name){
+    QMessageBox msgBox;
     QSqlQuery query,query1,query2;    facture F1;
    QSqlQueryModel* model=new QSqlQueryModel();
     query1.prepare("select facture.nfacture, facture.modedereglement,commande.id_commande,facture.remarque,client.nom from FACTURE INNER JOIN COMMANDE on (commande.id_commande=facture.id_commande) INNER JOIN CLIENT ON (client.id_client=commande.id_client) and client.nom =:name ");
@@ -567,7 +576,8 @@ set_datedecreation(QDate::currentDate());
 }
     if(query2.next()){
 int i=query2.value(0).toInt();
-  model->setQuery(query1);
+if(i>0){
+model->setQuery(query1);
 for (int j=0;j<i;j++) {
 
  int a=model->data(model->index(j,0,QModelIndex()),Qt::DisplayRole).toInt();
@@ -576,9 +586,23 @@ for (int j=0;j<i;j++) {
 supprimer(a,"FACTURE");
 }
 ajouter();
-
+}else if(i==0) {
+    model->setQuery(query1);
+   // msgBox.setText("vous aves deja une seul facture");
+    msgBox.exec();  }
+else {msgBox.setText("vous avez aucune facture a regrouper");
+    msgBox.exec();}
 
 }
 
     };
+
+
+
+
+
+
+
+
+
 

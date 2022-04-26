@@ -113,6 +113,7 @@ HEADERS += \
     panier.h \
     produit.h \
     produitw.h \
+    projet/projet.ino \
     promotion.h \
     qcustomplot.h \
     reclamation.h \
@@ -145,10 +146,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     congratulations.qrc \
     congratulations.qrc \
+    congratulations.qrc \
+    qml.qrc \
     qml.qrc \
     res.qrc \
     res.qrc \
-    ressource.qrc
+    res.qrc \
+    ressource.qrc \
+    ressource.qrc \
+    sons/sons.qrc
 
 DISTFILES += \
     Atelier_Connexion.pro.user \
@@ -160,7 +166,18 @@ DISTFILES += \
     congratulations.wav \
     fire_background_for_your_videos.mp4 \
     libeay32.dll \
+    map.qml \
     smtp.exe \
+    sons/Danger Alarm Meme Sound Effect.wav \
+    sons/gif2.gif \
+    sons/not.wav \
+    sons/not2.wav \
+    sons/not3.wav \
+    sons/not4.wav \
+    sons/not5.wav \
+    sons/not6.wav \
+    sons/not7.wav \
+    sons/not8.wav \
     ssleay32.dll \
     test.txt \
     winner.jpg

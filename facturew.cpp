@@ -6,9 +6,12 @@
 #include <QIntValidator>
 #include <QValidator>
 #include "menu.h"
+#include"panier.h"
+#include "produitw.h"
+#include "ui_produitw.h"
 factureW::factureW(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::factureW)
+    ui(new Ui::factureW )
 {
 
     ui->setupUi(this);
@@ -57,9 +60,9 @@ bool test=F.ajouter();
       if(test)
     {
     QMessageBox::information(nullptr, QObject::tr("Ajouter un equipement"),
-                      QObject::tr("fournisseur ajouté.\n"
+                      QObject::tr("FACTURE ajouté.\n"
                                   "Click Cancel to exit."), QMessageBox::Cancel);
-
+Panier p;
     ui->Etat_A->clear();
     ui->TVA_A->clear();
     ui->tttva_A->clear();
@@ -71,7 +74,8 @@ bool test=F.ajouter();
     ui->idcommande_A->clear();
     ui->dateajout_A->clear();
     ui->remarque_A->clear();
-    }
+p.supprimerparid(id_commande);
+      }
       else
       {
           QMessageBox::critical(nullptr, QObject::tr("Supprimer un equipement"),
@@ -115,7 +119,7 @@ void factureW::on_pb_modifier_clicked()
       }
         else
         {
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer une facture"),
                         QObject::tr("employee introuvable !.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
@@ -149,8 +153,8 @@ facture F(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,
   if(test==true)
   {
       if(int test1=F1.modifier(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,matricule,id_commande,datedecreation,remarque)==true){
-          QMessageBox::information(nullptr, QObject::tr("modifier un fournisseur"),
-                            QObject::tr("fournisseur modifié.\n"
+          QMessageBox::information(nullptr, QObject::tr("modifier une facture"),
+                            QObject::tr("facture modifié.\n"
                                         "Click Cancel to exit."), QMessageBox::Cancel);
     ui->tab_facture->setModel(F.afficherho("facture",0));
       }
@@ -166,7 +170,7 @@ facture F(nfacture,etat,tva,total_tva,total_ht,total_ttc,modedereglement,remise,
 
       else
       {
-          QMessageBox::critical(nullptr, QObject::tr("Supprimer un employee"),
+          QMessageBox::critical(nullptr, QObject::tr("Supprimer une facture"),
                       QObject::tr("Erreur !.\n"
                                   "Click Cancel to exit."), QMessageBox::Cancel);
 
@@ -229,7 +233,7 @@ void factureW::on_pb_supprimer_clicked()
 
       {
       QMessageBox::information(nullptr, QObject::tr("supprimer un fournisseur"),
-                        QObject::tr("fournisseur supprimé.\n"
+                        QObject::tr("facture supprimé.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 ui->tab_facture->setModel(F.afficherho("facture",0));
 ui->archive_table->setModel(F.afficherho("ARCHIVE_TABLE",0));
@@ -238,7 +242,7 @@ ui->nfacture_S->clear();
         }
         else
         {
-            QMessageBox::critical(nullptr, QObject::tr("Supprimer un fournisseur"),
+            QMessageBox::critical(nullptr, QObject::tr("Supprimer une facture"),
                         QObject::tr("Erreur !.\n"
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
