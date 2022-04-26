@@ -72,7 +72,7 @@ void Categoriew::on_NUM_clicked()
 void Categoriew::on_valider_clicked()
 {
     int ID_CATEGORIE = ui->ID_CATEGORIE->text().toInt();
-    int REMISE = ui->REMISE->text().toInt();
+    QString REMISE = ui->REMISE->text();
     QString LIBELLE=ui->LIBELLE->text();
     Categorie CA(ID_CATEGORIE, LIBELLE,REMISE);
     bool test = CA.ajouterCategorie();
@@ -130,7 +130,7 @@ void Categoriew::on_cherchermodif_clicked()
     {
 
         ui->idCategorie_3->setText(QString::number(C1.getID()));
-        ui->REMISE_3->setText(QString::number(C1.getREMISE()));
+        ui->REMISE_3->setText(C1.getREMISE());
         ui->LIBELLE_3->setText(C1.getLIBELLE());
 
         ui->view->setModel(CA.afficherCategorie(0));
@@ -148,7 +148,7 @@ void Categoriew::on_valider_3_clicked()
 {
 
     int ID_CATEGORIE = ui->idCategorie_3->text().toInt();
-    int REMISE = ui->REMISE_3->text().toInt();
+    QString REMISE = ui->REMISE_3->text();
     QString LIBELLE=ui->LIBELLE_3->text();
     Categorie C(ID_CATEGORIE,LIBELLE,REMISE);
 

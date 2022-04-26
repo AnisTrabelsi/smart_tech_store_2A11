@@ -9,10 +9,10 @@ Categorie::Categorie()
 {
     ID_CATEGORIE = 0;
     LIBELLE = "";
-    REMISE = 0;
+    REMISE = "";
 
 }
-Categorie::Categorie(int id, QString LIBELLE,int REMISE)
+Categorie::Categorie(int id, QString LIBELLE,QString REMISE)
 {
     this->ID_CATEGORIE = id;
     this->LIBELLE = LIBELLE;
@@ -22,7 +22,7 @@ int Categorie::getID()
 {
     return ID_CATEGORIE;
 }
-int Categorie::getREMISE()
+QString Categorie::getREMISE()
 {
     return REMISE;
 }
@@ -38,7 +38,7 @@ void Categorie::setID(int a)
 }
 
 
-void Categorie::setREMISE(int a)
+void Categorie::setREMISE(QString a)
 {
     REMISE = a;
 }
@@ -54,7 +54,7 @@ bool Categorie::ajouterCategorie()
 
     QSqlQuery query;
     //QString idcommnade_string = QString::number(ID_CATEGORIE);
-    query.prepare("INSERT INTO Categorie (ID_Categorie,LIBELLE,REMISE) "
+    query.prepare("INSERT INTO Categorie (ID_Categorie,LIBELLE,DESCRIPTION) "
                   "VALUES (:ID_CATEGORIE,:LIBELLE,:REMISE)");
     query.bindValue(":ID_CATEGORIE", ID_CATEGORIE);
     query.bindValue(":LIBELLE", LIBELLE);
@@ -66,17 +66,17 @@ bool Categorie::ajouterCategorieA()
 
     QSqlQuery query;
     //QString idcommnade_string = QString::number(ID_CATEGORIE);
-    query.prepare("INSERT INTO CategorieA (ID_Categorie,LIBELLE,REMISE) "
+    query.prepare("INSERT INTO CategorieA (ID_Categorie,LIBELLE,DESCRIPTION) "
                   "VALUES (:ID_CATEGORIE,:LIBELLE,:REMISE)");
     query.bindValue(":ID_CATEGORIE", ID_CATEGORIE);
     query.bindValue(":LIBELLE", LIBELLE);
     query.bindValue(":REMISE", REMISE);;
     return query.exec();
 }
-bool Categorie::modifier_Categorie(int id, QString LIBELLE,int REMISE)
+bool Categorie::modifier_Categorie(int id, QString LIBELLE,QString REMISE)
 {
     QSqlQuery query;
-    query.prepare("update Categorie set ID_CATEGORIE=:ID_CATEGORIE,LIBELLE=:LIBELLE,REMISE=:REMISE");
+    query.prepare("update Categorie set ID_CATEGORIE=:ID_CATEGORIE,LIBELLE=:LIBELLE,DESCRIPTION=:REMISE");
     query.bindValue(":ID_CATEGORIE", id);
     query.bindValue(":LIBELLE", LIBELLE);
     query.bindValue(":REMISE",REMISE);
@@ -120,7 +120,7 @@ QSqlQueryModel *Categorie::afficherCategorie(int a)
 }
     else if(a==2)
     {
-        model->setQuery("SELECT* FROM Categorie order by REMISE");
+        model->setQuery("SELECT* FROM Categorie order by DESCRIPTION");
     }
     else if (a==3)
     {
@@ -128,7 +128,7 @@ QSqlQueryModel *Categorie::afficherCategorie(int a)
     }
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("LIBELLE"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("REMISE"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Description"));
 
     return model;
 }
@@ -170,7 +170,7 @@ Categorie Categorie::chercher_Categorie(const int &id)
         {
             C1.setID(checkQuery.value(0).toInt());
             C1.setLIBELLE(checkQuery.value(1).toString());
-            C1.setREMISE(checkQuery.value(2).toInt());
+            C1.setREMISE(checkQuery.value(2).toString());
 
             return C1;
         }

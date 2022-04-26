@@ -70,7 +70,7 @@ font-size: 20px;
     <enum>QTabWidget::Triangular</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -177,7 +177,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Remise</string>
+      <string>Description</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="ID">
@@ -1297,7 +1297,7 @@ font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
        </font>
       </property>
       <property name="text">
-       <string>Remise</string>
+       <string>Description</string>
       </property>
      </widget>
      <widget class="QPushButton" name="reset_ajouter_2">
@@ -1896,7 +1896,7 @@ QLineEdit:focus
        </font>
       </property>
       <property name="text">
-       <string>Description</string>
+       <string>Libelle</string>
       </property>
      </widget>
     </widget>

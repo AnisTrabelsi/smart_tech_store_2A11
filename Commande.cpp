@@ -112,7 +112,7 @@ bool Commande::ajouterCommandeA()
 bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QString Livraison, QDate date)
 {
     QSqlQuery query;
-    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,PAIMENT_VALIDE=:paiment");
+    query.prepare("update COMMANDE set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,PAIMENT_VALIDE=:paiment,id_client=:quantity");
     query.bindValue(":idCommande", id);
     query.bindValue(":mode_Livraison", Livraison);
     query.bindValue(":date_Commande", date);

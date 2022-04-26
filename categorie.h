@@ -8,24 +8,24 @@ class Categorie
 {
     int ID_CATEGORIE;
     QString LIBELLE;
-    int REMISE;
+    QString REMISE;
 public:
     Categorie();
-    Categorie(int,QString,int);
+    Categorie(int,QString,QString);
     //*****GETTERS*****//
     int getID();
-    int getREMISE();
+    QString getREMISE();
     QString getLIBELLE();
     //*****SETTERS******//
     void setID(int);
-    void setREMISE(int);
+    void setREMISE(QString);
     void setLIBELLE(QString);
     //********METHODS******//
     bool ajouterCategorie();
     bool supprimerCategorie(int);
     QSqlQueryModel *afficherCategorie(int);
     bool CategorieExists(const int &idCategorie) const;
-    bool modifier_Categorie(int, QString,int);
+    bool modifier_Categorie(int, QString,QString);
     bool ajouterCategorieA();
     Categorie chercher_Categorie(const int &idCategorie);
 

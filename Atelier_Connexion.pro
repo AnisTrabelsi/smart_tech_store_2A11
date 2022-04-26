@@ -50,6 +50,7 @@ CONFIG += c++11
 SOURCES += \
     Commande.cpp \
     arduino.cpp \
+    categorie.cpp \
     categoriew.cpp \
     chatserver.cpp \
     chatsocket.cpp \
