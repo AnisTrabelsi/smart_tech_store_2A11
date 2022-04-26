@@ -25,7 +25,7 @@ int facture::numberofrows(int  commande){
     QSqlQuery query2;
 
 
-    query2.prepare("select count(ACHETER.QUANTITY) from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.COMMANDE_FK=:idcommande group by acheter.commande_fk");
+    query2.prepare("select count(ACHETER.QUANTITE) from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.ID_COMMANDE=:idcommande group by acheter.ID_COMMANDE");
     query2.bindValue(":idcommande", commande);
     query2.exec();
     if(query2.next()){
@@ -67,7 +67,7 @@ QSqlQueryModel* facture::chercheravancer(int idcommande){
     /**/
     QSqlQueryModel* model=new QSqlQueryModel();
     QSqlQuery checkQuery;
-    checkQuery.prepare("select ACHETER.QUANTITY,ACHETER.REF_PRODUIT,PRODUIT.PRIX,produit.libelle_produit from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.COMMANDE_FK=:idcommande");
+    checkQuery.prepare("select ACHETER.QUANTITE,ACHETER.REF_PRODUIT,PRODUIT.PRIX,produit.libelle_produit from ACHETER INNER JOIN PRODUIT on (ACHETER.REF_PRODUIT=PRODUIT.REF_PRODUIT) AND ACHETER.ID_COMMANDE=:idcommande");
     checkQuery.bindValue(":idcommande",idcommande);
     if (checkQuery.exec())
     {
