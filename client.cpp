@@ -295,6 +295,7 @@ bool client::chercher_client_bool(const int& id_client) const
  {
 
 
+    bool exists = false;
 
     QSqlQuery checkQuery;
     checkQuery.prepare("SELECT id_client FROM client WHERE id_client=:id_client");
@@ -308,7 +309,7 @@ bool client::chercher_client_bool(const int& id_client) const
             msgBox.setText("client trouvé! ");
             msgBox.exec();
             qDebug() << " found:" << checkQuery.lastError();
-            return  true;
+            exists=true;
         }
     }
     else
@@ -316,9 +317,9 @@ bool client::chercher_client_bool(const int& id_client) const
         msgBox.setText("client introuvable ! ");
         msgBox.exec();
         qDebug() << " not found:" << checkQuery.lastError();
-        return  false;
+       exists=false;
     }
-
+return exists;
 
       }
 

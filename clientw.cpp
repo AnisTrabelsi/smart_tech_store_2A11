@@ -149,11 +149,11 @@ void clientw::on_pb_supprimer_clicked()
 {
     client c1;
     c1.setid(ui->id_supp->text().toInt());
-
-
+bool test;
+test=c1.supprimer(c1.getid());
 
     QMessageBox msgBox;
-    if( c1.supprimer(c1.getid()))
+    if(test)
        { msgBox.setText("suppression avec success !");
          msgBox.exec();
     ui->tab_client->setModel(c1.afficher());
