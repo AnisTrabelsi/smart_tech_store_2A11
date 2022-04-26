@@ -3,13 +3,14 @@
 # Project created by QtCreator 2018-10-26T21:45:23
 #
 #-------------------------------------------------
-
+QT       += widgets quickwidgets
 QT       += core gui sql printsupport
 QT       += charts
 QT       += serialport
 QT       += core gui multimedia multimediawidgets sql location \
     quick
 QT += widgets charts
+QT       += qml quick
 
 QT       += core gui sql \
 quick
@@ -22,6 +23,7 @@ QT += quick
 QT += core gui multimedia multimediawidgets
 QT += multimedia
 QT       += core gui  serialport
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -46,9 +48,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    Commande.cpp \
     arduino.cpp \
+    categoriew.cpp \
     chatserver.cpp \
     chatsocket.cpp \
+    civraison.cpp \
     client.cpp \
     clientw.cpp \
     commandew.cpp \
@@ -62,9 +67,11 @@ SOURCES += \
     gagnant.cpp \
     home.cpp \
     incendie.cpp \
+    livraison.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
+    map.cpp \
     mdp_oub.cpp \
     menu.cpp \
     panier.cpp \
@@ -76,9 +83,13 @@ SOURCES += \
     smtp.cpp
 
 HEADERS += \
+    Commande.h \
     arduino.h \
+    categorie.h \
+    categoriew.h \
     chatserver.h \
     chatsocket.h \
+    civraison.h \
     client.h \
     clientw.h \
     commandew.h \
@@ -92,8 +103,10 @@ HEADERS += \
     gagnant.h \
     home.h \
     incendie.h \
+    livraison.h \
         mainwindow.h \
     connection.h \
+    map.h \
     mdp_oub.h \
     menu.h \
     panier.h \
@@ -105,6 +118,7 @@ HEADERS += \
     smtp.h
 
 FORMS += \
+        categoriew.ui \
         clientw.ui \
         commandew.ui \
         dumessengerconnectiondialog.ui \
@@ -114,7 +128,9 @@ FORMS += \
         historique.ui \
         home.ui \
         incendie.ui \
+        livraison.ui \
         mainwindow.ui \
+        map.ui \
         mdp_oub.ui \
         menu.ui \
         produitw.ui \
@@ -128,6 +144,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     congratulations.qrc \
     congratulations.qrc \
+    qml.qrc \
     res.qrc \
     res.qrc \
     ressource.qrc

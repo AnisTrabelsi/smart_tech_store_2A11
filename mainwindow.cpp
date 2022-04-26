@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "connection.h"
-
 #include "home.h"
 #include "mdp_oub.h"
 #include <QMessageBox>

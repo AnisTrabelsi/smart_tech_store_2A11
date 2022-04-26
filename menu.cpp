@@ -5,6 +5,8 @@
 #include"home.h"
 #include "clientw.h"
 #include "produitw.h"
+#include "commandeW.h"
+#include "categoriew.h"
 menu::menu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::menu)
@@ -64,4 +66,23 @@ void menu::on_fournisseurW_clicked()
          f.setModal(this);
          f.exec();
 
+}
+
+void menu::on_commandeW_clicked()
+{
+   commandeW f(nullptr);
+
+         this->hide();
+         f.setModal(this);
+         f.exec();
+
+}
+
+void menu::on_CategorieW_clicked()
+{
+    Categoriew f(nullptr);
+
+          this->hide();
+          f.setModal(this);
+          f.exec();
 }

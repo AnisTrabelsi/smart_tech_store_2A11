@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="commandeW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>600</y>
+     <x>350</x>
+     <y>530</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -47,8 +47,8 @@ QPushButton:focus
   <widget class="QPushButton" name="livraisonW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>320</y>
+     <x>350</x>
+     <y>250</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -78,8 +78,8 @@ QPushButton:focus
   <widget class="QPushButton" name="factureW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>240</y>
+     <x>350</x>
+     <y>180</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -109,8 +109,8 @@ QPushButton:focus
   <widget class="QPushButton" name="produitW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>400</y>
+     <x>350</x>
+     <y>320</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -140,8 +140,8 @@ QPushButton:focus
   <widget class="QPushButton" name="employeeW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>160</y>
+     <x>350</x>
+     <y>110</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -171,8 +171,8 @@ QPushButton:focus
   <widget class="QPushButton" name="clientW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>540</y>
+     <x>350</x>
+     <y>460</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -222,7 +222,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>60</y>
+     <y>30</y>
      <width>451</width>
      <height>61</height>
     </rect>
@@ -244,8 +244,8 @@ QPushButton:focus
   <widget class="QPushButton" name="fournisseurW">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>470</y>
+     <x>350</x>
+     <y>390</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -272,6 +272,37 @@ QPushButton:focus
     <string>GESTION DES FOURNISSEURS</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="CategorieW">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>600</y>
+     <width>491</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: #F9F9F9;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+   </property>
+   <property name="text">
+    <string>GESTION DES CATEGORIES</string>
+   </property>
+  </widget>
   <zorder>menuBac</zorder>
   <zorder>commandeW</zorder>
   <zorder>livraisonW</zorder>
@@ -281,6 +312,7 @@ QPushButton:focus
   <zorder>clientW</zorder>
   <zorder>label</zorder>
   <zorder>fournisseurW</zorder>
+  <zorder>CategorieW</zorder>
  </widget>
  <resources/>
  <connections/>

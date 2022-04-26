@@ -26,6 +26,10 @@ private slots:
 
     void on_fournisseurW_clicked();
 
+    void on_commandeW_clicked();
+
+    void on_CategorieW_clicked();
+
 private:
     Ui::menu *ui;
 };

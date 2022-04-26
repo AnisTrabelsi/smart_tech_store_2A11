@@ -58,48 +58,47 @@ void Livraison::on_valider_clicked()
     if(Ville=="Tunis")
     {
         Map m(nullptr,0);
-        m.show();
+
         m.exec();
     }
     else if(Ville=="Bizerte")
     {
         Map m(nullptr,1);
-        m.show();
+
         m.exec();
 
     }
     else if(Ville=="Sousse")
     {
         Map m(nullptr,2);
-        m.show();
+
         m.exec();
 
     }
     else if(Ville=="Kairouan")
     {
         Map m(nullptr,3);
-        m.show();
+
         m.exec();
 
     }
     else if(Ville=="Sfax")
     {
         Map m(nullptr,4);
-        m.show();
+
         m.exec();
 
     }
     else if(Ville=="Beja")
     {
         Map m(nullptr,5);
-        m.show();
+
         m.exec();
 
     }
     else if(Ville=="Djerba")
     {
         Map m(nullptr,6);
-        m.show();
         m.exec();
 
     }

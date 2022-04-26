@@ -84,7 +84,7 @@ bool Commande::ajouterCommande()
 
     QSqlQuery query;
     //QString idcommnade_string = QString::number(idCommande);
-    query.prepare("INSERT INTO Commande (ID_COMMANDE,DATE_COMMANDE,MODE_LIVRAISON,NUM_TEL,QUANTITE,PAIMENT_VALIDE) "
+    query.prepare("INSERT INTO Commande (ID_COMMANDE,DATE_COMMANDE,MODE_LIVRAISON,NUM_TEL,ID_CLIENT,PAIMENT_VALIDE) "
                   "VALUES (:idCommande,:date_Commande,:mode_Livraison, :num_Tel, :quantity , :paiment)");
     query.bindValue(":idCommande", idCommande);
     query.bindValue(":mode_Livraison", mode_Livraison);
@@ -99,7 +99,7 @@ bool Commande::ajouterCommandeA()
 
     QSqlQuery query;
     //QString idcommnade_string = QString::number(idCommande);
-    query.prepare("INSERT INTO COMMANDEA (ID_COMMANDE,DATE_COMMANDE,MODE_LIVRAISON,NUM_TEL,QUANTITE,PAIMENT_VALIDE) "
+    query.prepare("INSERT INTO COMMANDEA (ID_COMMANDE,DATE_COMMANDE,MODE_LIVRAISON,NUM_TEL,ID_CLIENT,PAIMENT_VALIDE) "
                   "VALUES (:idCommande,:date_Commande,:mode_Livraison, :num_Tel, :quantity , :paiment)");
     query.bindValue(":idCommande", idCommande);
     query.bindValue(":mode_Livraison", mode_Livraison);
@@ -112,7 +112,7 @@ bool Commande::ajouterCommandeA()
 bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QString Livraison, QDate date)
 {
     QSqlQuery query;
-    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,quantite=:quantity,PAIMENT_VALIDE=:paiment");
+    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,ID_CLIENT=:quantity,PAIMENT_VALIDE=:paiment");
     query.bindValue(":idCommande", id);
     query.bindValue(":mode_Livraison", Livraison);
     query.bindValue(":date_Commande", date);
@@ -159,18 +159,18 @@ QSqlQueryModel *Commande::afficherCommande(int a)
 }
     else if(a==2)
     {
-        model->setQuery("SELECT* FROM Commande order by PAIMENT_VALIDE");
+        model->setQuery("SELECT* FROM Commande order by ID_CLIENT");
     }
     else if (a==3)
     {
         model->setQuery("SELECT* FROM Commande order by ID_COMMANDE");
     }
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("mode_Livraison"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Numero_Tel"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantity"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Paiment valide"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Date Commande"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("mode_Livraison"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Numero_Tel"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Paiment Valide"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Date Commande"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ID_CLIENT"));
 
     return model;
 }
