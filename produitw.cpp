@@ -366,6 +366,7 @@ if(Prix3!=0)
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing); //Sets the given render hints on the painter if on is true; otherwise clears the render hints.
     chartView->resize(1000,500);  //page size
+     chartView->move(50,50);
     chartView->show();  //afficher la page des stats
     son4->play();
 
@@ -699,6 +700,7 @@ if(Pour3!=0)
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->resize(1000,500);
+      chartView->move(50,50);
     chartView->show();
     son4->play();
 

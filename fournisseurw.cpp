@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <qmessagebox.h>
 #include <QIntValidator> //controle saisie
+#include "menu.h"
 fournisseurw::fournisseurw(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::fournisseurw)
@@ -304,6 +305,7 @@ void fournisseurw::on_pb_supprimer_2_clicked()
             QChartView *chartView = new QChartView(chart);
             chartView->setRenderHint(QPainter::Antialiasing);
             chartView->resize(1000,500);
+              chartView->move(50,50);
             chartView->show();
 }
 
@@ -349,4 +351,13 @@ void fournisseurw::on_pb_supprimer_5_clicked()
 
             }
             ui->supp_5->clear();
+}
+
+void fournisseurw::on_return_fo_clicked()
+{
+    menu h(nullptr);
+
+     this->hide();
+     h.setModal(this);
+     h.exec();
 }

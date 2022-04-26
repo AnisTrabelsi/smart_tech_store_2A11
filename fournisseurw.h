@@ -7,7 +7,7 @@
 #include <QPieSeries>
 #include <QtCharts>
 #include <QDialog>
-
+#include "menu.h"
 namespace Ui {
 class fournisseurw;
 }
@@ -48,6 +48,8 @@ private slots:
     void on_reset_ajouter_2_clicked();
 
     void on_pb_supprimer_5_clicked();
+
+    void on_return_fo_clicked();
 
 private:
     Ui::fournisseurw *ui;

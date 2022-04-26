@@ -8,7 +8,7 @@
 #include <qmessagebox.h>
 #include <QIntValidator>
 #include <QSqlQuery>
-
+#include "menu.h"
 Categoriew::Categoriew(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Categoriew)
@@ -181,4 +181,15 @@ void Categoriew::on_valider_3_clicked()
                                           "Click Cancel to exit."),
                               QMessageBox::Cancel);
     }
+}
+
+
+void Categoriew::on_return_2_clicked()
+{
+    menu h(nullptr);
+
+     this->hide();
+     h.setModal(this);
+     h.exec();
+
 }

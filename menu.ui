@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>530</y>
+     <y>490</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -42,37 +42,6 @@ QPushButton:focus
    </property>
    <property name="text">
     <string>GESTION DES COMMANDES</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="livraisonW">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>250</y>
-     <width>491</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-
-color: white;
-background-color:Transparent;;
-border-width: 2px;
-border-color: #F9F9F9;
-border-style: solid;
-border-radius: 7;
-padding: 3px;
-font-size: 15px;
-
-
-}
-QPushButton:focus
-{border:2px solid #FBAD25;
-}</string>
-   </property>
-   <property name="text">
-    <string>GESTION DES LIVRAISONS </string>
    </property>
   </widget>
   <widget class="QPushButton" name="factureW">
@@ -110,7 +79,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>320</y>
+     <y>260</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -172,7 +141,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>460</y>
+     <y>410</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -212,7 +181,7 @@ QPushButton:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>background.png</pixmap>
+    <pixmap>../background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -245,7 +214,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>390</y>
+     <y>340</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -276,7 +245,7 @@ QPushButton:focus
    <property name="geometry">
     <rect>
      <x>350</x>
-     <y>600</y>
+     <y>570</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -305,7 +274,6 @@ QPushButton:focus
   </widget>
   <zorder>menuBac</zorder>
   <zorder>commandeW</zorder>
-  <zorder>livraisonW</zorder>
   <zorder>factureW</zorder>
   <zorder>produitW</zorder>
   <zorder>employeeW</zorder>

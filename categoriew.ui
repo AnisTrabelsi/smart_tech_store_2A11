@@ -26,7 +26,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../Users/Adam/Desktop/background.png</pixmap>
+    <pixmap>../background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -1442,7 +1442,7 @@ QLineEdit:focus
        <rect>
         <x>80</x>
         <y>270</y>
-        <width>91</width>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -1896,7 +1896,7 @@ QLineEdit:focus
        </font>
       </property>
       <property name="text">
-       <string>LIBELLE</string>
+       <string>Description</string>
       </property>
      </widget>
     </widget>
@@ -3129,7 +3129,7 @@ QPushButton:focus
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>180</y>
+        <y>260</y>
         <width>231</width>
         <height>21</height>
        </rect>
@@ -3584,7 +3584,7 @@ QPushButton:focus
        </font>
       </property>
       <property name="text">
-       <string>LIBELLE</string>
+       <string>Description</string>
       </property>
      </widget>
      <widget class="QPushButton" name="reset_ajouter_4">
@@ -3727,9 +3727,9 @@ QLineEdit:focus
      <widget class="QLabel" name="label_27">
       <property name="geometry">
        <rect>
-        <x>80</x>
-        <y>270</y>
-        <width>91</width>
+        <x>90</x>
+        <y>170</y>
+        <width>181</width>
         <height>21</height>
        </rect>
       </property>
@@ -4183,12 +4183,71 @@ QLineEdit:focus
        </font>
       </property>
       <property name="text">
-       <string>REMISE</string>
+       <string>Libelle</string>
       </property>
      </widget>
     </widget>
    </widget>
   </widget>
+  <widget class="QPushButton" name="return_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>71</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+
+color: white;
+background-color:Transparent;;
+border-width: 2px;
+border-color: Transparent;
+border-style: solid;
+border-radius: 7;
+padding: 3px;
+font-size: 15px;
+
+
+}
+QPushButton:focus
+{border:2px solid #FBAD25;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="returnbutton">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>71</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../return.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>background</zorder>
+  <zorder>tabWidget</zorder>
+  <zorder>returnbutton</zorder>
+  <zorder>return_2</zorder>
  </widget>
  <resources/>
  <connections/>

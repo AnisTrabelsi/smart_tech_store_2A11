@@ -229,8 +229,8 @@ void home::on_pb_stat_clicked()
        QChartView *chartView = new QChartView(chart);
        chartView->setRenderHint(QPainter::Antialiasing);
        chartView->resize(1000,500);
-       chartView->show();
-
+      chartView->move(50,50);
+      chartView->show();
 }
 
 void home::on_pb_modifier_3_clicked()

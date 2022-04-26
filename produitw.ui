@@ -103,7 +103,7 @@ font-size: 20px;
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -15698,10 +15698,10 @@ QLineEdit:focus
   <widget class="QPushButton" name="return_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>30</y>
-     <width>51</width>
-     <height>41</height>
+     <width>71</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="font">
@@ -15731,6 +15731,30 @@ QPushButton:focus
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="returnbutton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>71</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>../return.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>tab_widget</zorder>
+  <zorder>time</zorder>
+  <zorder>returnbutton</zorder>
+  <zorder>return_2</zorder>
  </widget>
  <resources/>
  <connections/>

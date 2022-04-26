@@ -8,7 +8,7 @@
 #include <qmessagebox.h>
 #include <QIntValidator>
 #include <QSqlQuery>
-
+#include "menu.h"
 commandeW::commandeW(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::commandeW)
@@ -217,3 +217,13 @@ void commandeW::on_pushButton_clicked()
         chartView->resize(1000,500);
         chartView->show();
 }
+
+void commandeW::on_return_2_clicked()
+{
+    menu h(nullptr);
+
+     this->hide();
+     h.setModal(this);
+     h.exec();
+}
+

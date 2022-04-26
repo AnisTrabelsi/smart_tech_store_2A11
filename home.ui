@@ -16,9 +16,9 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>100</x>
      <y>70</y>
-     <width>841</width>
+     <width>1001</width>
      <height>581</height>
     </rect>
    </property>
@@ -73,7 +73,7 @@ font-size: 20px;
    </property>
    <widget class="QWidget" name="AjouterEmployee_2">
     <attribute name="title">
-     <string>Ajouter Employee</string>
+     <string>Ajouter Employees</string>
     </attribute>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="enabled">
@@ -81,7 +81,7 @@ font-size: 20px;
      </property>
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>150</x>
        <y>40</y>
        <width>721</width>
        <height>451</height>
@@ -1335,7 +1335,7 @@ QLineEdit:focus
        <rect>
         <x>130</x>
         <y>150</y>
-        <width>81</width>
+        <width>111</width>
         <height>21</height>
        </rect>
       </property>
@@ -1719,7 +1719,7 @@ QLineEdit:focus
        <rect>
         <x>100</x>
         <y>230</y>
-        <width>141</width>
+        <width>181</width>
         <height>21</height>
        </rect>
       </property>
@@ -1909,9 +1909,9 @@ QLineEdit:focus
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>80</x>
         <y>270</y>
-        <width>191</width>
+        <width>231</width>
         <height>21</height>
        </rect>
       </property>
@@ -2366,12 +2366,12 @@ QLineEdit:focus
    </widget>
    <widget class="QWidget" name="tab_5">
     <attribute name="title">
-     <string>Afficher Employee</string>
+     <string>Afficher Employees</string>
     </attribute>
     <widget class="QTableView" name="tab_employee_2">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>330</x>
        <y>30</y>
        <width>561</width>
        <height>461</height>
@@ -2422,7 +2422,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
     <widget class="QPushButton" name="pb_stat">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>130</x>
        <y>460</y>
        <width>111</width>
        <height>41</height>
@@ -2452,15 +2452,15 @@ QPushButton:focus
 }</string>
      </property>
      <property name="text">
-      <string>Statistique</string>
+      <string>Statistiques</string>
      </property>
     </widget>
     <widget class="QGroupBox" name="suppression_6">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>40</x>
        <y>60</y>
-       <width>241</width>
+       <width>281</width>
        <height>161</height>
       </rect>
      </property>
@@ -2477,7 +2477,7 @@ color:white</string>
        <rect>
         <x>20</x>
         <y>40</y>
-        <width>91</width>
+        <width>131</width>
         <height>41</height>
        </rect>
       </property>
@@ -2696,9 +2696,9 @@ color:white</string>
      <widget class="QLineEdit" name="le_matricule_supp_3">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>150</x>
         <y>40</y>
-        <width>91</width>
+        <width>111</width>
         <height>41</height>
        </rect>
       </property>
@@ -2754,8 +2754,8 @@ QPushButton:focus
     <widget class="QGroupBox" name="suppression_7">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>270</y>
+       <x>50</x>
+       <y>260</y>
        <width>241</width>
        <height>171</height>
       </rect>
@@ -2797,9 +2797,9 @@ color:white</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
-        <width>101</width>
-        <height>18</height>
+        <y>60</y>
+        <width>131</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
@@ -2823,8 +2823,8 @@ color:white</string>
        <rect>
         <x>10</x>
         <y>100</y>
-        <width>181</width>
-        <height>18</height>
+        <width>221</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
@@ -2848,8 +2848,8 @@ color:white</string>
        <rect>
         <x>10</x>
         <y>130</y>
-        <width>83</width>
-        <height>18</height>
+        <width>111</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="font">
@@ -3520,13 +3520,13 @@ QPushButton:focus
    </widget>
    <widget class="QWidget" name="tab_6">
     <attribute name="title">
-     <string>Modifier Employee</string>
+     <string>Modifier Employees</string>
     </attribute>
     <widget class="QGroupBox" name="suppression_4">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>40</y>
+       <x>200</x>
+       <y>30</y>
        <width>611</width>
        <height>171</height>
       </rect>
@@ -3824,10 +3824,10 @@ QPushButton:focus
      </property>
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>210</y>
-       <width>721</width>
-       <height>291</height>
+       <x>90</x>
+       <y>200</y>
+       <width>761</width>
+       <height>301</height>
       </rect>
      </property>
      <property name="palette">
@@ -3971,8 +3971,8 @@ QPushButton:focus
      <widget class="QLabel" name="label_26">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>70</y>
+        <x>20</x>
+        <y>50</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -4438,8 +4438,8 @@ QPushButton:focus
      <widget class="QLabel" name="label_27">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>120</y>
+        <x>70</x>
+        <y>100</y>
         <width>91</width>
         <height>21</height>
        </rect>
@@ -4900,7 +4900,7 @@ QPushButton:focus
      <widget class="QLineEdit" name="le_prenom_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>170</x>
         <y>150</y>
         <width>221</width>
         <height>31</height>
@@ -4926,7 +4926,7 @@ QLineEdit:focus
      <widget class="QLineEdit" name="le_e_mail_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>170</x>
         <y>200</y>
         <width>221</width>
         <height>31</height>
@@ -4952,8 +4952,8 @@ QLineEdit:focus
      <widget class="QLineEdit" name="le_mot_de_passe_4">
       <property name="geometry">
        <rect>
-        <x>610</x>
-        <y>60</y>
+        <x>630</x>
+        <y>50</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -4978,8 +4978,8 @@ QLineEdit:focus
      <widget class="QPushButton" name="pb_modifier_4">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>240</y>
+        <x>320</x>
+        <y>250</y>
         <width>131</width>
         <height>41</height>
        </rect>
@@ -5014,8 +5014,8 @@ QPushButton:focus
      <widget class="QLineEdit" name="le_matricule_4">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>70</y>
+        <x>170</x>
+        <y>50</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -5045,9 +5045,9 @@ QLineEdit:focus
      <widget class="QLabel" name="label_28">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>170</y>
-        <width>81</width>
+        <x>40</x>
+        <y>150</y>
+        <width>111</width>
         <height>21</height>
        </rect>
       </property>
@@ -5430,9 +5430,9 @@ QLineEdit:focus
       <property name="geometry">
        <rect>
         <x>450</x>
-        <y>70</y>
-        <width>141</width>
-        <height>21</height>
+        <y>50</y>
+        <width>191</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="palette">
@@ -5621,9 +5621,9 @@ QLineEdit:focus
      <widget class="QLabel" name="label_31">
       <property name="geometry">
        <rect>
-        <x>440</x>
-        <y>120</y>
-        <width>191</width>
+        <x>410</x>
+        <y>110</y>
+        <width>231</width>
         <height>21</height>
        </rect>
       </property>
@@ -5813,8 +5813,8 @@ QLineEdit:focus
      <widget class="QLabel" name="label_32">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>170</y>
+        <x>490</x>
+        <y>150</y>
         <width>141</width>
         <height>21</height>
        </rect>
@@ -6005,8 +6005,8 @@ QLineEdit:focus
      <widget class="QLineEdit" name="le_nom_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>110</y>
+        <x>170</x>
+        <y>100</y>
         <width>221</width>
         <height>31</height>
        </rect>
@@ -6036,8 +6036,8 @@ QLineEdit:focus
      <widget class="QLineEdit" name="le_salaire_4">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>160</y>
+        <x>630</x>
+        <y>150</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -6067,8 +6067,8 @@ QLineEdit:focus
      <widget class="QDateEdit" name="le_date_embauche_4">
       <property name="geometry">
        <rect>
-        <x>630</x>
-        <y>120</y>
+        <x>650</x>
+        <y>110</y>
         <width>71</width>
         <height>21</height>
        </rect>
@@ -6077,8 +6077,8 @@ QLineEdit:focus
      <widget class="QLabel" name="label_34">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>210</y>
+        <x>510</x>
+        <y>200</y>
         <width>141</width>
         <height>21</height>
        </rect>
@@ -6269,7 +6269,7 @@ QLineEdit:focus
      <widget class="QLineEdit" name="le_code">
       <property name="geometry">
        <rect>
-        <x>600</x>
+        <x>630</x>
         <y>200</y>
         <width>101</width>
         <height>31</height>
@@ -6338,7 +6338,7 @@ QLineEdit:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../../../../return.png</pixmap>
+    <pixmap>../return.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

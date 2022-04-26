@@ -95,7 +95,7 @@ bool client:: supprimer(int id)
     QSqlQuery query;
 client c1;
 
-if(c1.chercher_client_bool(id)==true)
+if(c1.chercher_client_bool(id))
 {
 
 

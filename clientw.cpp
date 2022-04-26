@@ -145,7 +145,6 @@ msgBox.exec();
 
 
 
-
 void clientw::on_pb_supprimer_clicked()
 {
     client c1;

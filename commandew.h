@@ -30,6 +30,9 @@ private slots:
    void on_PAIMENT_clicked();
    void on_ID_clicked();
 
+   void on_return_2_clicked();
+
+
 private:
     Ui::commandeW *ui;
     Commande C;

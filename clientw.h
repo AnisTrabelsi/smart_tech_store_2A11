@@ -66,6 +66,7 @@ private slots:
 
     void on_return_home_clicked();
 
+
 private:
     Ui::clientw *ui;
     client C;

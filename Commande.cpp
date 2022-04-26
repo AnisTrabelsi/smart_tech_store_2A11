@@ -112,7 +112,7 @@ bool Commande::ajouterCommandeA()
 bool Commande::modifier_Commande(int id, int paiment, int Tel, int quant, QString Livraison, QDate date)
 {
     QSqlQuery query;
-    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,ID_CLIENT=:quantity,PAIMENT_VALIDE=:paiment");
+    query.prepare("update Commande set id_Commande=:idCommande,mode_Livraison=:mode_Livraison,date_Commande=:date_Commande,num_Tel=:num_Tel,PAIMENT_VALIDE=:paiment");
     query.bindValue(":idCommande", id);
     query.bindValue(":mode_Livraison", Livraison);
     query.bindValue(":date_Commande", date);
@@ -168,9 +168,9 @@ QSqlQueryModel *Commande::afficherCommande(int a)
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Identifiant"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("mode_Livraison"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Numero_Tel"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Paiment Valide"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("Paiment Valide"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Date Commande"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("ID_CLIENT"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("ID_CLIENT"));
 
     return model;
 }
