@@ -28,8 +28,6 @@ private slots:
    void on_PAIMENT_clicked();
    void on_ID_clicked();
 
-   void on_returnbutton_linkActivated(const QString &link);
-
    void on_return_2_clicked();
 
 private:

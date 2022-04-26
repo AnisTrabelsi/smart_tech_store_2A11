@@ -130,7 +130,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <property name="geometry">
       <rect>
        <x>690</x>
-       <y>80</y>
+       <y>380</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -146,7 +146,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <property name="geometry">
       <rect>
        <x>690</x>
-       <y>110</y>
+       <y>410</y>
        <width>91</width>
        <height>21</height>
       </rect>
@@ -162,7 +162,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <property name="geometry">
       <rect>
        <x>690</x>
-       <y>140</y>
+       <y>440</y>
        <width>91</width>
        <height>21</height>
       </rect>
@@ -178,7 +178,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <property name="geometry">
       <rect>
        <x>680</x>
-       <y>50</y>
+       <y>350</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -645,7 +645,7 @@ QCheckBox::indicator:checked, QCheckBox::indicator:unchecked{
      <property name="geometry">
       <rect>
        <x>690</x>
-       <y>190</y>
+       <y>490</y>
        <width>131</width>
        <height>41</height>
       </rect>
@@ -7017,7 +7017,7 @@ QLineEdit:focus
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>background.png</pixmap>
+    <pixmap>../background.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
