@@ -39,7 +39,7 @@ factureW::~factureW()
 
 
 void factureW::on_pb_ajouter_clicked()
-{   int nfacture=36;
+{   int nfacture=ui->remise_A->text().toInt();
     int etat=ui->Etat_A->currentIndex();
     int tva=ui->TVA_A->text().toInt();
     int total_tva=ui->tttva_A->text().toInt();
