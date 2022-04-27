@@ -50,6 +50,7 @@ CONFIG += c++11
 SOURCES += \
     Commande.cpp \
     arduino.cpp \
+    arduinoo.cpp \
     categorie.cpp \
     categoriew.cpp \
     chatserver.cpp \
@@ -86,6 +87,7 @@ SOURCES += \
 HEADERS += \
     Commande.h \
     arduino.h \
+    arduinoo.h \
     categorie.h \
     categoriew.h \
     chatserver.h \

@@ -71,6 +71,16 @@ int Arduino::close_arduino()
     }
  }
 
+ QByteArray Arduino::read_from_arduino1()
+{
+    if(serial->isReadable()){
+         data=serial->readAll(); //récupérer les données reçues
+
+         return data;
+    }
+ }
+
+
  int Arduino::cherchercode(int code){
 
      QSqlDatabase bd = QSqlDatabase::database();

@@ -759,9 +759,9 @@ void produitw::on_upload_clicked()
 
 void produitw::update_label()
 {
-    data=A.read_from_arduino();
+    data=A.read_from_arduino1();
 
-    if(data=="5")
+   if(data=="5")
 {
 
 
@@ -772,7 +772,8 @@ void produitw::update_label()
        i.setModal(true);
        i.exec();
 
-    }}
+ }
+}
 
 
 void produitw::on_stop_clicked()

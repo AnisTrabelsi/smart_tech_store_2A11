@@ -36,8 +36,16 @@
    </property>
   </widget>
   <widget class="QLabel" name="mrigl">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>5</y>
+     <width>781</width>
+     <height>411</height>
+    </rect>
+   </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
  </widget>
